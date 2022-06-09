@@ -43,6 +43,12 @@
   /*作品專用*/
 }
 
+.media-box .media-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
 .media-box .media-image img {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -266,10 +272,16 @@
 
 /* Hover */
 @media screen and (min-width: 768px) {
+  .media-box:hover .media-image img {
+    -webkit-filter: grayscale(0);
+            filter: grayscale(0);
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
   .media-box:hover .media-remark {
     display: block;
     max-height: 450px;
-    padding: 12px 24px 40px 24px;
+    padding: 24px 24px 40px 24px;
     opacity: 1;
     -webkit-transition: opacity 0.3s linear, padding 0.3s 0s linear, max-height 0.3s linear;
     transition: opacity 0.3s linear, padding 0.3s 0s linear, max-height 0.3s linear;
@@ -311,9 +323,15 @@
   .media-boxes > a {
     width: calc(100% / 4);
   }
-  .media-boxes .media-box {
+  .media-box {
     width: 280px;
     height: 450px;
+  }
+  .media-box .media-image img {
+    -webkit-filter: grayscale(0.3);
+            filter: grayscale(0.3);
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
   }
 }
 /*# sourceMappingURL=style.css.map */
