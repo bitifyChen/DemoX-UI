@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    img {
+        vertical-align: top;
+    }
+
+    .section-banner .banner {
+        position: relative;
+        width: 1200px;
+        height: 500px;
+        overflow: hidden;
+        background: rgb(63, 94, 251);
+        background: linear-gradient(45deg, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+        transition: all .3s linear;
+    }
+
+    .section-banner .banner .background {
+        position: absolute
+    }
+
+    .section-banner .banner .info {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .section-banner .banner .title {
+        width: 33.33333%;
+        order: -1;
+        font-size: 30px;
+        color: white;
+        font-weight: 900;
+        transition: all .3s linear;
+    }
+
+    .section-banner .banner .image {
+        position: absolute;
+        width: 33.33333%;
+        margin-left: 33.33333%;
+        transition: all .3s linear;
+    }
+
+    .section-banner .banner .ideas {
+        width: 21.33333%;
+        margin: 0 6%;
+        transition: all .5s linear;
+        max-height: 200px;
+    }
+    .section-banner .banner .ideas .idea .idea-image img{
+        width: 100px;
+    }
+    .section-banner .banner .ideas .playlist{
+        background-color: rgba(0, 0, 0, 0.404);
+        border: 2px solid white;
+        color: white;
+        font-weight: 900;
+        border-radius: 99px;
+        padding: 10px;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .section-banner .banner .ideas .playlist span{
+        background-color: #fff;
+        color: black;
+        font-weight: 900;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border-radius: 99px;
+    }
+
+    .section-banner .banner .image img {
+        --shadow-color: rgba(54, 54, 54, 0.5);
+        width: 100%;
+        height: auto;
+        transform: perspective(700px) rotateY(40deg);
+        box-shadow: -1px 1px 0px var(--shadow-color),
+            -2px 1px 0px var(--shadow-color),
+            -3px 1px 0px var(--shadow-color),
+            -4px 0px 0px -1px var(--shadow-color),
+            -5px 0px 0px -1px var(--shadow-color),
+            -10px 0px 0px -10px var(--shadow-color);
+        transition: all .3s linear;
+
+    }
+
+    .section-banner .banner.active .title {
+        margin-left: 33.333%;
+    }
+
+    .section-banner .banner.active .image {
+        margin-left: 0;
+    }
+
+    .section-banner .banner.active .image img {
+        transform: rotateY(0deg);
+        box-shadow: 0px 0px 10px var(--shadow-color),
+    }
+
+    .section-banner .banner.active .ideas{
+        background:linear-gradient(to bottom,#00000060 20%,#00000080 40%,#00000080 60%,#00000060);
+        height: 100%;
+        max-height: 600px;
+        padding: 40px 0px;
+    }
+
+    .section-banner .banner.active .ideas .playlist{
+        border: none;
+        background-color: transparent;
+    }
+</style>
+
+<body>
+    <header class="main-header">
+
+    </header>
+    <main>
+        <section class="section-banner">
+            <div class="banners">
+                <div class="banner">
+                    <div class="info">
+                        <div class="image">
+                            <img src="img/curation.jpg" alt="" class="curation-img">
+                        </div>
+
+                        <div class="title">
+                            <p>110-2 臺灣師範大學程式設計通識課程專題競賽</p>
+                        </div>
+                        <div class="ideas">
+                            <p class="playlist">IDEA LIST： <span>5</span></p>
+                            <div class="idea">
+                                <div class="idea-image">
+                                    <img src="img/curation.jpg" alt="" class="curation-img">
+                                </div>
+                                <div class="idea-info">
+                                    <p>110-2 臺灣師範大學程式設計通識課程專題競賽</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    </main>
+    <footer class="main-footer">
+
+    </footer>
+    <script>
+        const banner = document.querySelector('.banner')
+        banner.addEventListener('mouseenter', () => { banner.classList.add('active') })
+        banner.addEventListener('mouseleave', () => { banner.classList.remove('active') })
+    </script>
+</body>
+
+</html>
