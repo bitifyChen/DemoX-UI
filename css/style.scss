@@ -2,6 +2,8 @@
 @import url("reset.css");
 /*Header*/
 @import url("header.css");
+/*Component*/
+@import url("component.css");
 /*Font Awesome 6 */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
 /*Font Google -font-family: 'Noto Sans TC', sans-serif;*/
@@ -19,260 +21,120 @@
   box-sizing: border-box;
 }
 
-/* Component */
-/*【Media Box】 - Idea Curation Box */
-.media-box {
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-  width: 100%;
-  border-radius: 5px;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  font-family: "Noto Sans TC", sans-serif;
-  transition: all .3s linear;
-  .media-image {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-  }
-  .media-image img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-  }
+main{
+  .main-block{
 
-  .media-info {
-    padding: 24px;
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .badge {
-        background-color: rgb(71, 71, 71);
-        color: white;
-        padding: 4px 8px;
-        border-radius: 5px;
-        font-size: 14px;
-      }
-      .popular {
-        display: flex;
-        font-size: 14px;
-        .likes {
-          margin-right: 10px;
-        }
-        .likes::before {
-          content: "\f004";
-          font-family: "Font Awesome 6 Free";
-          font-weight: 900;
-          color: #505050;
-        }
-        .views::before {
-          content: "\f06e";
-          font-family: "Font Awesome 6 Free";
-          font-weight: 900;
-          color: #505050;
-        }
-      }
-    }
-    .title {
-      font-size: 18px;
-      line-height: 24px;
-      margin: 8px 0px;
-      text-align: justify;
-    }
-    .footer {
-      display: flex;
-      font-size: 14px;
-      li::before {
-        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
-        font-weight: 900;
-      }
-      .idea::before {
-        content: "\f02d";
-      }
-      .youtube::before {
-        content: "\f167";
-      }
-      .google::before {
-        content: "\f1a0";
-      }
-      .pdf::before {
-        content: "\f1c1";
-      }
-      .link::before {
-        content: "\f14c";
-      }
-      .youtube.active::before {
-        content: "\f167";
-      }
-      .google.active::before {
-        content: "\f1a0";
-      }
-      .pdf.active::before {
-        content: "\f1c1";
-      }
-      .link.active::before {
-        content: "\f14c";
-      }
-    }
   }
+  .container{
+    background-color: red;
+  }
+}
 
-  .media-footer {
-    margin-top: auto;
+@media screen and (max-width:767px) {
+  .side-block{
+    display: none;
+  }
+}	
+
+@media screen and (min-width:768px) {
+  main{
+    height: calc(100vh - 70px);
+    min-height: 500px;
     display: flex;
-    padding: 0px 24px 24px 24px;
-    .date {
-      font-size: 18px;
-      color: #505050;
-      span:not(:last-child)::after {
-        content: "-";
-        padding-left: 4px;
-      }
-    }
-    .line {
-      display: block;
-      height: 2px;
-      background-color: #505050;
+  }
+  .side-block{
+    width: 120px;
+    position: relative;
+    transition:all .5s ease-in-out;
+    .side-bgc{
       position: absolute;
-      width: 60px;
-      bottom: 24px;
-      right: 24px;
-      z-index: 3;
-      transition: all 0.3s 0.3s ease-in-out;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      filter: grayscale(1);
+      img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+      &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        background:linear-gradient(rgb(230, 229, 229),rgba(196, 196, 196, 0.8));
+      }
+      &::after{
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: 120px;
+        height: 200%;
+        width: 100%;
+        box-shadow: inset -10px 0px 10px rgba(182, 182, 182, 0.8);
+      }
+    }
+    .top-page{
+      background-color: rgb(240, 240, 240);
+      position: absolute;
+      right: 0;
+      height: 100%;
+      width: 120px;
+      overflow: hidden;
+      &::after{
+        content: '';
+        position: absolute;
+        top: -50%;
+        height: 200%;
+        width: 100%;
+        box-shadow: inset -10px 0px 10px rgba(185, 185, 185, 0.8);
+      }
+    }
+    .navBtn{
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      left: 50%;
+      transform: translate(-50%);
+      background-color: transparent;
+      border: 1px solid var(--main-base-color);
+      top: 100px;
+      transition:all .3s ease-in-out;
     }
   }
-
-  .media-remark {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #d9d9d9;
-    z-index: 2;
-    color: #505050;
-    font-size: 14px;
-    line-height: 20px;
-    max-height: 0;
-    padding: 0px 24px 0px 24px;
-    overflow: hidden;
-    opacity: 0.3;
-    transition: opacity 0.3s linear, max-height 0.3s linear, padding 0.3s 0s linear;
-    p {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 8;
-        overflow: hidden;
-    }
+  .main-block{
+    background-color: white;
+    flex: 1 1 auto;
+  
+    
   }
+}	
 
-  .icons {
-    color: rgb(202, 202, 202);
-    li.active {
-      color: #505050;
-    }
-    span {
-      color: #505050;
-      padding-left: 4px;
-    }
+
+@media screen and (min-width:900px) {
+  main{
+    
   }
-
-  /*策展專用*/
-  &.curation {
-    .media-info {
-      .badge {
+  .side-block{
+    background-color: white;
+    width: 300px;
+    .navBtn{
+      left: calc( (100% - 120px) / 2 );
+      &::after{
+        content: '';
+        position: absolute;
+        width: 30px;
+        height: 1px;
+        top: 24px;
+        left: 100% ;
         background-color: var(--main-base-color);
-        &::before {
-          content: "策展";
-        }
-      }
-      .footer {
-        li:not(.idea) {
-          display: none;
-        }
+        display: block;
       }
     }
   }
-  /*作品專用*/
-  &.idea {
-    .media-info {
-      .badge {
-        background-color: var(--main-symmetry-color);
-        &::before {
-          content: "作品";
-        }
-      }
-      .footer {
-        li:not(.youtube) {
-          margin-left: 10px;
-        }
-        li.idea {
-          display: none;
-        }
-      }
-    }
+  .main-block{
+   
   }
-}
-/* Hover */
-@media screen and (min-width: 768px) {
-  .media-box:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    .media-image img {
-      filter: grayscale(0);
-      transform: scale(1.2);
-    }
-    .media-remark {
-      display: block;
-      max-height: 450px;
-      padding: 24px 24px 40px 24px;
-      opacity: 1;
-      transition: opacity 0.3s linear, padding 0.3s 0s linear, max-height 0.3s linear;
-    }
-    .media-footer .line {
-      animation: line-run 1s .3s forwards;
-    }
-  }
-}
-
-@keyframes line-run {
-  0%{
-   width: 60px;
-   right: 24px;
-  }
-  30%{
-    width: 0;
-    right: 24px;
-  }
-  100%{
-    left: 24px;
-    width: calc(100% - 48px);
-  }
-}
-/*【Media Boxes】 - Idea Curation Box Group*/
-.media-boxes {
-  padding: 20px;
-  > a {
-    padding: 20px;
-  }
-}
-
-@media screen and (min-width: 990px) {
-  .media-boxes {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    > a {
-      width: calc(100% / 4);
-    }
-  }
-  .media-box {
-    width: 280px;
-    height: 450px;
-    .media-image img {
-      filter: grayscale(.3);
-     transition: all .3s linear;
-    }
-  }
-}
+}	
