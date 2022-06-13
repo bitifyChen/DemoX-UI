@@ -1,16 +1,16 @@
+@charset "UTF-8";
 .main-header {
-  height: 70px;
-  background-color: var(--main-base-color);
+  z-index: 9999;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
 }
 
-.main-header .container {
+.main-header .wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 100%;
+  height: 70px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -18,6 +18,9 @@
       -ms-flex-align: center;
           align-items: center;
   padding: 5px 10px;
+  background-color: var(--main-base-color);
+  -webkit-box-shadow: 0 0 5px var(--main-base-color);
+          box-shadow: 0 0 5px var(--main-base-color);
 }
 
 .main-header .logo {
@@ -30,11 +33,13 @@
 }
 
 .main-header .logo img {
-  height: 40px;
-  width: auto;
+  width: 120px;
+  height: auto;
 }
 
-#menu-check {
+#menu-check,
+#header-check,
+.menu-header-close {
   display: none;
 }
 
@@ -87,13 +92,93 @@
   #menu-check:checked ~ .main-header .main-nav {
     display: block;
   }
+  .menu-logo {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 768px) {
-  .main-header .main-nav {
+  .main-header .menu-logo {
+    width: 120px;
+    top: 35px;
+    opacity: 1;
+    position: fixed;
+    -webkit-transition: 0.5s 1s linear;
+    transition: 0.5s 1s linear;
+  }
+  .main-header .menu-logo img {
+    width: 100%;
+    -webkit-filter: invert(100%);
+            filter: invert(100%);
+  }
+  .main-header .menu-header-close {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+  }
+  .main-header .menu-header-close:before {
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: 20px;
+    top: 4px;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    background-color: #fff;
+    -webkit-transition: 0.1s linear;
+    transition: 0.1s linear;
+  }
+  .main-header .menu-header-close::after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: 20px;
+    top: 15px;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    background-color: #fff;
+    -webkit-transition: 0.1s linear;
+    transition: 0.1s linear;
+  }
+  .main-header .menu-header-close:hover:before {
+    top: 10px;
+  }
+  .main-header .menu-header-close:hover::after {
+    top: 10px;
+  }
+  .main-header .wrap {
+    position: fixed;
+    z-index: 999;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    height: 50px;
+    width: 100px;
+    overflow: hidden;
+    top: 25px;
+    left: -100px;
+    border-radius: 5px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    background-color: transparent;
+    -webkit-box-shadow: 0 0 5px transparent;
+            box-shadow: 0 0 5px transparent;
+    display: flex;
+    -webkit-transition: background-color 2s 0.5s linear, left 0.5s 0s linear, width 0.5s 0s linear;
+    transition: background-color 2s 0.5s linear, left 0.5s 0s linear, width 0.5s 0s linear;
+  }
+  .main-header .logo {
+    margin-right: auto;
+  }
+  .main-header .main-nav {
+    display: none;
   }
   .main-header .main-nav .link-list {
     display: -webkit-box;
@@ -107,6 +192,30 @@
   }
   .main-header .menu-hb {
     display: none;
+  }
+  /*打開Menu*/
+  #header-check:checked ~ .main-header .menu-logo {
+    opacity: 0;
+    -webkit-transition: 0.3s linear;
+    transition: 0.3s linear;
+  }
+  #header-check:checked ~ .main-header .wrap {
+    padding: 5px 10px;
+    width: 90%;
+    left: 5%;
+    background-color: var(--main-base-color);
+    -webkit-box-shadow: 0 0 5px var(--main-base-color);
+            box-shadow: 0 0 5px var(--main-base-color);
+    background-color: #153051E0;
+    -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+    -webkit-transition: 0.3s 0.3s linear;
+    transition: 0.3s 0.3s linear;
+  }
+  #header-check:checked ~ .main-header .main-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
 }
 /*# sourceMappingURL=header.css.map */
