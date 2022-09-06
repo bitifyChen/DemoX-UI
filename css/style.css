@@ -10,11 +10,84 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;900&family=Roboto:wght@100;300;500;700;900&display=swap");
 :root {
   --main-base-color: #153051;
+  --main-base-light-color: #587ba5;
   --main-symmetry-color: #ffcc00;
   --main-symmetry-hover-color: #ffdb6a;
   --main-light-color: #e9ecf3;
 }
 
+/*Button*/
+.btn-like {
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: 400;
+  color: #f57481;
+  border: 1px solid #f57481;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn-like.active, .btn-like:hover {
+  color: white;
+  background-color: #f57481;
+}
+
+/*CKEditor*/
+.ckeditor {
+  font-size: 1rem;
+  color: var(--fontSubDarkMode);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-wrap: break-word;
+}
+
+.ckeditor * {
+  line-height: 1.6em;
+  font-size: inherit;
+}
+
+.ckeditor p {
+  width: 100%;
+  font-size: 16px;
+}
+
+.ckeditor img {
+  width: 100% !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+  max-width: 100%;
+  height: auto;
+}
+
+.ckeditor iframe {
+  max-width: 100%;
+}
+
+.ckeditor table {
+  width: 100% !important;
+  border-collapse: collapse;
+}
+
+.ckeditor table th,
+.ckeditor table td {
+  border: 2px solid;
+}
+
+.ckeditor ol,
+.ckeditor ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  padding-left: 2em;
+}
+
+/*Start*/
 * {
   padding: 0;
   margin: 0;
@@ -22,7 +95,28 @@
           box-sizing: border-box;
 }
 
+.full-top {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 999;
+}
+
+.full-top img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+main .main-block {
+  margin-top: 50px;
+}
+
 @media screen and (max-width: 767px) {
+  .full-top {
+    display: none;
+  }
   .side-block {
     display: none;
   }
@@ -30,23 +124,22 @@
 
 @media screen and (min-width: 768px) {
   main {
-    height: calc(100vh - 70px);
     min-height: 500px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
-  .side-block {
+  main .side-block {
     width: 120px;
     position: fixed;
     left: 0;
     top: 0;
     height: 100vh;
     z-index: 1;
-    -webkit-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
   }
-  .side-block .side-bgc {
+  main .side-block .side-bgc {
     position: absolute;
     overflow: hidden;
     width: 100%;
@@ -54,14 +147,14 @@
     -webkit-filter: grayscale(1);
             filter: grayscale(1);
   }
-  .side-block .side-bgc img {
+  main .side-block .side-bgc img {
     height: 100%;
     width: 100%;
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .side-block .side-bgc::before {
-    content: '';
+  main .side-block .side-bgc::before {
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
@@ -69,8 +162,8 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#e6e5e5), to(rgba(196, 196, 196, 0.8)));
     background: linear-gradient(#e6e5e5, rgba(196, 196, 196, 0.8));
   }
-  .side-block .side-bgc::after {
-    content: '';
+  main .side-block .side-bgc::after {
+    content: "";
     position: absolute;
     top: -50%;
     right: 120px;
@@ -79,7 +172,7 @@
     -webkit-box-shadow: inset -10px 0px 10px rgba(182, 182, 182, 0.8);
             box-shadow: inset -10px 0px 10px rgba(182, 182, 182, 0.8);
   }
-  .side-block .top-page {
+  main .side-block .top-page {
     background-color: #f0f0f0;
     position: absolute;
     right: 0;
@@ -87,8 +180,8 @@
     width: 120px;
     overflow: hidden;
   }
-  .side-block .top-page::after {
-    content: '';
+  main .side-block .top-page::after {
+    content: "";
     position: absolute;
     top: -50%;
     height: 200%;
@@ -96,7 +189,7 @@
     -webkit-box-shadow: inset -10px 0px 10px rgba(185, 185, 185, 0.8);
             box-shadow: inset -10px 0px 10px rgba(185, 185, 185, 0.8);
   }
-  .side-block .navBtn {
+  main .side-block .navBtn {
     position: absolute;
     width: 50px;
     height: 50px;
@@ -107,15 +200,14 @@
     background-color: transparent;
     border: 1px solid var(--main-base-color);
     top: 100px;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
-  .main-block {
+  main .main-block {
     background-color: white;
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
+    width: 100%;
     margin-left: 120px;
+    margin-top: 125px;
   }
 }
 
@@ -125,10 +217,10 @@
     width: 300px;
   }
   .side-block .navBtn {
-    left: calc( (100% - 120px) / 2);
+    left: calc((100% - 120px) / 2);
   }
   .side-block .navBtn::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 30px;
     height: 1px;
@@ -139,6 +231,27 @@
   }
   .main-block {
     margin-left: 300px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  main.curation .side-block {
+    width: 180px;
+  }
+  main.curation .side-block .side-bgc::after {
+    right: 0;
+  }
+  main.curation .top-page {
+    display: none;
+  }
+  main.curation .main-block {
+    margin-left: 180px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  main.curation .side-block .navBtn {
+    left: 50%;
   }
 }
 /*# sourceMappingURL=style.css.map */

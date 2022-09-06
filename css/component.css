@@ -17,8 +17,8 @@
       -ms-flex-direction: column;
           flex-direction: column;
   font-family: "Noto Sans TC", sans-serif;
-  -webkit-transition: all .3s linear;
-  transition: all .3s linear;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
   /*策展專用*/
   /*作品專用*/
 }
@@ -34,6 +34,8 @@
   aspect-ratio: 16 / 9;
   -o-object-fit: cover;
      object-fit: cover;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 
 .media-box .media-info {
@@ -121,22 +123,6 @@
 }
 
 .media-box .media-info .footer .link::before {
-  content: "\f14c";
-}
-
-.media-box .media-info .footer .youtube.active::before {
-  content: "\f167";
-}
-
-.media-box .media-info .footer .google.active::before {
-  content: "\f1a0";
-}
-
-.media-box .media-info .footer .pdf.active::before {
-  content: "\f1c1";
-}
-
-.media-box .media-info .footer .link.active::before {
   content: "\f14c";
 }
 
@@ -259,8 +245,8 @@
     transition: opacity 0.3s linear, padding 0.3s 0s linear, max-height 0.3s linear;
   }
   .media-box:hover .media-footer .line {
-    -webkit-animation: line-run 1s .3s forwards;
-            animation: line-run 1s .3s forwards;
+    -webkit-animation: line-run 1s 0.3s forwards;
+            animation: line-run 1s 0.3s forwards;
   }
 }
 
@@ -303,7 +289,7 @@
   padding: 20px;
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 900px) {
   .media-boxes {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -313,17 +299,118 @@
     width: 100%;
   }
   .media-boxes > a {
-    width: calc(100% / 4);
+    width: calc(100% / 2);
+    min-width: 300px;
   }
-  .media-box {
-    width: 280px;
-    height: 450px;
+  .media-boxes .media-box {
+    width: 100%;
+    height: 350px;
   }
-  .media-box .media-image img {
+  .media-boxes .media-box .media-image img {
     -webkit-filter: grayscale(0.3);
             filter: grayscale(0.3);
-    -webkit-transition: all .3s linear;
-    transition: all .3s linear;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .media-boxes > a {
+    width: calc(100% / 3);
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .media-boxes > a {
+    width: calc(100% / 4);
+  }
+}
+
+/*【Media Main】 - Idea Curation Show */
+.media-main .media-header .media-image img {
+  width: 100%;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.media-main .media-header .media-title {
+  margin-bottom: 10px;
+}
+
+.media-main .media-header .media-title h2 {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.media-main .media-header .media-depiction {
+  color: #397197;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+
+.media-main .media-tags .tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
+  padding: 4px 8px;
+  background-color: var(--main-base-light-color);
+  border-radius: 999px;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.media-main .media-buttons {
+  margin: 10px 0px;
+}
+
+.media-main .media-body {
+  margin-top: 40px;
+  padding: 20px 0px;
+  border-top: 1px solid #d1d4db;
+}
+
+.media-main .media-body .media-captions {
+  border-bottom: 1px solid #d1d4db;
+}
+
+.media-main .media-body .media-captions .caption {
+  margin-bottom: 20px;
+}
+
+.media-main .media-body .media-captions .caption-title {
+  display: inline-block;
+  font-size: 16px;
+  padding: 6px 20px;
+  background-color: #397197;
+  border-radius: 999px;
+  color: white;
+}
+
+.media-main .media-body .media-captions .caption-info {
+  padding: 10px 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .media-main .media-title {
+    margin-top: 20px;
+  }
+  .media-main .media-depiction {
+    margin: 10px 0px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .media-main .media-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .media-main .media-header .media-image, .media-main .media-header .media-info {
+    width: 50%;
+  }
+  .media-main .media-header .media-info {
+    padding: 0px 20px;
   }
 }
 /*# sourceMappingURL=component.css.map */
