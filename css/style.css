@@ -113,6 +113,22 @@ main .main-block {
   margin-top: 50px;
 }
 
+main .float-block {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding-top: 80px;
+  min-height: 100vh;
+  background-color: red;
+  z-index: 3;
+  display: none;
+}
+
+main .float-block.show {
+  display: block;
+}
+
 @media screen and (max-width: 767px) {
   .full-top {
     display: none;
@@ -209,17 +225,20 @@ main .main-block {
     margin-left: 120px;
     margin-top: 125px;
   }
+  main .float-block {
+    left: 180px;
+  }
 }
 
 @media screen and (min-width: 900px) {
-  .side-block {
+  main .side-block {
     background-color: white;
     width: 300px;
   }
-  .side-block .navBtn {
+  main .side-block .navBtn {
     left: calc((100% - 120px) / 2);
   }
-  .side-block .navBtn::after {
+  main .side-block .navBtn::after {
     content: "";
     position: absolute;
     width: 30px;
@@ -229,8 +248,11 @@ main .main-block {
     background-color: var(--main-base-color);
     display: block;
   }
-  .main-block {
+  main .main-block {
     margin-left: 300px;
+  }
+  main .float-block {
+    left: 250px;
   }
 }
 

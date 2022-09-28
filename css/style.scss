@@ -98,7 +98,21 @@ main {
   .main-block {
     margin-top: 50px;
   }
-  .container {
+  .float-block{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    padding-top: 80px;
+    min-height: 100vh;
+    background-color: red;
+    z-index: 3;
+    display: none;
+
+    &.show{
+      display: block;
+      
+    }
   }
 }
 
@@ -189,31 +203,39 @@ main {
       margin-left: 120px;
       margin-top: 125px;
     }
+    //浮動顯示區塊
+    .float-block{
+      left: 180px;
+    }
   }
 }
 
 @media screen and (min-width: 900px) {
   main {
-  }
-  .side-block {
-    background-color: white;
-    width: 300px;
-    .navBtn {
-      left: calc((100% - 120px) / 2);
-      &::after {
-        content: "";
-        position: absolute;
-        width: 30px;
-        height: 1px;
-        top: 24px;
-        left: 100%;
-        background-color: var(--main-base-color);
-        display: block;
+    .side-block {
+      background-color: white;
+      width: 300px;
+      .navBtn {
+        left: calc((100% - 120px) / 2);
+        &::after {
+          content: "";
+          position: absolute;
+          width: 30px;
+          height: 1px;
+          top: 24px;
+          left: 100%;
+          background-color: var(--main-base-color);
+          display: block;
+        }
       }
     }
-  }
-  .main-block {
-    margin-left: 300px;
+    .main-block {
+      margin-left: 300px;
+    }
+    //浮動顯示區塊
+    .float-block{
+      left: 250px;
+    }
   }
 }
 
