@@ -109,17 +109,27 @@
      object-fit: cover;
 }
 
+main {
+  position: relative;
+}
+
 main .main-block {
   margin-top: 50px;
 }
 
+main .main-block.hidden {
+  width: 0px;
+  max-height: 0px;
+  overflow: hidden;
+}
+
 main .float-block {
-  position: absolute;
+  position: fixed;
+  padding-top: 100px;
   left: 0;
   top: 0;
   right: 0;
-  padding-top: 80px;
-  min-height: 100vh;
+  bottom: 0;
   background-color: red;
   z-index: 3;
   display: none;
@@ -227,6 +237,7 @@ main .float-block.show {
   }
   main .float-block {
     left: 180px;
+    font-size: 80px;
   }
 }
 
