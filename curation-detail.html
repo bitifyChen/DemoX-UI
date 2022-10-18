@@ -52,14 +52,11 @@
             </label>
         </div>
     </header>
-    <main class="curation">
+    <main id="app" class="curation">
         <div class="mask-shadow"></div>
         <div class="side-block">
             <div class="side-bgc">
-                <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-            </div>
-            <div class="top-page">
-                <p>Coding101</p>
+                <img :src="banner" alt="">
             </div>
             <button class="navBtn">
                 <a href="javascript: history.go(-1)">返回</a>
@@ -70,269 +67,73 @@
                 <div class="media-main">
                     <div class="media-header">
                         <div class="media-image">
-                            <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
+                            <img :src="banner" alt="">
                         </div>
                         <div class="media-info">
                             <div class="media-title">
-                                <h2>推動大學程式設計教學 學校虛實整合成果展-慈濟大學</h2>
+                                <h2>[[name]]</h2>
                             </div>
                             <div class="media-depiction">
-                                <p>這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。
-                                </p>
+                                <p>[[depiction]]</p>
                             </div>
                             <div class="media-tags">
-                                <div class="tag">Coding101</div>
-                                <div class="tag">@國立臺灣師範大學</div>
-                                <div class="tag">逢甲大學</div>
-                                <div class="tag">政治大學</div>
-                                <div class="tag">教育部計畫</div>
-                                <div class="tag">2022Coding101</div>
-                                <div class="tag">臺灣師範大學程式設計通識課程專題競賽</div>
+                                <div class="tag" v-for="tag in tags">[[tag]]</div>
                             </div>
                             <div class="media-buttons">
                                 <button type="button" class="btn-like"><i
-                                        class="far fa-heart"></i><span>11</span>人</button>
+                                        class="far fa-heart"></i><span>[[like]]</span>人</button>
                             </div>
                         </div>
                     </div>
                     <div class="media-body">
                         <div class="media-captions">
-                            <div class="caption">
+                            <!--策展簡介-->
+                            <div class="caption" v-for="caption in captions">
                                 <div class="caption-title">
-                                    說明
+                                    [[ caption.name ]]
                                 </div>
-                                <div class="caption-info ckeditor">
-                                    <div class="tab" style="display: block;">
-                                        <p dir="ltr">本競賽之目的在鼓勵非資訊領域科系學習程式設計的在學大學生，故資格限定如下：</p>
-                                        <ol>
-                                            <li dir="ltr">
-                                                <p dir="ltr"><strong>以團隊方式進行，每隊報名人數為二至五人，需指導教授一名。</strong></p>
-                                            </li>
-                                            <li dir="ltr">
-                                                <p dir="ltr"><strong>109 學年度下學期 或
-                                                        110學年度上學期有修習過或正在修習程式設計入門課程之非資訊相關科系學生。</strong></p>
-                                            </li>
-                                        </ol>
-                                    </div>
+                                <div class="caption-info ckeditor" v-html="caption.content">
                                 </div>
                             </div>
-                            <div class="caption">
-                                <div class="caption-title">
-                                    說明
-                                </div>
-                                <div class="caption-info ckeditor">
-                                    <div class="tab" style="display: block;">
-                                        <p dir="ltr">本競賽之目的在鼓勵非資訊領域科系學習程式設計的在學大學生，故資格限定如下：</p>
-                                        <ol>
-                                            <li dir="ltr">
-                                                <p dir="ltr"><strong>以團隊方式進行，每隊報名人數為二至五人，需指導教授一名。</strong></p>
-                                            </li>
-                                            <li dir="ltr">
-                                                <p dir="ltr"><strong>109 學年度下學期 或
-                                                        110學年度上學期有修習過或正在修習程式設計入門課程之非資訊相關科系學生。</strong></p>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
+                            <!--策展簡介 End-->
                         </div>
                         <div class="media-boxes">
-                            <a href="idea-detail.html" onclick="return leaveMask(this);">
-                                <article class="media-box curation">
+                            <!--組件-->
+                            <a :href="item.url" onclick="return leaveMask(this);" v-for="item in items">
+                                <article class="media-box" :class="item.type">
                                     <div class="media-image">
-                                        <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
+                                        <img :src="item.banner" alt="">
                                     </div>
                                     <div class="media-info">
                                         <div class="header">
                                             <div class="badge"></div>
                                             <ul class="popular icons">
-                                                <li class="likes"><span>0</span></li>
-                                                <li class="views"><span>20</span></li>
+                                                <li class="likes"><span>[[ item.like ]]</span></li>
+                                                <li class="views"><span>[[ item.views ]]</span></li>
                                             </ul>
                                         </div>
                                         <div class="title">
-                                            <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
+                                            <p>[[ item.name ]]</p>
                                         </div>
                                         <ul class="footer icons">
-                                            <li class="idea active">
-                                                <span>10</span>
-                                            </li>
-                                            <li class="youtube active">
-
-                                            </li>
-                                            <li class="google active">
-
-                                            </li>
-                                            <li class="pdf ">
-
-                                            </li>
-                                            <li class="link active">
-
+                                            <li v-for="(e, key) in item.include" :class="[ e ? 'active' : '', key ]">
+                                              <span v-if="item.type == 'curation'"> [[ e ]] </span>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="media-footer">
                                         <div class="date">
-                                            <span class="y">22</span>
-                                            <span class="m">04</span>
-                                            <span class="d">04</span>
+                                            [[ item.date ]]
                                         </div>
                                         <span class="line"></span>
                                     </div>
                                     <div class="media-remark">
-                                        <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
+                                        <p>[[ item.depiction ]]
                                         </p>
                                     </div>
                                 </article>
                             </a>
-                            <a href="javascript: void(0)">
-                                <article class="media-box idea">
-                                    <div class="media-image">
-                                        <img src="https://demox.tw/media/img/idea/cover_image/blob_2fdopdl.webp" alt="">
-                                    </div>
-                                    <div class="media-info">
-                                        <div class="header">
-                                            <div class="badge"></div>
-                                            <ul class="popular icons">
-                                                <li class="likes"><span>100</span></li>
-                                                <li class="views"><span>99</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="title">
-                                            <p>有色眼鏡</p>
-                                        </div>
-                                        <ul class="footer icons">
-                                            <li class="idea">
-                                                <span>3</span>
-                                            </li>
-                                            <li class="youtube active">
-
-                                            </li>
-                                            <li class="google active">
-
-                                            </li>
-                                            <li class="pdf ">
-
-                                            </li>
-                                            <li class="link active">
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="media-footer">
-                                        <div class="date">
-                                            <span class="y">22</span>
-                                            <span class="m">04</span>
-                                            <span class="d">04</span>
-                                        </div>
-                                        <span class="line"></span>
-                                    </div>
-                                    <div class="media-remark">
-                                        <p>《有色眼鏡》為第一人稱視角的虛擬實境遊戲。遊戲中，玩家必須透過更換、尋找不同顏色的眼鏡解謎。遊戲性的方式，讓玩家體驗主角從幼年、壯年、老年的人生經歷，並從遊玩的過程中，體會主角一路走來慢慢放下偏見的成長歷程。
-                                        </p>
-                                    </div>
-                                </article>
-                            </a>
-
-                            <a href="javascript: void(0)">
-                                <article class="media-box idea">
-                                    <div class="media-image">
-                                        <img src="https://demox.tw/media/img/idea/cover_image/blob_wnc6565.webp" alt="">
-                                    </div>
-                                    <div class="media-info">
-                                        <div class="header">
-                                            <div class="badge"></div>
-                                            <ul class="popular icons">
-                                                <li class="likes"><span>100</span></li>
-                                                <li class="views"><span>99</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="title">
-                                            <p>國立高雄大學 課程及學生作品-教育部推動大學程式設計教學計畫 111年成果發表</p>
-                                        </div>
-                                        <ul class="footer icons">
-                                            <li class="idea">
-                                                <span>3</span>
-                                            </li>
-                                            <li class="youtube active">
-
-                                            </li>
-                                            <li class="google active">
-
-                                            </li>
-                                            <li class="pdf active">
-
-                                            </li>
-                                            <li class="link active">
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="media-footer">
-                                        <div class="date">
-                                            <span class="y">22</span>
-                                            <span class="m">04</span>
-                                            <span class="d">04</span>
-                                        </div>
-                                        <span class="line"></span>
-                                    </div>
-                                    <div class="media-remark">
-                                        <p>採議題式教學培養學生跨領域程式設計及運算思維素養解決真實問題，並將程式教育融入院系專業議題培育跨域創新人才，使學生能自信地融入程式科技於自身專業。
-                                        </p>
-                                    </div>
-                                </article>
-                            </a>
-
-                            <a href="javascript: void(0)">
-                                <article class="media-box idea">
-                                    <div class="media-image">
-                                        <img src="https://demox.tw/media/img/idea/cover_image/blob_q2eahiJ.webp" alt="">
-                                    </div>
-                                    <div class="media-info">
-                                        <div class="header">
-                                            <div class="badge"></div>
-                                            <ul class="popular icons">
-                                                <li class="likes"><span>100</span></li>
-                                                <li class="views"><span>99</span></li>
-                                            </ul>
-                                        </div>
-                                        <div class="title">
-                                            <p>論壇風雲 Cyber Warfare</p>
-                                        </div>
-                                        <ul class="footer icons">
-                                            <li class="idea">
-                                                <span>3</span>
-                                            </li>
-                                            <li class="youtube active">
-
-                                            </li>
-                                            <li class="google ">
-
-                                            </li>
-                                            <li class="pdf ">
-
-                                            </li>
-                                            <li class="link active">
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="media-footer">
-                                        <div class="date">
-                                            <span class="y">22</span>
-                                            <span class="m">04</span>
-                                            <span class="d">04</span>
-                                        </div>
-                                        <span class="line"></span>
-                                    </div>
-                                    <div class="media-remark">
-                                        <p>在網路世界中，時刻上演著爾虞我詐的賽局， 真相隱沒在螢幕背後的黑暗。 在謠言四起的論壇中，一個邪惡計畫即將誕生。
-                                            以網頁遊戲形式展開辯論對話，每一次的選擇， 將會導向不同的結局。在論壇虛虛實實的攻防戰中， 你，又是否能看破？
-                                        </p>
-                                    </div>
-                                </article>
-                            </a>
-
+                            <!--組件 End-->
                         </div>
                     </div>
                 </div>
@@ -340,14 +141,136 @@
         </div>
     </main>
     <script src="js/main.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
     <script>
-        function leaveMask (e) {
+        let dataOrg = {
+            name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
+            banner:'https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp',
+            depiction: '這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。',
+            tags: ['Coding101', '@國立臺灣師範大學', '逢甲大學', '政治大學', '教育部計畫', '2022Coding101', '臺灣師範大學', '程式設計', '通識課程', '專題競賽'],
+            like: 12,
+            captions: [{
+                name: '說明',
+                content: `  <div class="tab" style="display: block;">
+                                <p dir="ltr">本競賽之目的在鼓勵非資訊領域科系學習程式設計的在學大學生，故資格限定如下：</p>
+                                <ol>
+                                    <li dir="ltr">
+                                        <p dir="ltr"><strong>以團隊方式進行，每隊報名人數為二至五人，需指導教授一名。</strong></p>
+                                    </li>
+                                    <li dir="ltr">
+                                        <p dir="ltr"><strong>109 學年度下學期 或
+                                                110學年度上學期有修習過或正在修習程式設計入門課程之非資訊相關科系學生。</strong></p>
+                                    </li>
+                                </ol>
+                            </div>`
+
+            },
+            {
+                name: '說明',
+                content: `  <div class="tab" style="display: block;">
+                                <p dir="ltr">本競賽之目的在鼓勵非資訊領域科系學習程式設計的在學大學生，故資格限定如下：</p>
+                                <ol>
+                                    <li dir="ltr">
+                                        <p dir="ltr"><strong>以團隊方式進行，每隊報名人數為二至五人，需指導教授一名。</strong></p>
+                                    </li>
+                                    <li dir="ltr">
+                                        <p dir="ltr"><strong>109 學年度下學期 或
+                                                110學年度上學期有修習過或正在修習程式設計入門課程之非資訊相關科系學生。</strong></p>
+                                    </li>
+                                </ol>
+                            </div>`
+
+            }],
+            items: [
+                {
+                    name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
+                    depiction: '這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。',
+                    banner:'https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp',
+                    type:'curation',
+                    url:'idea-detail.html',
+                    like: 10,
+                    views: 20,
+                    include:{
+                        idea:3,
+                        youtube:1,
+                        google:2,
+                        pdf:2,
+                        link:0,
+                    },
+                    date: '2022-04-20',
+                },
+                {
+                    name: '有色眼鏡',
+                    depiction: '<有色眼鏡>為第一人稱視角的虛擬實境遊戲。遊戲中，玩家必須透過更換、尋找不同顏色的眼鏡解謎。遊戲性的方式，讓玩家體驗主角從幼年、壯年、老年的人生經歷，並從遊玩的過程中，體會主角一路走來慢慢放下偏見的成長歷程。',
+                    banner:'https://demox.tw/media/img/idea/cover_image/blob_2fdopdl.webp',
+                    type:'idea',
+                    url:'idea-detail.html',
+                    like: 10,
+                    views: 20,
+                    include:{
+                        idea:3,
+                        youtube:1,
+                        google:2,
+                        pdf:0,
+                        link:3,
+                    },
+                    date: '2022-04-20',
+                },
+                {
+                    name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
+                    depiction: '這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。',
+                    banner:'https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp',
+                    type:'curation',
+                    url:'idea-detail.html',
+                    like: 10,
+                    views: 20,
+                    include:{
+                        idea:3,
+                        youtube:1,
+                        google:2,
+                        pdf:2,
+                        link:0,
+                    },
+                    date: '2022-04-20',
+                },
+                {
+                    name: '有色眼鏡',
+                    depiction: '<有色眼鏡>為第一人稱視角的虛擬實境遊戲。遊戲中，玩家必須透過更換、尋找不同顏色的眼鏡解謎。遊戲性的方式，讓玩家體驗主角從幼年、壯年、老年的人生經歷，並從遊玩的過程中，體會主角一路走來慢慢放下偏見的成長歷程。',
+                    banner:'https://demox.tw/media/img/idea/cover_image/blob_2fdopdl.webp',
+                    type:'idea',
+                    url:'idea-detail.html',
+                    like: 10,
+                    views: 20,
+                    include:{
+                        idea:3,
+                        youtube:1,
+                        google:2,
+                        pdf:0,
+                        link:3,
+                    },
+                    date: '2022-04-20',
+                },
+
+            ]
+        }
+        Vue.createApp({
+            data() { return dataOrg },
+            compilerOptions: {
+                delimiters: ['[[', ']]']
+            }
+        }).mount('#app');
+
+    </script>
+
+    <script>
+        function leaveMask(e) {
             let url = e.href
             const main = document.querySelector('main')
             main.classList.add('leave')
             main.addEventListener("animationend", (e) => {
                 //確認為離場動畫完成
-                if(e.animationName == 'mainLeave'){
+                if (e.animationName == 'mainLeave')
+                {
                     window.location.href = url;
                 }
             });
