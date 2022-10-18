@@ -406,11 +406,65 @@
     display: -ms-flexbox;
     display: flex;
   }
-  .media-main .media-header .media-image, .media-main .media-header .media-info {
+  .media-main .media-header .media-image,
+  .media-main .media-header .media-info {
     width: 50%;
   }
   .media-main .media-header .media-info {
     padding: 0px 20px;
   }
+}
+
+/*【Media Modules】 -Idea 組件顯示 */
+.module-btns {
+  margin-bottom: 20px;
+}
+
+.module-btns .btn {
+  font-size: 20px;
+  font-weight: 900;
+  padding: 5px 10px;
+  background-color: var(--main-symmetry-color);
+  color: var(--main-base-color);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.module-btns .btn:hover, .module-btns .btn.active {
+  background-color: var(--main-base-color);
+  color: var(--main-symmetry-color);
+}
+
+.module-btns .btn.google::before, .module-btns .btn.youtube::before, .module-btns .btn.pdf::before, .module-btns .btn.link::before {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
+  font-weight: 900;
+}
+
+.module-btns .btn.google::before {
+  content: "\f1a0";
+}
+
+.module-btns .btn.youtube::before {
+  content: "\f167";
+}
+
+.module-btns .btn.pdf::before {
+  content: "\f1c1";
+}
+
+.module-btns .btn.link::before {
+  content: "\f14c";
+}
+
+.module-show {
+  max-width: 100%;
+  aspect-ratio: 16/9;
+}
+
+.module-show iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
 }
 /*# sourceMappingURL=component.css.map */

@@ -52,9 +52,6 @@
             </label>
         </div>
     </header>
-    <!-- <section class="full-top">
-        <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-    </section> -->
     <main class="curation">
         <div class="mask-shadow"></div>
         <div class="side-block">
@@ -65,10 +62,10 @@
                 <p>Coding101</p>
             </div>
             <button class="navBtn">
-                <a href="javascript: void(0)" onclick="floatBoxClose()">返回</a>
+                <a href="javascript: history.go(-1)">返回</a>
             </button>
         </div>
-        <div class="main-block hidden">
+        <div class="main-block">
             <div class="container">
                 <div class="media-main">
                     <div class="media-header">
@@ -140,7 +137,7 @@
                             </div>
                         </div>
                         <div class="media-boxes">
-                            <a href="javascript: void(0)" onclick="floatBoxOpen()">
+                            <a href="idea-detail.html" onclick="return leaveMask(this);">
                                 <article class="media-box curation">
                                     <div class="media-image">
                                         <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
@@ -188,7 +185,7 @@
                                     </div>
                                 </article>
                             </a>
-                            <a href="javascript: void(0)" onclick="floatBoxOpen()">
+                            <a href="javascript: void(0)">
                                 <article class="media-box idea">
                                     <div class="media-image">
                                         <img src="https://demox.tw/media/img/idea/cover_image/blob_2fdopdl.webp" alt="">
@@ -237,7 +234,7 @@
                                 </article>
                             </a>
 
-                            <a href="javascript: void(0)" onclick="floatBoxOpen()">
+                            <a href="javascript: void(0)">
                                 <article class="media-box idea">
                                     <div class="media-image">
                                         <img src="https://demox.tw/media/img/idea/cover_image/blob_wnc6565.webp" alt="">
@@ -286,7 +283,7 @@
                                 </article>
                             </a>
 
-                            <a href="javascript: void(0)" onclick="floatBoxOpen()">
+                            <a href="javascript: void(0)">
                                 <article class="media-box idea">
                                     <div class="media-image">
                                         <img src="https://demox.tw/media/img/idea/cover_image/blob_q2eahiJ.webp" alt="">
@@ -341,11 +338,23 @@
                 </div>
             </div>
         </div>
-        <div class="float-block show">
-            123
-        </div>
     </main>
     <script src="js/main.js"></script>
+    <script>
+        function leaveMask (e) {
+            let url = e.href
+            const main = document.querySelector('main')
+            main.classList.add('leave')
+            main.addEventListener("animationend", (e) => {
+                //確認為離場動畫完成
+                if(e.animationName == 'mainLeave'){
+                    window.location.href = url;
+                }
+            });
+            return false
+        }
+
+    </script>
 </body>
 
 </html>

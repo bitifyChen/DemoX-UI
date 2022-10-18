@@ -74,6 +74,25 @@
     padding-left: 2em;
   }
 }
+/*通用*/
+/*抓取滑動*/
+.drag-scroll {
+  cursor: grab !important;
+  overflow: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  > * {
+    cursor: grab !important;
+    display: inline-block !important;
+  }
+}
 
 /*Start*/
 * {
@@ -98,26 +117,6 @@ main {
   position: relative;
   .main-block {
     margin-top: 50px;
-    &.hidden{
-      width: 0px;
-      max-height: 0px;
-      overflow: hidden;
-    }
-  }
-  .float-block{
-    position: fixed;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: red;
-    z-index: 3;
-    display: none;
-    &.show{
-      display: block;
-      
-    }
   }
 }
 
@@ -148,7 +147,6 @@ main {
         overflow: hidden;
         width: 100%;
         height: 100%;
-        filter: grayscale(1);
         img {
           height: 100%;
           width: 100%;
@@ -172,22 +170,6 @@ main {
           box-shadow: inset -10px 0px 10px rgba(182, 182, 182, 0.8);
         }
       }
-      .top-page {
-        background-color: rgb(240, 240, 240);
-        position: absolute;
-        right: 0;
-        height: 100%;
-        width: 120px;
-        overflow: hidden;
-        &::after {
-          content: "";
-          position: absolute;
-          top: -50%;
-          height: 200%;
-          width: 100%;
-          box-shadow: inset -10px 0px 10px rgba(185, 185, 185, 0.8);
-        }
-      }
       .navBtn {
         position: absolute;
         width: 50px;
@@ -199,19 +181,43 @@ main {
         border: 1px solid var(--main-base-color);
         top: 100px;
         transition: all 0.3s ease-in-out;
+        color: var(--main-base-color);
+        font-weight: 900;
+        cursor: pointer;
+        a {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        &:hover {
+          background-color: var(--main-base-color);
+          color: white;
+          transition: all 0.3s ease-in-out;
+          &::after {
+            left: -30px;
+          }
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          width: 30px;
+          height: 1px;
+          top: 24px;
+          left: 100%;
+          background-color: var(--main-base-color);
+          display: block;
+          transition: all 0.3s ease-in-out;
+        }
       }
     }
     //主顯示區塊
     .main-block {
       background-color: white;
-      width: 100%;
+      width: calc( 100% - 125px );
       margin-left: 120px;
       margin-top: 125px;
-    }
-    //浮動顯示區塊
-    .float-block{
-      left: 180px;
-      font-size: 80px;
     }
   }
 }
@@ -223,24 +229,11 @@ main {
       width: 300px;
       .navBtn {
         left: calc((100% - 120px) / 2);
-        &::after {
-          content: "";
-          position: absolute;
-          width: 30px;
-          height: 1px;
-          top: 24px;
-          left: 100%;
-          background-color: var(--main-base-color);
-          display: block;
-        }
       }
     }
     .main-block {
       margin-left: 300px;
-    }
-    //浮動顯示區塊
-    .float-block{
-      left: 250px;
+      width: calc(100% - 300px);
     }
   }
 }
@@ -261,6 +254,7 @@ main {
     }
     .main-block {
       margin-left: 180px;
+      width: calc(100% - 180px);
     }
   }
 }
@@ -270,5 +264,245 @@ main {
     .side-block .navBtn {
       left: 50%;
     }
+  }
+}
+
+//Idea
+@media screen and (min-width: 768px) {
+  main.idea {
+    .side-block {
+      width: 180px;
+      .side-bgc {
+        &::after {
+          right: 0;
+        }
+      }
+    }
+    .top-page {
+      display: none;
+    }
+    .main-block {
+      margin-left: 180px;
+      width: calc(100% - 180px);
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  main.idea {
+    .side-block .navBtn {
+      left: 50%;
+    }
+  }
+}
+
+//Animation
+
+// main
+main {
+  &.leave,
+  &.in {
+    position: relative;
+    overflow: hidden;
+    &::before {
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      z-index: 9999;
+      animation-timing-function: ease-in-out;
+    }
+  }
+  &.leave {
+    &::before {
+      animation: mainLeave 1.5s 0s forwards;
+      transform-origin: 100% 0; //從右側展開
+    }
+  }
+  &.in {
+    max-height: 100vh;
+    height: 100vh;
+    &::before {
+      animation: mainIn 1.5s 0s forwards;
+      transform-origin: 0% 0; //從左側展開
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  main.curation {
+    .side-block {
+      width: 100%;
+      z-index: 31;
+      animation: curationIn 1s 0.8s forwards;
+      .side-bgc {
+        &::before {
+          opacity: 0;
+          animation: fadeIn 1.5s 0.8s forwards;
+        }
+      }
+      .navBtn {
+        opacity: 0;
+        animation: fadeIn 1.5s 2s forwards;
+      }
+    }
+  }
+}
+
+.media-header,
+.media-captions,
+.media-boxes,
+.media-box,
+.module-btns,
+.module-show {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--main-base-light-color);
+    transform: scale(0, 1) translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    animation: shapeOut 1s 1.3s forwards;
+    z-index: 30;
+    pointer-events: none;
+  }
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    transform: scale(1.02, 1.06);
+    opacity: 1;
+    animation: shapeOutMask 1s 1.3s forwards;
+    z-index: 29;
+    pointer-events: none;
+  }
+}
+.media-header {
+  &::before,
+  &::after {
+    animation-delay: 1.1s;
+  }
+}
+
+.media-captions {
+  &::before,
+  &::after {
+    animation-delay: 1.2s;
+  }
+}
+.media-boxes,
+.media-info,
+.module-btns,
+.module-show {
+  &::before,
+  &::after {
+    animation-delay: 1.4s;
+  }
+}
+
+.media-box {
+  &::before,
+  &::after {
+    animation-delay: 1.6s;
+  }
+}
+
+@keyframes mainLeave {
+  0% {
+    transform: scale(0, 1) translate3d(0, 0, 0);
+    background-color: white;
+  }
+  49.99% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    background-color: var(--main-base-light-color);
+  }
+
+  100% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    background-color: var(--main-base-color);
+  }
+}
+
+@keyframes mainIn {
+  0% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    background-color: var(--main-base-color);
+  }
+
+  49.99% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: scale(0, 1) translate3d(0, 0, 0);
+    background-color: var(--main-base-color);
+  }
+}
+
+@keyframes shapeOut {
+  0% {
+    transform: scale(0, 1) translate3d(0, 0, 0);
+    transform-origin: 0 0;
+  }
+
+  49.999% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    transform-origin: 0 0;
+  }
+
+  50% {
+    transform: scale(1, 1) translate3d(0, 0, 0);
+    transform-origin: 100% 0;
+  }
+
+  100% {
+    transform: scale(0, 1) translate3d(0, 0, 0);
+    transform-origin: 100% 0;
+  }
+}
+
+@keyframes shapeOutMask {
+  0% {
+    opacity: 1;
+  }
+
+  49.999% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes curationIn {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 180px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

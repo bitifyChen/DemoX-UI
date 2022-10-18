@@ -218,6 +218,7 @@
     width: calc(100% - 48px);
   }
 }
+
 /*【Media Boxes】 - Idea Curation Box Group*/
 .media-boxes {
   padding: 20px;
@@ -245,37 +246,35 @@
 }
 @media screen and (min-width: 1200px) {
   .media-boxes {
-  > a {
+    > a {
       width: calc(100% / 3);
     }
   }
 }
 @media screen and (min-width: 1500px) {
   .media-boxes {
-  > a {
+    > a {
       width: calc(100% / 4);
     }
   }
 }
 
-
 /*【Media Main】 - Idea Curation Show */
-
 .media-main {
   .media-header {
-    .media-image img{
+    .media-image img {
       width: 100%;
       border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
-    .media-title{
+    .media-title {
       margin-bottom: 10px;
     }
-    .media-title h2{
+    .media-title h2 {
       font-size: 30px;
       font-weight: 900;
     }
-    .media-depiction{
+    .media-depiction {
       color: #397197;
       font-weight: 900;
       font-size: 14px;
@@ -283,8 +282,8 @@
       margin-bottom: 10px;
     }
   }
-  .media-tags{
-    .tag{
+  .media-tags {
+    .tag {
       display: inline-block;
       font-size: 12px;
       font-weight: normal;
@@ -295,20 +294,20 @@
       margin-bottom: 4px;
     }
   }
-  .media-buttons{
+  .media-buttons {
     margin: 10px 0px;
   }
 
-  .media-body{
+  .media-body {
     margin-top: 40px;
     padding: 20px 0px;
     border-top: 1px solid rgb(209, 212, 219);
-    .media-captions{
+    .media-captions {
       border-bottom: 1px solid rgb(209, 212, 219);
-      .caption{
+      .caption {
         margin-bottom: 20px;
       }
-      .caption-title{
+      .caption-title {
         display: inline-block;
         font-size: 16px;
         padding: 6px 20px;
@@ -316,33 +315,84 @@
         border-radius: 999px;
         color: white;
       }
-      .caption-info{
+      .caption-info {
         padding: 10px 20px;
       }
     }
   }
 }
-@media screen and (max-width:900px) {
-  .media-main{
-    .media-title{
+@media screen and (max-width: 900px) {
+  .media-main {
+    .media-title {
       margin-top: 20px;
     }
-    .media-depiction{
+    .media-depiction {
       margin: 10px 0px;
     }
   }
-}	
+}
 
-@media screen and (min-width:900px) {
+@media screen and (min-width: 900px) {
   .media-main {
     .media-header {
       display: flex;
-      .media-image,.media-info{
+      .media-image,
+      .media-info {
         width: 50%;
       }
-      .media-info{
+      .media-info {
         padding: 0px 20px;
       }
     }
   }
-}	
+}
+
+/*【Media Modules】 -Idea 組件顯示 */
+
+.module-btns {
+  margin-bottom: 20px;
+  .btn {
+    font-size: 20px;
+    font-weight: 900;
+    padding: 5px 10px;
+    background-color: var(--main-symmetry-color);
+    color: var(--main-base-color);
+    transition: all 0.3s linear;
+    border-radius: 999px;
+    cursor: pointer;
+    &:hover,
+    &.active {
+      background-color: var(--main-base-color);
+      color: var(--main-symmetry-color);
+    }
+    &.google,&.youtube,&.pdf,&.link{
+      &::before{
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
+        font-weight: 900;
+      }   
+    }
+    &.google::before{
+      content: "\f1a0";
+    }
+
+    &.youtube::before{
+      content: "\f167";
+    }
+
+    &.pdf::before{
+      content: "\f1c1";
+    }
+
+    &.link::before{
+      content: "\f14c";
+    }
+  }
+}
+.module-show {
+  max-width: 100%;
+  aspect-ratio: 16/9;
+  iframe{
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
+}
