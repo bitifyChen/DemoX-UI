@@ -120,6 +120,17 @@
           box-sizing: border-box;
 }
 
+body {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .full-top {
   width: 100%;
   height: 100vh;
@@ -375,8 +386,8 @@ main.in::before {
 .media-captions,
 .media-boxes,
 .media-box,
-.module-btns,
-.module-show {
+.media-modules,
+.module-changing {
   position: relative;
 }
 
@@ -384,8 +395,8 @@ main.in::before {
 .media-captions::before,
 .media-boxes::before,
 .media-box::before,
-.module-btns::before,
-.module-show::before {
+.media-modules::before,
+.module-changing::before {
   content: "";
   position: absolute;
   top: 0;
@@ -407,8 +418,8 @@ main.in::before {
 .media-captions::after,
 .media-boxes::after,
 .media-box::after,
-.module-btns::after,
-.module-show::after {
+.media-modules::after,
+.module-changing::after {
   content: "";
   width: 100%;
   height: 100%;
@@ -425,6 +436,19 @@ main.in::before {
   pointer-events: none;
 }
 
+.module-changing::before {
+  -webkit-animation: shapeOut 1s;
+          animation: shapeOut 1s;
+  z-index: 28;
+}
+
+.module-changing::after {
+  content: "";
+  -webkit-animation: shapeOutMask 1s forwards;
+          animation: shapeOutMask 1s forwards;
+  z-index: 27;
+}
+
 .media-header::before, .media-header::after {
   -webkit-animation-delay: 1.1s;
           animation-delay: 1.1s;
@@ -438,10 +462,8 @@ main.in::before {
 .media-boxes::before, .media-boxes::after,
 .media-info::before,
 .media-info::after,
-.module-btns::before,
-.module-btns::after,
-.module-show::before,
-.module-show::after {
+.media-modules::before,
+.media-modules::after {
   -webkit-animation-delay: 1.4s;
           animation-delay: 1.4s;
 }

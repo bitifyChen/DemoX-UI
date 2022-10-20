@@ -358,6 +358,7 @@
   border-radius: 999px;
   color: white;
   margin-bottom: 4px;
+  margin-right: 2px;
 }
 
 .media-main .media-buttons {
@@ -437,9 +438,14 @@
   color: var(--main-symmetry-color);
 }
 
+.module-btns .btn + .btn {
+  margin-left: 5px;
+}
+
 .module-btns .btn.google::before, .module-btns .btn.youtube::before, .module-btns .btn.pdf::before, .module-btns .btn.link::before {
   font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
   font-weight: 900;
+  margin-right: 4px;
 }
 
 .module-btns .btn.google::before {
@@ -460,11 +466,33 @@
 
 .module-show {
   max-width: 100%;
-  aspect-ratio: 16/9;
 }
 
 .module-show iframe {
   width: 100%;
+  height: auto !important;
   aspect-ratio: 16/9;
+}
+
+.module-show .link {
+  padding: 20px 10px;
+  border-radius: 5px;
+  background-color: var(--main-light-color);
+}
+
+.module-show .link p {
+  color: var(--main-base-color);
+  font-weight: 900;
+}
+
+.module-show .link a {
+  color: #7474ff;
+  text-decoration: underline;
+  -webkit-transition: all .1s linear;
+  transition: all .1s linear;
+}
+
+.module-show .link a:hover {
+  color: var(--main-symmetry-color);
 }
 /*# sourceMappingURL=component.css.map */

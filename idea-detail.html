@@ -53,13 +53,13 @@
         </div>
     </header>
 
-    <main class="idea">
+    <main class="idea in" id="app">
         <div class="side-block">
             <div class="side-bgc">
-                <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
+                <img :src="banner" alt="">
             </div>
             <button class="navBtn">
-                <a href="javascript: history.go(-1)" >返回</a>
+                <a href="javascript: history.go(-1)">返回</a>
             </button>
         </div>
         <div class="main-block">
@@ -67,64 +67,42 @@
                 <div class="media-main">
                     <div class="media-header">
                         <div class="media-image">
-                            <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
+                            <img :src="banner" alt="">
                         </div>
                         <div class="media-info">
                             <div class="media-title">
-                                <h2>推動大學程式設計教學 學校虛實整合成果展-慈濟大學</h2>
+                                <h2>[[ name ]]</h2>
                             </div>
                             <div class="media-depiction">
-                                <p>這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。
-                                </p>
+                                <p>[[ depiction ]]</p>
                             </div>
                             <div class="media-tags">
-                                <div class="tag">Coding101</div>
-                                <div class="tag">@國立臺灣師範大學</div>
-                                <div class="tag">逢甲大學</div>
-                                <div class="tag">政治大學</div>
-                                <div class="tag">教育部計畫</div>
-                                <div class="tag">2022Coding101</div>
-                                <div class="tag">臺灣師範大學程式設計通識課程專題競賽</div>
+                                <div class="tag" v-for="tag in tags">[[tag]]</div>
                             </div>
                             <div class="media-buttons">
                                 <button type="button" class="btn-like"><i
-                                        class="far fa-heart"></i><span>11</span>人</button>
+                                        class="far fa-heart"></i><span>[[like]]</span>人</button>
                             </div>
                         </div>
                     </div>
                     <div class="media-body">
+
                         <div class="media-modules">
                             <div class="module-btns drag-scroll">
-                                <button class="btn active google">
-                                    說明簡報
-                                </button>
-                                <button class="btn google">
-                                    參考資料
-                                </button>
-                                <button class="btn youtube">
-                                    說明影片
-                                </button>
-                                <button class="btn youtube">
-                                    操作影片
-                                </button>
-                                <button class="btn pdf">
-                                    使用手冊1
-                                </button>
-                                <button class="btn pdf">
-                                    使用手冊2
-                                </button>
-                                <button class="btn pdf">
-                                    使用手冊3
-                                </button>
-                                <button class="btn link">
-                                    官方網站
-                                </button>
-                                <button class="btn link">
-                                    逢甲大學官方網站
+                                <button class="btn" :class=" [ module.type , key==showingModule.order?'active':''] "
+                                    v-for="(module,key) in modules" @click="moduleShow(key)">
+                                    [[ module.name ]]
                                 </button>
                             </div>
-                            <div class="module-show">
-                                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTXrGti1nh6xfNqtvtCfZV1YFtjwqagUz_e6l1LFabTzFuee62bGXL6DB4x4yW4zgnnoQF42yflGyIZ/embed?start=false&amp;loop=false&amp;delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                            <div class="module-show" :class="[showingModule.updating ? 'module-changing':'' ]"
+                                v-if="showingModule.content">
+                                <div class="link" v-if="showingModule.content.type == 'link'">
+                                    <p>[[showingModule.content.name]] <a
+                                            :href="showingModule.content.url">[[showingModule.content.url]]</a> </p>
+                                </div>
+                                <iframe v-else :src="showingModule.content.url" :key="showingModule.order"
+                                    frameborder="0" width="100%" height="569" allowfullscreen="true"
+                                    mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                             </div>
                         </div>
                     </div>
@@ -133,17 +111,104 @@
         </div>
     </main>
     <script src="js/main.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
     <script>
-        function leaveMask (e) {
-            let url = e.href
+        let dataOrg = {
+            name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
+            banner: 'https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp',
+            depiction: '這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。',
+            tags: ['Coding101', '@國立臺灣師範大學', '逢甲大學', '政治大學', '教育部計畫', '2022Coding101', '臺灣師範大學', '程式設計', '通識課程', '專題競賽'],
+            like: 12,
+            showingModule: {
+                updating: true,
+                order: 0,
+                content: {
+                }
+            },
+            modules: [
+                {
+                    name: '說明簡報1',
+                    type: 'google',
+                    url: 'https://docs.google.com/presentation/d/e/2PACX-1vTXrGti1nh6xfNqtvtCfZV1YFtjwqagUz_e6l1LFabTzFuee62bGXL6DB4x4yW4zgnnoQF42yflGyIZ/embed?start=false&amp;loop=false&amp;delayms=3000',
+                },
+                {
+                    name: '說明簡報',
+                    type: 'youtube',
+                    url: 'https://www.youtube.com/embed/NoQPSMJlggk',
+                },
+                {
+                    name: '說明簡報2',
+                    type: 'google',
+                    url: 'https://docs.google.com/presentation/d/e/2PACX-1vTXrGti1nh6xfNqtvtCfZV1YFtjwqagUz_e6l1LFabTzFuee62bGXL6DB4x4yW4zgnnoQF42yflGyIZ/embed?start=false&amp;loop=false&amp;delayms=3000',
+                },
+                {
+                    name: '連結',
+                    type: 'link',
+                    url: 'https://tw.yahoo.com/',
+                },
+            ],
+        }
+        Vue.createApp({
+            data() { return dataOrg },
+            compilerOptions: {
+                delimiters: ['[[', ']]']
+            },
+            methods: {
+                moduleShow(key) {
+                    this.showingModule.order = key
+                },
+            },
+            watch: {
+                //監測showing Module .order 是否有改變 
+                'showingModule.order': {
+                    handler() {
+                        this.showingModule.updating = true
+                        this.showingModule.content = this.modules[this.showingModule.order]
+                    },
+                    immediate: true,
+                },
+                'showingModule.updating': {
+                    handler() {
+                        if (this.showingModule.updating)
+                        {
+                            setTimeout(() => { this.showingModule.updating = false }, 1000)
+                        }
+                    },
+                    immediate: true,
+                }
+            }
+        }).mount('#app');
+
+    </script>
+
+    <script>
+        window.onload = inMask();
+
+        function inMask() {
             const main = document.querySelector('main')
-            main.classList.add('leave')
             main.addEventListener("animationend", (e) => {
                 //確認為離場動畫完成
-                if(e.animationName == 'mainLeave'){
-                    window.location.href = url;
+                if (e.animationName == 'mainIn')
+                {
+                    main.classList.remove('in')
                 }
             });
+            return false
+        }
+
+        function leaveMask(e) {
+            let url = e.href
+            window.location.href = url;
+            //待解決
+            // const main = document.querySelector('main')
+            // main.classList.add('leave')
+            // main.addEventListener("animationend", (e) => {
+            //     //確認為離場動畫完成
+            //     if (e.animationName == 'mainLeave')
+            //     {
+            //         window.location.href = url;
+            //     }
+            // });
             return false
         }
 

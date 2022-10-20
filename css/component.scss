@@ -292,6 +292,7 @@
       border-radius: 999px;
       color: white;
       margin-bottom: 4px;
+      margin-right: 2px;
     }
   }
   .media-buttons {
@@ -365,10 +366,14 @@
       background-color: var(--main-base-color);
       color: var(--main-symmetry-color);
     }
+    & + .btn {
+      margin-left: 5px;
+    }
     &.google,&.youtube,&.pdf,&.link{
       &::before{
         font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
         font-weight: 900;
+        margin-right: 4px;
       }   
     }
     &.google::before{
@@ -390,9 +395,26 @@
 }
 .module-show {
   max-width: 100%;
-  aspect-ratio: 16/9;
   iframe{
     width: 100%;
+    height: auto !important;
     aspect-ratio: 16/9;
+  }
+  .link{
+    padding: 20px 10px;
+    border-radius: 5px;
+    background-color: var(--main-light-color);
+    p{
+      color:var(--main-base-color);
+      font-weight: 900;
+    }
+    a{
+      color:rgb(116, 116, 255);
+      text-decoration: underline;
+      transition: all .1s linear;
+      &:hover{
+        color: var(--main-symmetry-color);
+      }
+    }
   }
 }
