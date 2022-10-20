@@ -5,7 +5,7 @@
 
   .wrap {
     display: flex;
-    height: 70px;
+    height: 50px;
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
@@ -44,17 +44,19 @@
       }
       .link {
         text-align: center;
-        font-size: 22px;
-        line-height: 40px;
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 30px;
+        color: var(--main-base-color);
         & + .link {
-          border-top: 1px solid #000;
+          margin-top: 10px;
         }
       }
     }
 
     .menu-hb {
-      width: 40px;
-      height: 40px;
+      width: 20px;
+      height: 20px;
       cursor: pointer;
       position: relative;
     }
@@ -63,26 +65,51 @@
     .menu-hb span::before {
       content: "";
       width: 100%;
-      height: 4px;
+      height: 2px;
       background-color: var(--main-light-color);
       position: absolute;
     }
+    //上
     .menu-hb::before {
-      top: 6px;
-      left: 0;
+      top: 0;
+      transition: top .5s .5s, transform .5s;
     }
-    .menu-hb::after {
-      bottom: 6px;
-    }
+    //中
     .menu-hb span::before {
-      top: calc(50% - (4px / 2));
+      top: calc(50% - (2px / 2));
+      transition: opacity 2s 1s;
     }
+    //下
+    .menu-hb::after {
+      bottom: 0px;
+      transition: bottom .5s .5s, transform .5s;
+    }
+    
   }
 
   #menu-check:checked ~ .main-header .main-nav {
     display: block;
   }
 
+  #menu-check:checked ~ .main-header .menu-hb{
+    //上
+    &::before {
+      top: calc(50% - (2px / 2));
+      transform: rotate(225deg);
+      transition: top .5s, transform .5s .5s;
+    }
+    //中
+    span::before {
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    //下
+    &::after {
+      bottom: calc(50% - (2px / 2));
+      transform: rotate(495deg);
+      transition: bottom .5s, transform .5s .5s;
+    }
+  }
   .menu-logo {
     display: none;
   }
@@ -101,7 +128,7 @@
       img {
         height: 30px;
         margin: auto;
-        display: block;   
+        display: block;
       }
     }
 
@@ -116,9 +143,9 @@
       &:before {
         content: "";
         position: absolute;
-        height: 4px;
-        width: 20px;
-        top: 4px;
+        height: 2px;
+        width: 15px;
+        top: 5px;
         transform: rotate(-45deg);
         background-color: #fff;
         transition: 0.1s linear;
@@ -126,8 +153,8 @@
       &::after {
         content: "";
         position: absolute;
-        height: 4px;
-        width: 20px;
+        height: 2px;
+        width: 15px;
         top: 15px;
         transform: rotate(45deg);
         background-color: #fff;
@@ -171,10 +198,15 @@
     .main-nav .link-list {
       display: flex;
     }
-    .link-list .link a {
+    .link a {
       padding: 20px;
-      font-size: 20px;
+      font-size: 16px;
+      font-weight: 900;
       color: var(--main-light-color);
+      transition: all .3s linear;
+      &:hover{
+        color:var(--main-symmetry-color);
+      }
     }
     .menu-hb {
       display: none;
@@ -191,7 +223,7 @@
     left: 5%;
     background-color: var(--main-base-color);
     box-shadow: 0 0 5px var(--main-base-color);
-    background-color: #153051E0;
+    background-color: #153051e0;
     backdrop-filter: blur(4px);
     transition: 0.3s 0.3s linear;
   }
@@ -200,8 +232,7 @@
   }
 }
 
-
-@media screen and (min-width:900px) {
+@media screen and (min-width: 900px) {
   .main-header {
     .menu-logo {
       width: 200px;
