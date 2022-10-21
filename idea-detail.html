@@ -11,7 +11,8 @@
 
 <body>
     <input type="checkbox" id="menu-check">
-    <input type="checkbox" id="header-check">
+    <input type="checkbox" id="header-check" checked>
+    <input type="checkbox" id="user-check">
     <header class="main-header">
         <label class="menu-logo" for="header-check">
             <img src="https://demox.tw/static/page/setting/logo-w.d6e001a47b68.svg" alt="">
@@ -40,11 +41,30 @@
                     <li class="link">
                         <a href="#">搜尋</a>
                     </li>
-                </ul>
-                <ul class="user">
-                    <li class="link">
-                        <a href="#">登入</a>
-                    </li>
+                    <label class="user" for="user-check">
+                        <span></span>
+                        <ul class="login">
+                            <li class="link">
+                                <a href="#">使用說明</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">建立作品</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">建立策展</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">個人資料</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">登出</a>
+                            </li>
+                        </ul>
+                        <div class="user-info">
+                            <p class="user-name">嗨，陳品宏</p>
+                            <img class="user-pic"src="img/user.svg" alt="">
+                        </div>
+                    </label>
                 </ul>
             </nav>
             <label class="menu-hb" for="menu-check">

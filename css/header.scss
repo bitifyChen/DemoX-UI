@@ -25,10 +25,12 @@
 
 #menu-check,
 #header-check,
+#user-check,
 .menu-header-close {
   display: none;
 }
 
+/*手機*/
 @media screen and (max-width: 767px) {
   .main-header {
     .main-nav {
@@ -52,6 +54,14 @@
           margin-top: 10px;
         }
       }
+      .user {
+        display: block;
+        margin-top: 10px;
+        background-color: rgba(0,0,0,.1);
+        .user-info {
+            display: none;
+          }
+        }
     }
 
     .menu-hb {
@@ -72,7 +82,7 @@
     //上
     .menu-hb::before {
       top: 0;
-      transition: top .5s .5s, transform .5s;
+      transition: top 0.5s 0.5s, transform 0.5s;
     }
     //中
     .menu-hb span::before {
@@ -82,32 +92,31 @@
     //下
     .menu-hb::after {
       bottom: 0px;
-      transition: bottom .5s .5s, transform .5s;
+      transition: bottom 0.5s 0.5s, transform 0.5s;
     }
-    
   }
 
   #menu-check:checked ~ .main-header .main-nav {
     display: block;
   }
 
-  #menu-check:checked ~ .main-header .menu-hb{
+  #menu-check:checked ~ .main-header .menu-hb {
     //上
     &::before {
       top: calc(50% - (2px / 2));
       transform: rotate(225deg);
-      transition: top .5s, transform .5s .5s;
+      transition: top 0.5s, transform 0.5s 0.5s;
     }
     //中
     span::before {
       opacity: 0;
-      transition: opacity .3s;
+      transition: opacity 0.3s;
     }
     //下
     &::after {
       bottom: calc(50% - (2px / 2));
       transform: rotate(495deg);
-      transition: bottom .5s, transform .5s .5s;
+      transition: bottom 0.5s, transform 0.5s 0.5s;
     }
   }
   .menu-logo {
@@ -115,6 +124,9 @@
   }
 }
 
+
+
+/*電腦版*/
 @media screen and (min-width: 768px) {
   .main-header {
     .menu-logo {
@@ -137,7 +149,6 @@
       width: 20px;
       height: 20px;
       margin-right: 10px;
-
       position: relative;
       cursor: pointer;
       &:before {
@@ -179,7 +190,7 @@
       overflow: hidden;
       top: 25px;
       left: -100px;
-      border-radius: 5px;
+      border-radius: 99px;
       justify-content: space-between;
       align-items: center;
       background-color: transparent;
@@ -195,23 +206,53 @@
     .main-nav {
       display: none;
     }
-    .main-nav .link-list {
+    .main-nav .link-list,
+    .main-nav .user {
       display: flex;
+      align-items: center;
+    }
+    .main-nav .user {
+      border: 2px solid var(--main-light-color);
+      border-radius: 99px;
+      background-color: var(--main-base-color);
+      padding: 4px;
+      .user-info {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .user-pic {
+          height: 30px;
+          width: auto;
+          aspect-ratio: 1/1;
+          border-radius: 50%;
+        }
+        .user-name {
+          margin: 0px 10px;
+          font-weight: 900;
+          color: white;
+        }
+      }
+      .login {
+        display: none;
+      }
     }
     .link a {
       padding: 20px;
       font-size: 16px;
       font-weight: 900;
       color: var(--main-light-color);
-      transition: all .3s linear;
-      &:hover{
-        color:var(--main-symmetry-color);
+      transition: all 0.3s linear;
+      &:hover {
+        color: var(--main-symmetry-color);
       }
     }
     .menu-hb {
       display: none;
     }
+
   }
+
+
   /*打開Menu*/
   #header-check:checked ~ .main-header .menu-logo {
     opacity: 0;
@@ -230,6 +271,82 @@
   #header-check:checked ~ .main-header .main-nav {
     display: flex;
   }
+
+   /*打開設定選單*/
+   #user-check:checked ~ .main-header .main-nav .user .login {
+    display: flex;
+  }
+  /*選單動畫*/
+  //選端動畫
+  .main-nav .user span{
+    height: 20px;
+    width: 10px;
+    margin-left: 10px;
+    position: relative;
+    cursor: pointer;
+    &::before{
+      content: '';
+      width: 10px;
+      height: 2px;
+      position: absolute;
+      background-color: white;
+      transform: rotate(-45deg);
+      transform-origin: center;
+      transition: top .3s linear ,transform .1s linear;
+      top: 6px;
+    }
+    &::after{
+      content: '';
+      width: 11px;
+      height: 2px;
+      top: 13px;
+      position: absolute;
+      background-color: white;
+      transform: rotate(45deg);
+      transform-origin: center;;
+      transition: top .3s linear ,transform .1s linear;;
+    }
+  }
+  .main-nav .user:hover  span{
+    &::before{
+      transform: translateX(-4px) rotate(-45deg);
+    }
+    &::after{
+      transform: translateX(-4px) rotate(45deg);
+    }
+  }
+  #user-check:checked ~ .main-header .main-nav .user{
+    position: absolute;
+    right: 10px;
+  }
+  #user-check:checked ~ .main-header .main-nav .user span{
+    &::before{
+      top: 13px;
+
+    }
+    &::after{
+      content: '';
+      top: 6px;
+    }
+  }
+
+  #user-check:checked ~ .main-header .main-nav .user:hover span{
+    &::before{
+      transform: translateX(0px) rotate(-45deg);
+    }
+    &::after{
+      transform: translateX(0px) rotate(45deg);
+    }
+  }
+
+  #user-check:checked ~ .main-header .main-nav .user span:hover{
+    &::before{
+      transform: translateX(4px) rotate(-45deg);
+    }
+    &::after{
+      transform: translateX(4px) rotate(45deg);
+    }
+  }
 }
 
 @media screen and (min-width: 900px) {
@@ -239,3 +356,4 @@
     }
   }
 }
+
