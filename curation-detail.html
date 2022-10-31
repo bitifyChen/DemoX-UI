@@ -62,7 +62,7 @@
                         </ul>
                         <div class="user-info">
                             <p class="user-name">嗨，陳品宏</p>
-                            <img class="user-pic"src="img/user.svg" alt="">
+                            <img class="user-pic" src="img/user.svg" alt="">
                         </div>
                     </label>
                 </ul>
@@ -100,8 +100,8 @@
                                 <div class="tag" v-for="tag in tags">[[tag]]</div>
                             </div>
                             <div class="media-buttons">
-                                <button type="button" class="btn-like"><i
-                                        class="far fa-heart"></i><span>[[like]]</span>人</button>
+                                <button type="button" class="btn-like" :class=" like.liked ? 'active' : ''"
+                                    @click="likeHandler"><i class="far fa-heart"></i><span>[[like.num]]</span>人</button>
                             </div>
                         </div>
                     </div>
@@ -160,15 +160,22 @@
             </div>
         </div>
     </main>
-    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
+    <script src="js/main.js"></script>
     <script>
         let dataOrg = {
+            id: 20,
+            userId: 22,
+            type: 'curation',
             name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
             banner: 'https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp',
             depiction: '這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。',
             tags: ['Coding101', '@國立臺灣師範大學', '逢甲大學', '政治大學', '教育部計畫', '2022Coding101', '臺灣師範大學', '程式設計', '通識課程', '專題競賽'],
-            like: 12,
+            like: {
+                num: 12,
+                liked: false,
+            },
             captions: [{
                 name: '說明',
                 content: `  <div class="tab" style="display: block;">
@@ -277,7 +284,31 @@
             data() { return dataOrg },
             compilerOptions: {
                 delimiters: ['[[', ']]']
-            }
+            },
+            methods: {
+                likeHandler() {
+                    if (this.userId)
+                    //準備post資料如果成功
+                    {
+                        if (this.like.liked)
+                        {
+                            new Noty({type: 'success',layout: 'topCenter',text: '已收回讚',timeout: 2000,}).show();
+                            this.like.num -= 1
+                            this.like.liked = false
+                        } else
+                        {
+                            new Noty({type: 'success',layout: 'topCenter',text: '已按讚',timeout: 2000,}).show();
+                            this.like.num += 1
+                            this.like.liked = true
+                        }
+
+                    }
+                    else
+                    {
+                        new Noty({ type: 'error', layout: 'topCenter', text: '此操作需要登入', timeout: 2000, }).show();
+                    }
+                },
+            },
         }).mount('#app');
 
     </script>
