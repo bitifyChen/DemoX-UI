@@ -7,14 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo X</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+      <!-- Demo styles -->
+      <style>
+      
+
+      </style>
 </head>
+
 <body>
     <input type="checkbox" id="menu-check">
+    <input type="checkbox" id="header-check" checked>
+    <input type="checkbox" id="user-check">
     <header class="main-header">
-        <div class="container">
+        <label class="menu-logo" for="header-check">
+            <img src="https://demox.tw/static/page/setting/logo-w.d6e001a47b68.svg" alt="">
+        </label>
+        <div class="wrap">
+            <label class="menu-header-close" for="header-check">
+                <span></span>
+            </label>
             <div class="logo">
-                <h1 class="sr-only">Demo X</h1>
-                <img src="https://demox.tw/static/page/setting/logo-w.d6e001a47b68.svg" alt="">
+                <a href="#">
+                    <h1 class="sr-only">Demo X</h1>
+                    <img src="https://demox.tw/static/page/setting/logo-w.d6e001a47b68.svg" alt="">
+                </a>
             </div>
             <nav class="main-nav">
                 <ul class="link-list">
@@ -30,11 +48,30 @@
                     <li class="link">
                         <a href="#">搜尋</a>
                     </li>
-                </ul>
-                <ul class="user">
-                    <li class="link">
-                        <a href="#">登入</a>
-                    </li>
+                    <label class="user" for="user-check">
+                        <span></span>
+                        <ul class="login">
+                            <li class="link">
+                                <a href="#">使用說明</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">建立作品</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">建立策展</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">個人資料</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">登出</a>
+                            </li>
+                        </ul>
+                        <div class="user-info">
+                            <p class="user-name">嗨，陳品宏</p>
+                            <img class="user-pic" src="img/user.svg" alt="">
+                        </div>
+                    </label>
                 </ul>
             </nav>
             <label class="menu-hb" for="menu-check">
@@ -42,7 +79,88 @@
             </label>
         </div>
     </header>
-    <main></main>
+    <main>
+        <section class="section-banner">
+            <div class="active-banner">
+                <div class="mask"></div>
+                <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
+            </div>
+            
+            <div class="banners">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
+                    <div class="info">
+                        <h3 class="title">推動大學程式設計教學 學校虛實整合成果展-慈濟大學</h3>
+                        <p class="depiction">這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。</p>
+                        <a href="#" class="link">瀏覽更多</a>
+                    </div>
+                  </div>
+                  
+                  <div class="swiper-slide">
+                    <img src="https://demox.tw/media/img/curation/image/blob_zcciuaY.webp" alt="">
+                    <div class="info">
+                        <h3 class="title">推動大學程式設計教學 學校虛實整合成果展-慈濟大學</h3>
+                        <p class="depiction">這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。</p>
+                        <a href="#" class="link">瀏覽更多</a>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://demox.tw/media/img/curation/image/blob_ji5tcQM.webp" alt="">
+                    <div class="info">
+                        <h3 class="title">推動大學程式設計教學 學校虛實整合成果展-慈濟大學</h3>
+                        <p class="depiction">這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。</p>
+                        <a href="#" class="link">瀏覽更多</a>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://demox.tw/media/img/curation/image/blob_qyhkNRl.webp" alt="">
+                    <div class="info">
+                        <h3 class="title">推動大學程式設計教學 學校虛實整合成果展-慈濟大學</h3>
+                        <p class="depiction">這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。</p>
+                        <a href="#" class="link">瀏覽更多</a>
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+        </section>
+        <section class="section-curation-list">
+            <div class="container">
+            <h2>最新策展</h2>
+            </div>
+         </section>
+         <section class="section-idea-list">
+            <div class="container">
+            <h2>最新作品</h2>
+            </div>
+         </section>
+    </main>
+
+     <!-- Swiper JS -->
+     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+     <!-- Initialize Swiper -->
+     <script>
+       var swiper = new Swiper(".banners", {
+         grabCursor: true,
+         effect: "creative",
+         creativeEffect: {
+           prev: {
+             shadow: true,
+             translate: [0, 0, -400],
+           },
+           next: {
+             translate: ["100%", 0, 0],
+           },
+         },
+       });
+       
+       //TODO更換背景
+       swiper.on('slideChange', function () {
+        console.log('slide changed');
+       });
+    </script>
 </body>
 
 </html>

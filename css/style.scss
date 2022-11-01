@@ -101,7 +101,7 @@
   box-sizing: border-box;
 }
 
-body{
+body {
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
@@ -225,7 +225,7 @@ main {
     //主顯示區塊
     .main-block {
       background-color: white;
-      width: calc( 100% - 125px );
+      width: calc(100% - 125px);
       margin-left: 120px;
       margin-top: 125px;
     }
@@ -244,6 +244,117 @@ main {
     .main-block {
       margin-left: 300px;
       width: calc(100% - 300px);
+    }
+  }
+}
+
+//Index
+.section-banner {
+  width: 100%;
+  overflow: hidden;
+}
+@media screen and (max-width: 767px){
+  .section-banner {
+    .active-banner{
+      display: none;
+    }
+    .banners{
+      .swiper-slide{
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        img{
+          width: 100%;
+          aspect-ratio: 16/9;
+          object-fit: cover;
+        }
+        .info{
+          background-color: red;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .section-banner {
+    height: 100vh;
+    padding-top: 100px;
+    position: relative;
+    .active-banner{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      .mask{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255,.5);
+        backdrop-filter: blur(15px);
+      }
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .banners {
+      margin: 100px auto;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .swiper-slide{
+      position: relative;
+      img{
+        width: 100%;
+        aspect-ratio: 16/9;
+      }
+      .info{
+        border-left: 2px solid var(--main-symmetry-color);
+        padding-left: 20px;
+        padding-top: 20px;
+        opacity: 0;
+        display: none;
+        transition: all .3s linear;
+        .title{
+          color: var(--main-base-color);
+          font-weight: 900;
+          font-size: 26px;
+        }
+        .depiction{
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 1.2em;
+          letter-spacing: .2em;
+          margin: 10px 0px;
+        }
+        .link{
+          display: inline-block;
+          background-color: var(--main-symmetry-color);
+          font-size: 16px;
+          line-height: 1.2em;
+          letter-spacing: .2em;
+          padding: 10px 20px;
+        }
+      }
+    }
+
+    .swiper-slide-next{
+      .info{
+        display: block;
+        opacity: .1;
+        .depiction,.link{
+          display: none;
+        }
+      }
+    }
+    .swiper-slide-active{
+      .info{
+        display: block;
+        opacity: 1;
+      }
     }
   }
 }
@@ -306,100 +417,100 @@ main {
   }
 }
 
-//Animation
+// //Animation
 
-// main
-main {
-  &.leave,
-  &.in {
-    position: relative;
-    overflow: hidden;
-    &::before {
-      content: "";
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      position: absolute;
-      z-index: 9999;
-      animation-timing-function: ease-in-out;
-    }
-  }
-  &.leave {
-    &::before {
-      animation: mainLeave 1.5s 0s forwards;
-      transform-origin: 100% 0; //從右側展開
-    }
-  }
-  &.in {
-    max-height: 100vh;
-    height: 100vh;
-    &::before {
-      animation: mainIn 1.5s 0s forwards;
-      transform-origin: 0% 0; //從左側展開
-    }
-  }
-}
+// // main
+// main {
+//   &.leave,
+//   &.in {
+//     position: relative;
+//     overflow: hidden;
+//     &::before {
+//       content: "";
+//       top: 0;
+//       left: 0;
+//       right: 0;
+//       bottom: 0;
+//       position: absolute;
+//       z-index: 9999;
+//       animation-timing-function: ease-in-out;
+//     }
+//   }
+//   &.leave {
+//     &::before {
+//       animation: mainLeave 1.5s 0s forwards;
+//       transform-origin: 100% 0; //從右側展開
+//     }
+//   }
+//   &.in {
+//     max-height: 100vh;
+//     height: 100vh;
+//     &::before {
+//       animation: mainIn 1.5s 0s forwards;
+//       transform-origin: 0% 0; //從左側展開
+//     }
+//   }
+// }
 
-@media screen and (min-width: 768px) {
-  main.curation {
-    .side-block {
-      width: 100%;
-      z-index: 31;
-      animation: curationIn 1s 0.8s forwards;
-      .side-bgc {
-        &::before {
-          opacity: 0;
-          animation: fadeIn 1.5s 0.8s forwards;
-        }
-      }
-      .navBtn {
-        opacity: 0;
-        animation: fadeIn 1.5s 2s forwards;
-      }
-    }
-  }
-}
+// @media screen and (min-width: 768px) {
+//   main.curation {
+//     .side-block {
+//       width: 100%;
+//       z-index: 31;
+//       animation: curationIn 1s 0.8s forwards;
+//       .side-bgc {
+//         &::before {
+//           opacity: 0;
+//           animation: fadeIn 1.5s 0.8s forwards;
+//         }
+//       }
+//       .navBtn {
+//         opacity: 0;
+//         animation: fadeIn 1.5s 2s forwards;
+//       }
+//     }
+//   }
+// }
 
-.media-header,
-.media-captions,
-.media-boxes,
-.media-box,
-.media-modules,
-.module-changing{
-  position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--main-base-light-color);
-    transform: scale(0, 1) translate3d(0, 0, 0);
-    transform-origin: 0 0;
-    animation: shapeOut 1s 1.3s forwards;
-    z-index: 30;
-    pointer-events: none;
-  }
-  &::after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: white;
-    transform: scale(1.02, 1.06);
-    opacity: 1;
-    animation: shapeOutMask 1s 1.3s forwards;
-    z-index: 29;
-    pointer-events: none;
-  }
-}
+// .media-header,
+// .media-captions,
+// .media-boxes,
+// .media-box,
+// .media-modules,
+// .module-changing{
+//   position: relative;
+//   &::before {
+//     content: "";
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background: var(--main-base-light-color);
+//     transform: scale(0, 1) translate3d(0, 0, 0);
+//     transform-origin: 0 0;
+//     animation: shapeOut 1s 1.3s forwards;
+//     z-index: 30;
+//     pointer-events: none;
+//   }
+//   &::after {
+//     content: "";
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     background: white;
+//     transform: scale(1.02, 1.06);
+//     opacity: 1;
+//     animation: shapeOutMask 1s 1.3s forwards;
+//     z-index: 29;
+//     pointer-events: none;
+//   }
+// }
 
 //idea 組件內再次動畫
-.module-changing{
+.module-changing {
   &::before {
     animation: shapeOut 1s;
     z-index: 28;
@@ -426,7 +537,7 @@ main {
 }
 .media-boxes,
 .media-info,
-.media-modules{
+.media-modules {
   &::before,
   &::after {
     animation-delay: 1.4s;
