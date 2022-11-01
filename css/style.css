@@ -89,6 +89,42 @@
 }
 
 /*通用*/
+/*Font*/
+h2.title {
+  font-weight: 900;
+  color: var(--main-base-color);
+  font-size: 30px;
+  letter-spacing: 0.2em;
+  line-height: 1.2em;
+}
+
+.rainbow-text .text {
+  background: linear-gradient(135deg, #0099ae 0%, #006da6 41.5%, #fdcd72 58.5%, #d25972 87.8%, #d28859 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  position: relative;
+  color: transparent;
+}
+
+.rainbow-text .text ._t {
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  color: #fff;
+}
+
+.rainbow-text .text ._t:after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.rainbow-text.active .text ._t {
+  display: inline;
+  color: transparent;
+  -webkit-transition: color 0.8s ease;
+  transition: color 0.8s ease;
+}
+
 /*抓取滑動*/
 .drag-scroll {
   cursor: -webkit-grab !important;
@@ -283,16 +319,46 @@ main .main-block {
   }
 }
 
-.section-banner {
-  width: 100%;
-  overflow: hidden;
+main.index {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main.index .rainbow-text.title {
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+main.index .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+main.index .header .link {
+  font-weight: 900;
+  font-size: 30px;
+  letter-spacing: .2em;
+  border-bottom: 2px black solid;
+  padding-bottom: .3em;
 }
 
 @media screen and (max-width: 767px) {
-  .section-banner .active-banner {
+  main.index .rainbow-text.title {
+    font-size: 50px;
+  }
+  main.index .section-banner .active-banner {
     display: none;
   }
-  .section-banner .banners .swiper-slide {
+  main.index .section-banner .banners .swiper-slide {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -302,21 +368,37 @@ main .main-block {
             flex-direction: column;
     padding: 20px;
   }
-  .section-banner .banners .swiper-slide img {
+  main.index .section-banner .banners .swiper-slide img {
     width: 100%;
     aspect-ratio: 16/9;
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .section-banner .banners .swiper-slide .info {
+  main.index .section-banner .banners .swiper-slide .info {
     background-color: red;
   }
 }
 
 @media screen and (min-width: 768px) {
+  main.index section {
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 50px 0px;
+  }
+  main.index .rainbow-text.title {
+    line-height: 1.1;
+    font-size: 86px;
+    font-weight: 900;
+  }
   .section-banner {
-    height: 100vh;
-    padding-top: 100px;
+    min-height: 100vh;
+    overflow: hidden;
+    padding-top: 50px;
     position: relative;
   }
   .section-banner .active-banner {
@@ -358,8 +440,8 @@ main .main-block {
     padding-top: 20px;
     opacity: 0;
     display: none;
-    -webkit-transition: all .3s linear;
-    transition: all .3s linear;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
   }
   .section-banner .swiper-slide .info .title {
     color: var(--main-base-color);
@@ -370,7 +452,7 @@ main .main-block {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.2em;
-    letter-spacing: .2em;
+    letter-spacing: 0.2em;
     margin: 10px 0px;
   }
   .section-banner .swiper-slide .info .link {
@@ -378,14 +460,15 @@ main .main-block {
     background-color: var(--main-symmetry-color);
     font-size: 16px;
     line-height: 1.2em;
-    letter-spacing: .2em;
+    letter-spacing: 0.2em;
     padding: 10px 20px;
   }
   .section-banner .swiper-slide-next .info {
     display: block;
-    opacity: .1;
+    opacity: 0.1;
   }
-  .section-banner .swiper-slide-next .info .depiction, .section-banner .swiper-slide-next .info .link {
+  .section-banner .swiper-slide-next .info .depiction,
+  .section-banner .swiper-slide-next .info .link {
     display: none;
   }
   .section-banner .swiper-slide-active .info {
