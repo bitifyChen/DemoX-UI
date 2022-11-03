@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <!-- Demo styles -->
     <style>
-
+        body {
+            background-color: var(--bgc, white);
+            transition: background-color 1s linear;
+        }
     </style>
 </head>
 
@@ -82,7 +85,10 @@
         <section class="section-banner">
             <div class="active-banner">
                 <div class="mask"></div>
-                <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
+                <img class="banner-pic active" src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
+                <img class="banner-pic" src="https://demox.tw/media/img/curation/image/blob_zcciuaY.webp" alt="">
+                <img class="banner-pic" src="https://demox.tw/media/img/curation/image/blob_ji5tcQM.webp" alt="">
+                <img class="banner-pic" src="https://demox.tw/media/img/curation/image/blob_qyhkNRl.webp" alt="">
             </div>
 
             <div class="banners">
@@ -130,10 +136,10 @@
         </section>
 
         <!-- 策展 -->
-        <section class="section-curation-list">
+        <section class="section-curation-list fade">
             <div class="container">
                 <div class="header">
-                    <p class="title rainbow-text active">
+                    <p class="title rainbow-text fade">
                         <span class="text">
                             <span class="_t">最</span>
                             <span class="_t">新</span>
@@ -166,16 +172,16 @@
                                             <span>10</span>
                                         </li>
                                         <li class="youtube active">
-        
+
                                         </li>
                                         <li class="google active">
-        
+
                                         </li>
                                         <li class="pdf ">
-        
+
                                         </li>
                                         <li class="link active">
-        
+
                                         </li>
                                     </ul>
                                 </div>
@@ -214,16 +220,16 @@
                                             <span>10</span>
                                         </li>
                                         <li class="youtube active">
-        
+
                                         </li>
                                         <li class="google active">
-        
+
                                         </li>
                                         <li class="pdf ">
-        
+
                                         </li>
                                         <li class="link active">
-        
+
                                         </li>
                                     </ul>
                                 </div>
@@ -262,16 +268,16 @@
                                             <span>10</span>
                                         </li>
                                         <li class="youtube active">
-        
+
                                         </li>
                                         <li class="google active">
-        
+
                                         </li>
                                         <li class="pdf ">
-        
+
                                         </li>
                                         <li class="link active">
-        
+
                                         </li>
                                     </ul>
                                 </div>
@@ -310,16 +316,16 @@
                                             <span>3</span>
                                         </li>
                                         <li class="youtube active">
-        
+
                                         </li>
                                         <li class="google active">
-        
+
                                         </li>
                                         <li class="pdf ">
-        
+
                                         </li>
                                         <li class="link active">
-        
+
                                         </li>
                                     </ul>
                                 </div>
@@ -337,15 +343,15 @@
                                 </div>
                             </article>
                         </a>
+                    </div>
                 </div>
-            </div>
         </section>
-        
+
         <!-- 作品 -->
-        <section class="section-idea-list">
+        <section class="section-idea-list" data-fade-delay="2">
             <div class="container">
                 <div class="header">
-                    <p class="title rainbow-text active">
+                    <p class="title rainbow-text fade">
                         <span class="text">
                             <span class="_t">最</span>
                             <span class="_t">新</span>
@@ -378,16 +384,16 @@
                                             <span>10</span>
                                         </li>
                                         <li class="youtube active">
-        
+
                                         </li>
                                         <li class="google active">
-        
+
                                         </li>
                                         <li class="pdf ">
-        
+
                                         </li>
                                         <li class="link active">
-        
+
                                         </li>
                                     </ul>
                                 </div>
@@ -426,16 +432,16 @@
                                             <span>10</span>
                                         </li>
                                         <li class="youtube active">
-        
+
                                         </li>
                                         <li class="google active">
-        
+
                                         </li>
                                         <li class="pdf ">
-        
+
                                         </li>
                                         <li class="link active">
-        
+
                                         </li>
                                     </ul>
                                 </div>
@@ -474,16 +480,16 @@
                                             <span>10</span>
                                         </li>
                                         <li class="youtube active">
-        
+
                                         </li>
                                         <li class="google active">
-        
+
                                         </li>
                                         <li class="pdf ">
-        
+
                                         </li>
                                         <li class="link active">
-        
+
                                         </li>
                                     </ul>
                                 </div>
@@ -522,16 +528,16 @@
                                             <span>3</span>
                                         </li>
                                         <li class="youtube active">
-        
+
                                         </li>
                                         <li class="google active">
-        
+
                                         </li>
                                         <li class="pdf ">
-        
+
                                         </li>
                                         <li class="link active">
-        
+
                                         </li>
                                     </ul>
                                 </div>
@@ -549,20 +555,29 @@
                                 </div>
                             </article>
                         </a>
+                    </div>
                 </div>
-            </div>
         </section>
-        
+
+        <!-- 學校 -->
+        <section>
+
+        </section>
     </main>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
 
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper(".banners", {
             grabCursor: true,
             effect: "creative",
+            speed: 800,
+            autoplay: {
+                delay: 5000,
+            },
             creativeEffect: {
                 prev: {
                     shadow: true,
@@ -576,8 +591,40 @@
 
         //TODO更換背景
         swiper.on('slideChange', function () {
-            console.log('slide changed');
+            bannerHide(this.activeIndex)
         });
+
+        //隱藏背景
+        function bannerHide(no){
+            document.querySelectorAll('.active-banner .banner-pic').forEach((banner,index)=>{
+                if(no ==  index){
+                    banner.classList.add('active')
+                }
+                else{
+                    banner.classList.remove('active')
+                }
+            })
+        }
+    </script>
+
+
+   <script>
+        const body = document.querySelector('body')
+        const rainbow = ['#e9e8e9', '#587ba5', '#153051','#5a595a']
+
+        /*取得總高*/
+        let bodyHight = body.offsetHeight
+        /*設定顏色*/
+        function scrollBgc() {
+            let scrollTop = window.scrollY; //滑動範圍
+            let docHeight = document.body.offsetHeight; //body高度
+            let winHeight = window.innerHeight; //頁面高度
+            let scrollPercent = scrollTop / (docHeight - winHeight);
+            let scrollPercentRounded = Math.round(scrollPercent * 100);
+            let nowBgc = Math.round(scrollPercentRounded / (100 / (rainbow.length - 1)));
+            console.log(rainbow.length)
+            body.style.setProperty('--bgc', rainbow[nowBgc]);
+        }
     </script>
 </body>
 

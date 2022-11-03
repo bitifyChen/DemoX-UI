@@ -290,16 +290,26 @@ main.index {
     line-height: 1.1;
     font-weight: 900;
   }
-  .header{
+  .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .link{
+    .link {
       font-weight: 900;
       font-size: 30px;
-      letter-spacing: .2em;
-      border-bottom: 2px black solid;
-      padding-bottom: .3em;
+      letter-spacing: 0.2em;
+      padding-bottom: 0.3em;
+      position: relative;
+      &::after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: white;
+        transition: all 0.3s linear;
+      }
     }
   }
 }
@@ -331,13 +341,16 @@ main.index {
     }
   }
 }
+
 @media screen and (min-width: 768px) {
   main.index {
     section {
-      min-height: 100vh;
+      min-height: 110vh;
       display: flex;
       align-items: center;
       padding: 50px 0px;
+      transition: all 0.3s linear;
+      overflow-x: hidden;
     }
 
     .rainbow-text.title {
@@ -345,88 +358,106 @@ main.index {
       font-size: 86px;
       font-weight: 900;
     }
-  }
 
-  .section-banner {
-    min-height: 100vh;
-    overflow: hidden;
-    padding-top: 50px;
-    position: relative;
-    .active-banner {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      .mask {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(15px);
-      }
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-    .banners {
-      margin: 100px auto;
-      width: 100%;
-      max-width: 900px;
+    .header .link:hover::after {
+      width: 400%;
     }
 
-    .swiper-slide {
+    .section-banner {
+      min-height: 100vh;
+      overflow: hidden;
+      padding-top: 50px;
       position: relative;
-      img {
-        width: 100%;
-        aspect-ratio: 16/9;
-      }
-      .info {
-        border-left: 2px solid var(--main-symmetry-color);
-        padding-left: 20px;
-        padding-top: 20px;
-        opacity: 0;
-        display: none;
-        transition: all 0.3s linear;
-        .title {
-          color: var(--main-base-color);
-          font-weight: 900;
-          font-size: 26px;
+      .active-banner {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        .banner-pic {
+          transition: all 1.5s .5s linear;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          opacity: 0;
+          z-index: -1;
+          &.active {
+            opacity: 1;
+          }
         }
-        .depiction {
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 1.2em;
-          letter-spacing: 0.2em;
-          margin: 10px 0px;
-        }
-        .link {
-          display: inline-block;
-          background-color: var(--main-symmetry-color);
-          font-size: 16px;
-          line-height: 1.2em;
-          letter-spacing: 0.2em;
-          padding: 10px 20px;
-        }
-      }
-    }
 
-    .swiper-slide-next {
-      .info {
-        display: block;
-        opacity: 0.1;
-        .depiction,
-        .link {
-          display: none;
+        .mask {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(15px);
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
-    }
-    .swiper-slide-active {
-      .info {
-        display: block;
-        opacity: 1;
+      .banners {
+        margin: 100px auto;
+        width: 100%;
+        max-width: 900px;
+      }
+
+      .swiper-slide {
+        position: relative;
+        img {
+          width: 100%;
+          aspect-ratio: 16/9;
+        }
+        .info {
+          border-left: 2px solid var(--main-symmetry-color);
+          padding-left: 20px;
+          padding-top: 20px;
+          opacity: 0;
+          display: none;
+          transition: all 0.3s linear;
+          .title {
+            color: var(--main-base-color);
+            font-weight: 900;
+            font-size: 26px;
+          }
+          .depiction {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.2em;
+            letter-spacing: 0.2em;
+            margin: 10px 0px;
+          }
+          .link {
+            display: inline-block;
+            background-color: var(--main-symmetry-color);
+            font-size: 16px;
+            line-height: 1.2em;
+            letter-spacing: 0.2em;
+            padding: 10px 20px;
+          }
+        }
+      }
+
+      .swiper-slide-next {
+        .info {
+          display: block;
+          opacity: 0.1;
+          .depiction,
+          .link {
+            display: none;
+          }
+        }
+      }
+      .swiper-slide-active {
+        .info {
+          display: block;
+          opacity: 1;
+        }
       }
     }
   }
@@ -490,7 +521,7 @@ main.index {
   }
 }
 
-// //Animation
+//Animation
 
 // // main
 // main {
@@ -545,42 +576,95 @@ main.index {
 //   }
 // }
 
-// .media-header,
-// .media-captions,
-// .media-boxes,
-// .media-box,
-// .media-modules,
-// .module-changing{
-//   position: relative;
-//   &::before {
-//     content: "";
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     bottom: 0;
-//     background: var(--main-base-light-color);
-//     transform: scale(0, 1) translate3d(0, 0, 0);
-//     transform-origin: 0 0;
-//     animation: shapeOut 1s 1.3s forwards;
-//     z-index: 30;
-//     pointer-events: none;
-//   }
-//   &::after {
-//     content: "";
-//     width: 100%;
-//     height: 100%;
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     background: white;
-//     transform: scale(1.02, 1.06);
-//     opacity: 1;
-//     animation: shapeOutMask 1s 1.3s forwards;
-//     z-index: 29;
-//     pointer-events: none;
-//   }
-// }
+// index - curation 動畫
+@media screen and (min-width: 768px) {
+  main.index {
+    //移除原先動畫
+    .media-boxes,
+    .media-box {
+      &::before,
+      &::after {
+        display: none;
+      }
+    }
+    //添加重要動畫
+    .section-curation-list {
+      //背景變色
+
+      transition: all 0.5s linear;
+
+      //延遲
+      .rainbow-text.active {
+        .text ._t {
+          transition-delay: 1s;
+        }
+      }
+
+      //方塊進場
+      .media-boxes > a {
+        transition: all 0.3s 1s linear;
+        transform: translateY(100px);
+        opacity: 0;
+      }
+
+      //連結進場
+      .header .link {
+        opacity: 0;
+        color: #fff;
+        border-color: white;
+        transition: opacity 0.5s 2s linear;
+      }
+    }
+    .section-curation-list.active {
+      
+
+      .media-boxes > a {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+      .header .link {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.media-header,
+.media-captions,
+.media-boxes,
+.media-box,
+.media-modules,
+.module-changing {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--main-base-light-color);
+    transform: scale(0, 1) translate3d(0, 0, 0);
+    transform-origin: 0 0;
+    animation: shapeOut 1s 1.3s forwards;
+    z-index: 30;
+    pointer-events: none;
+  }
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    transform: scale(1.02, 1.06);
+    opacity: 1;
+    animation: shapeOutMask 1s 1.3s forwards;
+    z-index: 29;
+    pointer-events: none;
+  }
+}
 
 //idea 組件內再次動畫
 .module-changing {

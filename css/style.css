@@ -346,9 +346,21 @@ main.index .header {
 main.index .header .link {
   font-weight: 900;
   font-size: 30px;
-  letter-spacing: .2em;
-  border-bottom: 2px black solid;
-  padding-bottom: .3em;
+  letter-spacing: 0.2em;
+  padding-bottom: 0.3em;
+  position: relative;
+}
+
+main.index .header .link::after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 
 @media screen and (max-width: 767px) {
@@ -381,7 +393,7 @@ main.index .header .link {
 
 @media screen and (min-width: 768px) {
   main.index section {
-    min-height: 100vh;
+    min-height: 110vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -389,52 +401,72 @@ main.index .header .link {
         -ms-flex-align: center;
             align-items: center;
     padding: 50px 0px;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+    overflow-x: hidden;
   }
   main.index .rainbow-text.title {
     line-height: 1.1;
     font-size: 86px;
     font-weight: 900;
   }
-  .section-banner {
+  main.index .header .link:hover::after {
+    width: 400%;
+  }
+  main.index .section-banner {
     min-height: 100vh;
     overflow: hidden;
     padding-top: 50px;
     position: relative;
   }
-  .section-banner .active-banner {
+  main.index .section-banner .active-banner {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
   }
-  .section-banner .active-banner .mask {
+  main.index .section-banner .active-banner .banner-pic {
+    -webkit-transition: all 1.5s .5s linear;
+    transition: all 1.5s .5s linear;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    z-index: -1;
+  }
+  main.index .section-banner .active-banner .banner-pic.active {
+    opacity: 1;
+  }
+  main.index .section-banner .active-banner .mask {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
     -webkit-backdrop-filter: blur(15px);
             backdrop-filter: blur(15px);
   }
-  .section-banner .active-banner img {
+  main.index .section-banner .active-banner img {
     width: 100%;
     height: 100%;
     -o-object-fit: cover;
        object-fit: cover;
   }
-  .section-banner .banners {
+  main.index .section-banner .banners {
     margin: 100px auto;
     width: 100%;
     max-width: 900px;
   }
-  .section-banner .swiper-slide {
+  main.index .section-banner .swiper-slide {
     position: relative;
   }
-  .section-banner .swiper-slide img {
+  main.index .section-banner .swiper-slide img {
     width: 100%;
     aspect-ratio: 16/9;
   }
-  .section-banner .swiper-slide .info {
+  main.index .section-banner .swiper-slide .info {
     border-left: 2px solid var(--main-symmetry-color);
     padding-left: 20px;
     padding-top: 20px;
@@ -443,19 +475,19 @@ main.index .header .link {
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
   }
-  .section-banner .swiper-slide .info .title {
+  main.index .section-banner .swiper-slide .info .title {
     color: var(--main-base-color);
     font-weight: 900;
     font-size: 26px;
   }
-  .section-banner .swiper-slide .info .depiction {
+  main.index .section-banner .swiper-slide .info .depiction {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.2em;
     letter-spacing: 0.2em;
     margin: 10px 0px;
   }
-  .section-banner .swiper-slide .info .link {
+  main.index .section-banner .swiper-slide .info .link {
     display: inline-block;
     background-color: var(--main-symmetry-color);
     font-size: 16px;
@@ -463,15 +495,15 @@ main.index .header .link {
     letter-spacing: 0.2em;
     padding: 10px 20px;
   }
-  .section-banner .swiper-slide-next .info {
+  main.index .section-banner .swiper-slide-next .info {
     display: block;
     opacity: 0.1;
   }
-  .section-banner .swiper-slide-next .info .depiction,
-  .section-banner .swiper-slide-next .info .link {
+  main.index .section-banner .swiper-slide-next .info .depiction,
+  main.index .section-banner .swiper-slide-next .info .link {
     display: none;
   }
-  .section-banner .swiper-slide-active .info {
+  main.index .section-banner .swiper-slide-active .info {
     display: block;
     opacity: 1;
   }
@@ -519,6 +551,98 @@ main.index .header .link {
   main.idea .side-block .navBtn {
     left: 50%;
   }
+}
+
+@media screen and (min-width: 768px) {
+  main.index .media-boxes::before, main.index .media-boxes::after,
+  main.index .media-box::before,
+  main.index .media-box::after {
+    display: none;
+  }
+  main.index .section-curation-list {
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+  }
+  main.index .section-curation-list .rainbow-text.active .text ._t {
+    -webkit-transition-delay: 1s;
+            transition-delay: 1s;
+  }
+  main.index .section-curation-list .media-boxes > a {
+    -webkit-transition: all 0.3s 1s linear;
+    transition: all 0.3s 1s linear;
+    -webkit-transform: translateY(100px);
+            transform: translateY(100px);
+    opacity: 0;
+  }
+  main.index .section-curation-list .header .link {
+    opacity: 0;
+    color: #fff;
+    border-color: white;
+    -webkit-transition: opacity 0.5s 2s linear;
+    transition: opacity 0.5s 2s linear;
+  }
+  main.index .section-curation-list.active .media-boxes > a {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    opacity: 1;
+  }
+  main.index .section-curation-list.active .header .link {
+    opacity: 1;
+  }
+}
+
+.media-header,
+.media-captions,
+.media-boxes,
+.media-box,
+.media-modules,
+.module-changing {
+  position: relative;
+}
+
+.media-header::before,
+.media-captions::before,
+.media-boxes::before,
+.media-box::before,
+.media-modules::before,
+.module-changing::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--main-base-light-color);
+  -webkit-transform: scale(0, 1) translate3d(0, 0, 0);
+          transform: scale(0, 1) translate3d(0, 0, 0);
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+  -webkit-animation: shapeOut 1s 1.3s forwards;
+          animation: shapeOut 1s 1.3s forwards;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.media-header::after,
+.media-captions::after,
+.media-boxes::after,
+.media-box::after,
+.media-modules::after,
+.module-changing::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  -webkit-transform: scale(1.02, 1.06);
+          transform: scale(1.02, 1.06);
+  opacity: 1;
+  -webkit-animation: shapeOutMask 1s 1.3s forwards;
+          animation: shapeOutMask 1s 1.3s forwards;
+  z-index: 29;
+  pointer-events: none;
 }
 
 .module-changing::before {
