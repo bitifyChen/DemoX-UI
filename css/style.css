@@ -403,7 +403,6 @@ main.index .header .link::after {
     padding: 50px 0px;
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
-    overflow-x: hidden;
   }
   main.index .rainbow-text.title {
     line-height: 1.1;
@@ -559,34 +558,30 @@ main.index .header .link::after {
   main.index .media-box::after {
     display: none;
   }
-  main.index .section-curation-list {
-    -webkit-transition: all 0.5s linear;
-    transition: all 0.5s linear;
-  }
-  main.index .section-curation-list .rainbow-text.active .text ._t {
+  main.index .section-curation-list .rainbow-text.active .text ._t, main.index .section-idea-list .rainbow-text.active .text ._t {
     -webkit-transition-delay: 1s;
             transition-delay: 1s;
   }
-  main.index .section-curation-list .media-boxes > a {
+  main.index .section-curation-list .media-boxes > a, main.index .section-idea-list .media-boxes > a {
     -webkit-transition: all 0.3s 1s linear;
     transition: all 0.3s 1s linear;
     -webkit-transform: translateY(100px);
             transform: translateY(100px);
     opacity: 0;
   }
-  main.index .section-curation-list .header .link {
+  main.index .section-curation-list .header .link, main.index .section-idea-list .header .link {
     opacity: 0;
     color: #fff;
     border-color: white;
     -webkit-transition: opacity 0.5s 2s linear;
     transition: opacity 0.5s 2s linear;
   }
-  main.index .section-curation-list.active .media-boxes > a {
+  main.index .section-curation-list.active .media-boxes > a, main.index .section-idea-list.active .media-boxes > a {
     -webkit-transform: translateY(0px);
             transform: translateY(0px);
     opacity: 1;
   }
-  main.index .section-curation-list.active .header .link {
+  main.index .section-curation-list.active .header .link, main.index .section-idea-list.active .header .link {
     opacity: 1;
   }
 }

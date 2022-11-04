@@ -350,7 +350,6 @@ main.index {
       align-items: center;
       padding: 50px 0px;
       transition: all 0.3s linear;
-      overflow-x: hidden;
     }
 
     .rainbow-text.title {
@@ -588,11 +587,7 @@ main.index {
       }
     }
     //添加重要動畫
-    .section-curation-list {
-      //背景變色
-
-      transition: all 0.5s linear;
-
+    .section-curation-list,.section-idea-list {
       //延遲
       .rainbow-text.active {
         .text ._t {
@@ -614,16 +609,15 @@ main.index {
         border-color: white;
         transition: opacity 0.5s 2s linear;
       }
-    }
-    .section-curation-list.active {
-      
 
-      .media-boxes > a {
-        transform: translateY(0px);
-        opacity: 1;
-      }
-      .header .link {
-        opacity: 1;
+      &.active{
+        .media-boxes > a {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+        .header .link {
+          opacity: 1;
+        }
       }
     }
   }
