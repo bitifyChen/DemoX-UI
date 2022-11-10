@@ -7,32 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo X</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Link Swiper's CSS -->
+    <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <!-- Aos CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
-    <!-- Demo styles -->
-    <style>
-        main {
-            height: 100%;
-        }
-
-        body {
-            background-color: var(--bgc, white);
-            transition: background-color 1s linear;
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        .block {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            border: 10px solid white;
-            top: 0;
-            left: 0;
-        }
-    </style>
 </head>
 
 <body>
@@ -154,7 +133,7 @@
         <!-- 策展 -->
         <section class="section-curation-list fade">
             <div class="container">
-                <div class="header" data-aos="zoom-out-right" data-aos-duration="500">
+                <div class="header-block" data-aos="zoom-out-right" data-aos-duration="500">
                     <p class="title rainbow-text fade">
                         <span class="text">
                             <span class="_t">最</span>
@@ -165,7 +144,7 @@
                     </p>
                     <a href="#" class="link">前往觀看</a>
                 </div>
-                <div class="content" data-aos="zoom-out-up" data-aos-delay="300" data-aos-duration="1000">
+                <div class="content" data-aos="zoom-out-up"  data-aos-delay="300" data-aos-duration="1000">
                     <div class="media-boxes">
                         <div class="swiper-wrapper">
                             <a href="#" class="swiper-slide">
@@ -364,10 +343,11 @@
                     </div>
                 </div>
         </section>
+
         <!-- 作品 -->
         <section class="section-idea-list fade">
             <div class="container">
-                <div class="header" data-aos="zoom-out-right" data-aos-duration="500">
+                <div class="header-block" data-aos="zoom-out-right" data-aos-duration="500">
                     <p class="title rainbow-text fade">
                         <span class="text">
                             <span class="_t">最</span>
@@ -576,14 +556,26 @@
                         </div>
                     </div>
         </section>
-
-
-        <div class="block"></div>
     </main>
-
+    <footer>
+        <div class="container">
+            
+        </div>
+    </footer>
     <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- ScrollMagic JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"
+        integrity="sha256-2p2tRZlPowp3P/04Pw2rqVCSbhyV/IB7ZEVUglrDS/c=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.js"
+        integrity="sha256-peenofh8a9TIqKdPKIeQE7mJvuwh+J0To7nslvpj1jI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.js"
+        integrity="sha256-31FC/OT6XpfjAhj9FuXjw5/wPXXawCAjJQ29E23/XPk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"
+        integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+
     <script src="js/main.js"></script>
 
     <!-- Initialize Swiper -->
@@ -595,6 +587,7 @@
             autoplay: {
                 delay: 1,
             },
+            loop: true,
             allowTouchMove: true,
             disableOnInteraction: true,
             spaceBetween: 30,
@@ -645,10 +638,51 @@
         }
     </script>
 
+    <!-- ScrollMagic scene -->
+    <script>
+        const controller = new ScrollMagic.Controller();
+        //Scenes1 - 背景比物件晚移除
+        const sectionBanner = document.querySelector(".section-banner");
+        const itemAnim = TweenMax.fromTo(sectionBanner.querySelector(".active-banner"), 1, { opacity: 1, y: 0 }, { opacity:0, scale:1.5, filter: "blur(20px)" });
+        let scene = new ScrollMagic.Scene({
+            duration: 500,
+            triggerElement: sectionBanner,
+            triggerHook: 0
+        })
+            .setTween(itemAnim)
+            .addTo(controller);
 
+        //Scenes2 - Curation
+        const sectionCuration = document.querySelector(".section-curation-list");
+        const curationAnim = TweenMax.fromTo(sectionCuration.querySelector(".container"), 1, {}, {});
+        let scene2 = new ScrollMagic.Scene({
+            triggerElement: sectionCuration,
+            triggerHook: 0,
+            duration: 500,
+        })
+            .setPin(sectionCuration)
+            .setTween(curationAnim)
+            .setClassToggle('body', 'bg-212933')
+            .addTo(controller);
+
+        //Scenes2 - Idea
+
+        const sectionIdea = document.querySelector(".section-idea-list");
+        const ideaAnim = TweenMax.fromTo(sectionIdea.querySelector(".media-boxes"), 1, {}, {});
+        let scene3 = new ScrollMagic.Scene({
+            triggerElement: sectionIdea,
+            triggerHook: 0,
+            duration: 500,
+        })
+            .setPin(sectionIdea)
+            .setTween(ideaAnim)
+            .setClassToggle('body', 'bg-192e47')
+            .addTo(controller);
+  
+    </script>
     <script>
         const body = document.querySelector('body')
-        const rainbow = ['#e9e8e9', '#212933', '#153051', '#587ba5']
+        const rainbow = ['#e9e8e9', '#212933', '#192e47', '#153051']
 
         /*取得總高*/
         let bodyHight = body.offsetHeight

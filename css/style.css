@@ -17,6 +17,22 @@
   --main-light-color: #e9ecf3;
 }
 
+.bg-212933 {
+  background-color: #212933;
+}
+
+.bg-192e47 {
+  background-color: #192e47;
+}
+
+.bg-153051 {
+  background-color: #153051;
+}
+
+.bg-4a463a {
+  background-color: #4a463a;
+}
+
 /*Button*/
 .btn-like {
   padding: 4px 10px;
@@ -158,6 +174,11 @@ h2.title {
 
 body {
   -ms-overflow-style: none;
+  background-color: var(--bgc, white);
+  -webkit-transition: background-color 1s linear;
+  transition: background-color 1s linear;
+  max-width: 100%;
+  overflow-x: hidden;
   /* IE and Edge */
   scrollbar-width: none;
   /* Firefox */
@@ -199,7 +220,8 @@ main .main-block {
 }
 
 @media screen and (min-width: 768px) {
-  main {
+  main.idea,
+  main.curation {
     min-height: 500px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -207,7 +229,8 @@ main .main-block {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
-  main .side-block {
+  main.idea .side-block,
+  main.curation .side-block {
     width: 120px;
     position: fixed;
     left: 0;
@@ -215,19 +238,22 @@ main .main-block {
     height: 100vh;
     z-index: 1;
   }
-  main .side-block .side-bgc {
+  main.idea .side-block .side-bgc,
+  main.curation .side-block .side-bgc {
     position: absolute;
     overflow: hidden;
     width: 100%;
     height: 100%;
   }
-  main .side-block .side-bgc img {
+  main.idea .side-block .side-bgc img,
+  main.curation .side-block .side-bgc img {
     height: 100%;
     width: 100%;
     -o-object-fit: cover;
        object-fit: cover;
   }
-  main .side-block .side-bgc::before {
+  main.idea .side-block .side-bgc::before,
+  main.curation .side-block .side-bgc::before {
     content: "";
     position: absolute;
     top: 0;
@@ -236,7 +262,8 @@ main .main-block {
     background: -webkit-gradient(linear, left top, left bottom, from(#e6e5e5), to(rgba(196, 196, 196, 0.8)));
     background: linear-gradient(#e6e5e5, rgba(196, 196, 196, 0.8));
   }
-  main .side-block .side-bgc::after {
+  main.idea .side-block .side-bgc::after,
+  main.curation .side-block .side-bgc::after {
     content: "";
     position: absolute;
     top: -50%;
@@ -246,7 +273,8 @@ main .main-block {
     -webkit-box-shadow: inset -10px 0px 10px rgba(182, 182, 182, 0.8);
             box-shadow: inset -10px 0px 10px rgba(182, 182, 182, 0.8);
   }
-  main .side-block .navBtn {
+  main.idea .side-block .navBtn,
+  main.curation .side-block .navBtn {
     position: absolute;
     width: 50px;
     height: 50px;
@@ -263,7 +291,8 @@ main .main-block {
     font-weight: 900;
     cursor: pointer;
   }
-  main .side-block .navBtn a {
+  main.idea .side-block .navBtn a,
+  main.curation .side-block .navBtn a {
     height: 100%;
     width: 100%;
     display: -webkit-box;
@@ -276,16 +305,19 @@ main .main-block {
         -ms-flex-align: center;
             align-items: center;
   }
-  main .side-block .navBtn:hover {
+  main.idea .side-block .navBtn:hover,
+  main.curation .side-block .navBtn:hover {
     background-color: var(--main-base-color);
     color: white;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
-  main .side-block .navBtn:hover::after {
+  main.idea .side-block .navBtn:hover::after,
+  main.curation .side-block .navBtn:hover::after {
     left: -30px;
   }
-  main .side-block .navBtn::after {
+  main.idea .side-block .navBtn::after,
+  main.curation .side-block .navBtn::after {
     content: "";
     position: absolute;
     width: 30px;
@@ -297,7 +329,8 @@ main .main-block {
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
-  main .main-block {
+  main.idea .main-block,
+  main.curation .main-block {
     background-color: white;
     width: calc(100% - 125px);
     margin-left: 120px;
@@ -306,24 +339,25 @@ main .main-block {
 }
 
 @media screen and (min-width: 900px) {
-  main .side-block {
+  main.idea .side-block,
+  main.curation .side-block {
     background-color: white;
     width: 300px;
   }
-  main .side-block .navBtn {
+  main.idea .side-block .navBtn,
+  main.curation .side-block .navBtn {
     left: calc((100% - 120px) / 2);
   }
-  main .main-block {
+  main.idea .main-block,
+  main.curation .main-block {
     margin-left: 300px;
     width: calc(100% - 300px);
   }
 }
 
 main.index {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 main.index .rainbow-text.title {
@@ -331,7 +365,7 @@ main.index .rainbow-text.title {
   font-weight: 900;
 }
 
-main.index .header {
+main.index .header-block {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -343,15 +377,16 @@ main.index .header {
           justify-content: space-between;
 }
 
-main.index .header .link {
+main.index .header-block .link {
   font-weight: 900;
   font-size: 30px;
   letter-spacing: 0.2em;
   padding-bottom: 0.3em;
   position: relative;
+  color: white;
 }
 
-main.index .header .link::after {
+main.index .header-block .link::after {
   content: "";
   height: 2px;
   width: 100%;
@@ -363,12 +398,101 @@ main.index .header .link::after {
   transition: all 0.3s linear;
 }
 
+main.index .section-banner {
+  min-height: 100vh;
+  overflow: hidden;
+  padding-top: 50px;
+  position: relative;
+}
+
+main.index .section-banner .active-banner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+main.index .section-banner .active-banner .banner-pic {
+  -webkit-transition: all 1.5s 0.5s linear;
+  transition: all 1.5s 0.5s linear;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+}
+
+main.index .section-banner .active-banner .banner-pic.active {
+  opacity: 1;
+}
+
+main.index .section-banner .active-banner .mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+}
+
+main.index .section-banner .active-banner img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+main.index .section-school-list {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main.index .section-school-list .school-list .swiper-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 @media screen and (max-width: 767px) {
   main.index .rainbow-text.title {
     font-size: 50px;
   }
-  main.index .section-banner .active-banner {
-    display: none;
+  main.index .header-block {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  main.index .header-block .title {
+    margin-right: auto;
+    margin-top: 80px;
+  }
+  main.index .header-block .link {
+    font-size: 16px;
+    margin-left: auto;
+  }
+  main.index .header-block .link::after {
+    content: "";
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+  }
+  main.index .section-banner .banners {
+    margin: 10px 0px;
+    padding: 20px;
   }
   main.index .section-banner .banners .swiper-slide {
     display: -webkit-box;
@@ -379,6 +503,8 @@ main.index .header .link::after {
         -ms-flex-direction: column;
             flex-direction: column;
     padding: 20px;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
   }
   main.index .section-banner .banners .swiper-slide img {
     width: 100%;
@@ -387,7 +513,32 @@ main.index .header .link::after {
        object-fit: cover;
   }
   main.index .section-banner .banners .swiper-slide .info {
-    background-color: red;
+    margin: 10px 0px;
+  }
+  main.index .section-banner .banners .swiper-slide .info .title {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--main-base-color);
+  }
+  main.index .section-banner .banners .swiper-slide .info .depiction {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.1em;
+    letter-spacing: 0.1em;
+    margin: 10px 0px;
+  }
+  main.index .section-banner .banners .swiper-slide .info .link {
+    display: inline-block;
+    background-color: var(--main-symmetry-color);
+    font-size: 16px;
+    line-height: 1.2em;
+    letter-spacing: 0.2em;
+    padding: 10px 20px;
+  }
+  main.index .section-banner .banners .swiper-slide-active {
+    -webkit-box-shadow: 5px 5px var(--main-symmetry-color);
+            box-shadow: 5px 5px var(--main-symmetry-color);
+    background-color: white;
   }
 }
 
@@ -409,49 +560,8 @@ main.index .header .link::after {
     font-size: 86px;
     font-weight: 900;
   }
-  main.index .header .link:hover::after {
+  main.index .header-block .link:hover::after {
     width: 400%;
-  }
-  main.index .section-banner {
-    min-height: 100vh;
-    overflow: hidden;
-    padding-top: 50px;
-    position: relative;
-  }
-  main.index .section-banner .active-banner {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  main.index .section-banner .active-banner .banner-pic {
-    -webkit-transition: all 1.5s .5s linear;
-    transition: all 1.5s .5s linear;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    z-index: -1;
-  }
-  main.index .section-banner .active-banner .banner-pic.active {
-    opacity: 1;
-  }
-  main.index .section-banner .active-banner .mask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.2);
-    -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
-  }
-  main.index .section-banner .active-banner img {
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
   }
   main.index .section-banner .banners {
     margin: 100px auto;
@@ -552,38 +662,16 @@ main.index .header .link::after {
   }
 }
 
-@media screen and (min-width: 768px) {
-  main.index .media-boxes::before, main.index .media-boxes::after,
-  main.index .media-box::before,
-  main.index .media-box::after {
-    display: none;
-  }
-  main.index .section-curation-list .rainbow-text.active .text ._t, main.index .section-idea-list .rainbow-text.active .text ._t {
-    -webkit-transition-delay: 1s;
-            transition-delay: 1s;
-  }
-  main.index .section-curation-list .media-boxes > a, main.index .section-idea-list .media-boxes > a {
-    -webkit-transition: all 0.3s 1s linear;
-    transition: all 0.3s 1s linear;
-    -webkit-transform: translateY(100px);
-            transform: translateY(100px);
-    opacity: 0;
-  }
-  main.index .section-curation-list .header .link, main.index .section-idea-list .header .link {
-    opacity: 0;
-    color: #fff;
-    border-color: white;
-    -webkit-transition: opacity 0.5s 2s linear;
-    transition: opacity 0.5s 2s linear;
-  }
-  main.index .section-curation-list.active .media-boxes > a, main.index .section-idea-list.active .media-boxes > a {
-    -webkit-transform: translateY(0px);
-            transform: translateY(0px);
-    opacity: 1;
-  }
-  main.index .section-curation-list.active .header .link, main.index .section-idea-list.active .header .link {
-    opacity: 1;
-  }
+main.index .media-boxes::before, main.index .media-boxes::after,
+main.index .media-box::before,
+main.index .media-box::after {
+  display: none;
+}
+
+main.index .section-curation-list .rainbow-text.active .text ._t,
+main.index .section-idea-list .rainbow-text.active .text ._t {
+  -webkit-transition-delay: 1s;
+          transition-delay: 1s;
 }
 
 .media-header,
