@@ -11,7 +11,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <!-- Aos CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Bgc CSS -->
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(to right, #ffffff, #fadaf8);
+        }
 
+        body {
+            background: var(--bg-gradient);
+            position: relative;
+        }
+
+        .orb-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
 </head>
 
 <body>
@@ -77,6 +97,7 @@
             </label>
         </div>
     </header>
+    <canvas class="orb-canvas"></canvas>
     <main class="index">
         <section class="section-banner">
             <div class="active-banner">
@@ -144,7 +165,7 @@
                     </p>
                     <a href="#" class="link">前往觀看</a>
                 </div>
-                <div class="content" data-aos="zoom-out-up"  data-aos-delay="300" data-aos-duration="1000">
+                <div class="content" data-aos="zoom-out-up" data-aos-delay="300" data-aos-duration="1000">
                     <div class="media-boxes">
                         <div class="swiper-wrapper">
                             <a href="#" class="swiper-slide">
@@ -559,7 +580,7 @@
     </main>
     <footer>
         <div class="container">
-            
+
         </div>
     </footer>
     <!-- Swiper JS -->
@@ -575,7 +596,7 @@
         integrity="sha256-31FC/OT6XpfjAhj9FuXjw5/wPXXawCAjJQ29E23/XPk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"
         integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
-
+    <script type="module" src="js/bgc.js"></script>
     <script src="js/main.js"></script>
 
     <!-- Initialize Swiper -->
@@ -641,7 +662,7 @@
         const controller = new ScrollMagic.Controller();
         //Scenes1 - 背景比物件晚移除
         const sectionBanner = document.querySelector(".section-banner");
-        const itemAnim = TweenMax.fromTo(sectionBanner.querySelector(".active-banner"), 1, { opacity: 1, y: 0 }, { opacity:0, scale:1.5, filter: "blur(20px)" });
+        const itemAnim = TweenMax.fromTo(sectionBanner.querySelector(".active-banner"), 1, { opacity: 1, y: 0 }, { opacity: 0, scale: 1.5, filter: "blur(20px)" });
         let scene = new ScrollMagic.Scene({
             duration: 500,
             triggerElement: sectionBanner,
@@ -676,7 +697,7 @@
             .setTween(ideaAnim)
             .setClassToggle('body', 'bg-192e47')
             .addTo(controller);
-  
+
     </script>
     <script>
         const body = document.querySelector('body')

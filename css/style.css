@@ -115,7 +115,7 @@ h2.title {
 }
 
 .rainbow-text .text {
-  background: linear-gradient(135deg, #0099ae 0%, #006da6 41.5%, #fdcd72 58.5%, #d25972 87.8%, #d28859 100%);
+  background: linear-gradient(135deg, #6881E0, #C850C0, #FFCC70);
   background-clip: text;
   -webkit-background-clip: text;
   position: relative;
@@ -396,6 +396,12 @@ main.index .header-block .link::after {
   background-color: white;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
+}
+
+main.index .media-box {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
+  background: rgba(255, 255, 255, 0.376);
 }
 
 main.index .section-banner {
