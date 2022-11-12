@@ -662,6 +662,61 @@ main.index .section-school-list .school-list .swiper-wrapper {
   }
 }
 
+main.leave, main.in {
+  position: relative;
+  overflow: hidden;
+}
+
+main.leave::before, main.in::before {
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 9999;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+}
+
+main.leave::before {
+  -webkit-animation: mainLeave 1.5s 0s forwards;
+          animation: mainLeave 1.5s 0s forwards;
+  -webkit-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+}
+
+main.in {
+  max-height: 100vh;
+  height: 100vh;
+}
+
+main.in::before {
+  -webkit-animation: mainIn 1.5s 0s forwards;
+          animation: mainIn 1.5s 0s forwards;
+  -webkit-transform-origin: 0% 0;
+          transform-origin: 0% 0;
+}
+
+@media screen and (min-width: 768px) {
+  main.curation .side-block {
+    width: 100%;
+    z-index: 31;
+    -webkit-animation: curationIn 1s 0.8s forwards;
+            animation: curationIn 1s 0.8s forwards;
+  }
+  main.curation .side-block .side-bgc::before {
+    opacity: 0;
+    -webkit-animation: fadeIn 1.5s 0.8s forwards;
+            animation: fadeIn 1.5s 0.8s forwards;
+  }
+  main.curation .side-block .navBtn {
+    opacity: 0;
+    -webkit-animation: fadeIn 1.5s 2s forwards;
+            animation: fadeIn 1.5s 2s forwards;
+  }
+}
+
 main.index .media-boxes::before, main.index .media-boxes::after,
 main.index .media-box::before,
 main.index .media-box::after {

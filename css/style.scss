@@ -601,58 +601,58 @@ main.index {
 
 //Animation
 
-// // main
-// main {
-//   &.leave,
-//   &.in {
-//     position: relative;
-//     overflow: hidden;
-//     &::before {
-//       content: "";
-//       top: 0;
-//       left: 0;
-//       right: 0;
-//       bottom: 0;
-//       position: absolute;
-//       z-index: 9999;
-//       animation-timing-function: ease-in-out;
-//     }
-//   }
-//   &.leave {
-//     &::before {
-//       animation: mainLeave 1.5s 0s forwards;
-//       transform-origin: 100% 0; //從右側展開
-//     }
-//   }
-//   &.in {
-//     max-height: 100vh;
-//     height: 100vh;
-//     &::before {
-//       animation: mainIn 1.5s 0s forwards;
-//       transform-origin: 0% 0; //從左側展開
-//     }
-//   }
-// }
+// main
+main {
+  &.leave,
+  &.in {
+    position: relative;
+    overflow: hidden;
+    &::before {
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      z-index: 9999;
+      animation-timing-function: ease-in-out;
+    }
+  }
+  &.leave {
+    &::before {
+      animation: mainLeave 1.5s 0s forwards;
+      transform-origin: 100% 0; //從右側展開
+    }
+  }
+  &.in {
+    max-height: 100vh;
+    height: 100vh;
+    &::before {
+      animation: mainIn 1.5s 0s forwards;
+      transform-origin: 0% 0; //從左側展開
+    }
+  }
+}
 
-// @media screen and (min-width: 768px) {
-//   main.curation {
-//     .side-block {
-//       width: 100%;
-//       z-index: 31;
-//       animation: curationIn 1s 0.8s forwards;
-//       .side-bgc {
-//         &::before {
-//           opacity: 0;
-//           animation: fadeIn 1.5s 0.8s forwards;
-//         }
-//       }
-//       .navBtn {
-//         opacity: 0;
-//         animation: fadeIn 1.5s 2s forwards;
-//       }
-//     }
-//   }
-// }
+@media screen and (min-width: 768px) {
+  main.curation {
+    .side-block {
+      width: 100%;
+      z-index: 31;
+      animation: curationIn 1s 0.8s forwards;
+      .side-bgc {
+        &::before {
+          opacity: 0;
+          animation: fadeIn 1.5s 0.8s forwards;
+        }
+      }
+      .navBtn {
+        opacity: 0;
+        animation: fadeIn 1.5s 2s forwards;
+      }
+    }
+  }
+}
 
 // index - curation 動畫
 

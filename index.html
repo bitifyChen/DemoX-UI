@@ -8,7 +8,7 @@
     <title>Demo X</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <!-- Aos CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -563,7 +563,7 @@
         </div>
     </footer>
     <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- ScrollMagic JS -->
@@ -580,27 +580,7 @@
 
     <!-- Initialize Swiper -->
     <script>
-        var swiper = new Swiper(".media-boxes", {
-            slidesPerView: 1,
-            centeredSlides: true,
-            speed: 6000,
-            autoplay: {
-                delay: 1,
-            },
-            loop: true,
-            allowTouchMove: true,
-            disableOnInteraction: true,
-            spaceBetween: 30,
-            breakpoints: {
-                768: {
-                    allowTouchMove: false,
-                    slidesPerView: 4,
-                    loop: true,
-                }
-            }
-        });
-
-        var swiper = new Swiper(".banners", {
+        var swiper1 = new Swiper(".banners", {
             grabCursor: true,
             effect: "creative",
             speed: 800,
@@ -616,6 +596,24 @@
                     translate: ["100%", 0, 0],
                 },
             },
+        });
+
+        var swiper2 = new Swiper(".media-boxes", {
+            slidesPerView: 1,
+            centeredSlides: true,
+            speed: 6000,
+            autoplay: {
+                delay: 1,
+            },
+            loop: true,
+            allowTouchMove: true,
+            disableOnInteraction: true,
+            spaceBetween: 30,
+            breakpoints: {
+                768: {
+                    slidesPerView: 4,          
+                }
+            }
         });
 
         //TODO更換背景
