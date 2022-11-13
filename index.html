@@ -19,7 +19,6 @@
 
         body {
             background: var(--bg-gradient);
-            position: relative;
         }
 
         .orb-canvas {
@@ -632,13 +631,11 @@
             spaceBetween: 30,
             breakpoints: {
                 768: {
-                    slidesPerView: 4,          
+                    slidesPerView: 4,
                 }
             }
         });
-
-        //TODO更換背景
-        swiper.on('slideChange', function () {
+        swiper1.on('slideChange', function () {
             bannerHide(this.activeIndex)
         });
 
@@ -660,6 +657,16 @@
     <!-- ScrollMagic scene -->
     <script>
         const controller = new ScrollMagic.Controller();
+        const orbAnim = TweenMax.fromTo(document.querySelector(".orb-canvas"), 1, { opacity: .5,scale: 1 }, { opacity: 1,scale: 1.5,transformOrigin: "bottom right"})
+        //Scenes0 - 背景越來越大
+        let scene0 = new ScrollMagic.Scene({
+            duration: document.querySelector('body').offsetHeight,
+            triggerElement: document.querySelector('body'),
+            triggerHook: 0,
+        })
+            .setTween(orbAnim)
+            .addTo(controller);
+
         //Scenes1 - 背景比物件晚移除
         const sectionBanner = document.querySelector(".section-banner");
         const itemAnim = TweenMax.fromTo(sectionBanner.querySelector(".active-banner"), 1, { opacity: 1, y: 0 }, { opacity: 0, scale: 1.5, filter: "blur(20px)" });
@@ -681,7 +688,6 @@
         })
             .setPin(sectionCuration)
             .setTween(curationAnim)
-            .setClassToggle('body', 'bg-212933')
             .addTo(controller);
 
         //Scenes2 - Idea
@@ -695,11 +701,10 @@
         })
             .setPin(sectionIdea)
             .setTween(ideaAnim)
-            .setClassToggle('body', 'bg-192e47')
             .addTo(controller);
 
     </script>
-    <script>
+    <!-- <script>
         const body = document.querySelector('body')
         const rainbow = ['#e9e8e9', '#212933', '#192e47', '#153051']
 
@@ -715,7 +720,7 @@
             let nowBgc = Math.round(scrollPercentRounded / (100 / (rainbow.length - 1)));
             body.style.setProperty('--bgc', rainbow[nowBgc]);
         }
-    </script>
+    </script> -->
     <script>
         AOS.init();
     </script>
