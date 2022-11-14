@@ -51,8 +51,8 @@ class ColorPalette {
   setCustomProperties() {
     // set CSS custom properties so that the colors defined here can be used throughout the UI
     document.documentElement.style.setProperty("--bgc-baseColor", this.baseColor);
-    document.documentElement.style.setProperty("--bgc-ubColor1",this.subColor1);
-    document.documentElement.style.setProperty("--bgc-ubColor2",this.subColor2);
+    document.documentElement.style.setProperty("--bgc-subColor1",this.subColor1);
+    document.documentElement.style.setProperty("--bgc-subColor2",this.subColor2);
   }
 }
 
