@@ -11,6 +11,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
 /*Font Google -font-family: 'Noto Sans TC', sans-serif;*/
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;900&family=Roboto:wght@100;300;500;700;900&display=swap");
+body {
+  font-family: pingfangtc-regular,Microsoft JhengHei;
+}
+
 :root {
   --main-base-color: #153051;
   --main-base-light-color: #587ba5;
