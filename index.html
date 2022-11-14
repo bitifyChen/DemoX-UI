@@ -577,9 +577,36 @@
                     </div>
         </section>
     </main>
-    <footer>
+    <footer class="main-footer">
         <div class="container">
-
+            <div class="main-block">
+                <span class="footer-bar"></span>
+                <ul class="footer-start sub-block">
+                    <p class="footer-subtitle">開始使用</p>
+                    <li><a href="#">DemoX Setting</a></li>
+                    <li><a href="#">建立作品</a></li>
+                    <li><a href="#">建立策展</a></li>
+                    <li><a href="#">成為策展人</a></li>
+                    <li><a href="#">使用說明</a></li>
+                </ul>
+                <ul class="footer-about sub-block">
+                    <p class="footer-subtitle">Demo X</p>
+                    <li><a href="#">OpenEdu</a></li>
+                    <li><a href="#">推動大學程式設計教學計畫</a></li>
+                </ul>
+                <ul class="footer-rule sub-block">
+                    <p class="footer-subtitle">網站規範</p>
+                    <li><a href="#">隱私權規範</a></li>
+                    <li><a href="#">免責聲明</a></li>
+                </ul>
+                <ul class="footer-contact sub-block">
+                    <p class="footer-subtitle">聯絡我們</p>
+                    <li>xxxxx@demox.tw</li>
+                </ul>
+            </div>
+            <div class="copyright">
+                DEMO X © 2022
+            </div>
         </div>
     </footer>
     <!-- Swiper JS -->
@@ -656,8 +683,8 @@
 
     <!-- ScrollMagic scene -->
     <script>
-        const controller = new ScrollMagic.Controller();
-        const orbAnim = TweenMax.fromTo(document.querySelector(".orb-canvas"), 1, { opacity: .5,scale: 1 }, { opacity: 1,scale: 1.5,transformOrigin: "bottom right"})
+        let controller = new ScrollMagic.Controller();
+        const orbAnim = TweenMax.fromTo(document.querySelector(".orb-canvas"), 1, { opacity: .5, scale: 1 }, { opacity: 1, scale: 1.5, transformOrigin: "bottom right" })
         //Scenes0 - 背景越來越大
         let scene0 = new ScrollMagic.Scene({
             duration: document.querySelector('body').offsetHeight,
@@ -676,31 +703,6 @@
             triggerHook: 0
         })
             .setTween(itemAnim)
-            .addTo(controller);
-
-        //Scenes2 - Curation
-        const sectionCuration = document.querySelector(".section-curation-list");
-        const curationAnim = TweenMax.fromTo(sectionCuration.querySelector(".container"), 1, {}, {});
-        let scene2 = new ScrollMagic.Scene({
-            triggerElement: sectionCuration,
-            triggerHook: 0,
-            duration: 500,
-        })
-            .setPin(sectionCuration)
-            .setTween(curationAnim)
-            .addTo(controller);
-
-        //Scenes2 - Idea
-
-        const sectionIdea = document.querySelector(".section-idea-list");
-        const ideaAnim = TweenMax.fromTo(sectionIdea.querySelector(".media-boxes"), 1, {}, {});
-        let scene3 = new ScrollMagic.Scene({
-            triggerElement: sectionIdea,
-            triggerHook: 0,
-            duration: 500,
-        })
-            .setPin(sectionIdea)
-            .setTween(ideaAnim)
             .addTo(controller);
 
     </script>

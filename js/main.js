@@ -24,6 +24,26 @@ function scrollFunction() {
     }
   }
 }
+
+// Footer
+//Footer 進場動畫
+//-Footer 下方區塊漸進
+let footerController = new ScrollMagic.Controller();
+new ScrollMagic.Scene({
+  triggerElement: document.querySelector(".main-footer"),
+  triggerHook: 0.8,
+})
+  .setTween(TweenMax.fromTo(document.querySelector(".main-footer .main-block"), 1, { scale: 0.8 }, { scale: 1 }))
+  .addTo(footerController);
+//-Footer 上方Bar動畫
+new ScrollMagic.Scene({
+  triggerElement: document.querySelector(".main-footer"),
+  triggerHook: 1,
+  duration: document.querySelector(".main-footer").offsetHeight,
+})
+  .setTween(TweenMax.fromTo(document.querySelector(".main-footer .footer-bar"), 1, { width: "0%" }, { width: "100%" }))
+  .addTo(footerController);
+
 // Item active
 const onceItems = document.querySelectorAll(".fadeOnce");
 const items = document.querySelectorAll(".fade");
