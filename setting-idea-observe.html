@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEMOX | 設定</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="page/setting/css/select2theme.css" />
+
+    <link rel="stylesheet" href="page/setting/css/dashboard.css" />
+    <link rel="stylesheet" href="page/setting/css/dashboard-color.css" />
+    <link rel="stylesheet" href="page/setting/css/dashboard-path.css" />
+    <link rel="stylesheet" href="page/setting/demox_module/demox_module.css" />
+
+
+    <link rel="stylesheet" href="page/cropper/cropper.css">
+    <!-- {% block STYLEontent %}
+
+    {% endblock %} -->
+</head>
+
+<body class="gray">
+    <div class="wrap">
+        <div class="sideBar">
+            <nav>
+                <button class="app-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="logo" href="index.html">
+                    <img src="page/setting/logo-w.svg" height="30" />
+                </a>
+                <a href="#" class="item" data-name="index">
+                    <span>Demo X 控制台</span>
+                </a>
+                <a href="setting-curation-list.html" class="item" data-name="curation">
+                    <i class="far fa-copy"></i>
+                    <span>策展</span>
+                </a>
+                <a href="setting-idea-list.html" class="item active" data-name="idea">
+                    <i class="far fa-file"></i>
+                    <span>作品</span>
+                </a>
+                <a href="setting-profile.html" class="item" data-name="profile">
+                    <i class="far fa-id-badge"></i>
+                    <span>個人資料</span>
+                </a>
+                <button class="mode" id="btn-mode"></button>
+                <button class="back" id="btn-close-dashboard">
+                    <i class="fas fa-arrow-left"></i>離開編輯模式
+                </button>
+            </nav>
+        </div>
+        <div class="main">
+            <div class="path">
+                <ul></ul>
+            </div>
+            <h2 class="title"></h2>
+            <div id="app" class="content-boxs">
+                <div class="content-box funcMenu" v-if="!authorOnly">
+                    <ul>
+                        <a href="setting-idea-list.html?func=list_idea">
+                            <li data-name="list_idea">
+                                <i class="far fa-file fa-fw"></i>
+                                作品列表
+                            </li>
+                        </a>
+                        <a href="setting-idea-add.html?func=add_idea">
+                            <li data-name="add_idea">
+                                <i class="fas fa-plus fa-fw"></i>
+                                新增作品
+                            </li>
+                        </a>
+                        <a href="setting-idea-observe.html?func=view_idea">
+                            <li data-name="view_idea">
+                                <i class="far fa-eye fa-fw"></i>
+                                作品觀摩
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+
+                <div class="content-box func-box box-9" data-name="view_idea">
+                    <div class="form-group input-button">
+                        <input type="text" placeholder="請輸入想您加入的作品邀請代碼。" id="idea_join_code" />
+                        <button onclick="api_idea_observe()">驗證代碼</button>
+                    </div>
+                    <div id="idea_join_box"></div>
+                </div>
+            </div>
+        </div>
+        <div class="wrap-animation"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js'></script>
+
+    <script src="page/setting/js/dashboard.js"></script>
+    <script src="page/setting/js/dashboard-color.js"></script>
+    <script src="page/setting/js/dashboard-path.js"></script>
+    <script src="page/web/url.js"></script>
+    <!-- {% block JScontent %} -->
+    <script>
+        //假資料
+        let data = [{ "id": 720, "name": "test", "observe_code": "PFDLSIB4", "like_users": "0", "page_views": "21" }, { "id": 719, "name": "中原大學", "observe_code": "8ODYZE61", "like_users": "0", "page_views": "20" }, { "id": 718, "name": "自助點餐機", "observe_code": "XIPAKBDF", "like_users": "0", "page_views": "0" }, { "id": 717, "name": "智慧看盤，一目瞭然", "observe_code": "4F9NR65M", "like_users": "0", "page_views": "5" }, { "id": 675, "name": "明志科技大學推動程式設計教學成果", "observe_code": "KNVG31YC", "like_users": "0", "page_views": "43" }, { "id": 672, "name": "享cafe", "observe_code": "E8JKCBX4", "like_users": "0", "page_views": "10" }, { "id": 516, "name": "test", "observe_code": "WR42C5NT", "like_users": "0", "page_views": "16" }]
+
+        Vue.component('idea-component', {
+            delimiters: ['[[', ']]'],
+            props: ['idea'],
+            data() {
+                return {
+                    edited: false,
+                }
+            },
+            template: `
+                <div class="box">
+                    <div class="box-info">
+                        <h3 class="title"> [[ idea.name ]] </h3>
+                        <span class="share-code" @click="copyShareCode"> [[ idea.observe_code ]] </span>
+                        <span class="views"> [[ idea.page_views ]]</span>
+                        <span class="likes"> [[ idea.like_users ]]</span>
+                    </div>
+                    <div class="box-func">
+                        <button class="btn-edit btn-circle" @click="editIdea"></button>
+                        <button class="btn-del btn-circle" @click="deleteIdea"></button>
+                    </div>
+                </div>
+            `,
+            methods: {
+                copyShareCode() {
+                    const value = this.idea.observe_code;
+                    const el = document.createElement('textarea');
+                    el.value = value;
+                    document.body.appendChild(el);
+                    el.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(el);
+                    new Noty({ type: 'success', text: '已複製您的觀摩代碼!', timeout: 2000, }).show();
+                },
+                editIdea() {
+                    window.location.href = 'setting-idea-edit?func=edit_idea?id=' + this.idea.id
+                },
+                deleteIdea() {
+                    axios
+                        .delete('{% url "idea:api" %}', {
+                            headers: { 'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val() },
+                            data: { id: this.idea.id },
+                        })
+                        .then((res) => {
+                            new Noty({ type: 'success', text: '刪除成功!', timeout: 2000, }).show();
+                            this.$emit('resetlist');
+                        })
+                        .catch((err) => {
+                            new Noty({ type: 'error', text: '錯誤!', timeout: 2000, }).show();
+                        })
+                },
+            },
+        })
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                ideaList: data,
+            },
+            created() {
+                this.getData()
+            },
+            methods: {
+                getData() {
+                    axios
+                        .get('#', { headers: { 'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val() } })
+                        .then((res) => {
+                            this.ideaList = res.data
+                        })
+                        .catch((err) => {
+                            new Noty({ type: 'error', text: '錯誤!', timeout: 2000, }).show();
+                        })
+                },
+            },
+            computed: {
+                reverseIdeaList() {
+                    return this.ideaList.reverse()
+                }
+            }
+        });
+    </script>
+    <!-- {% endblock %} -->
+
+    <script src="page/setting/js/dashboard-step.js"></script>
+    <!-- {#----------Cropper----------#} -->
+    <script src="page/cropper/cropper.js"></script>
+    <script src="page/cropper/cropper_custom.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+.path {
+  width: 100%;
+  flex-grow: 0;
+}
+.path ul {
+  display: flex;
+  justify-content: flex-start;
+  min-height: 30px;
+}
+.path ul li {
+  padding: 3px 10px;
+  background-color: var(--main-symmetry-color);
+  color: #036;
+  font-weight: 900;
+  border-radius: 20px;
+  position: relative;
+}
+.path ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+.path ul li + li {
+  margin-left: 10px;
+}
+.path ul li + li:before {
+  content: ">";
+}

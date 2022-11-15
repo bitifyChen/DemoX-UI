@@ -1,0 +1,30 @@
+/*基本顏色*/
+html {
+    --main-base-color: #153051;
+    --main-symmetry-color: #FFCC00;
+    --main-symmetry-hover-color: #FFDB6A;
+    --background-color: #e9ecf3;
+    --content-box-color: white;
+    --content-box-shadow-color: #DCDDDD;
+
+    --font-light-color: white;
+    --font-light-hover-color: white;
+    --font-dark-color: #30434d;
+    --font-dark-hover-color: #15182E;
+}
+
+
+html.dark {
+    --main-base-color: #232B47;
+    --main-symmetry-color: #FFCC00;
+    --main-symmetry-hover-color: #FFDB6A;
+    --background-color: #191F39;
+    --content-box-color: #3A3D58;
+    --content-box-shadow-color: #191F39;
+
+    --font-light-color: #5D6575;
+    --font-light-hover-color: #5D6575;
+    --font-dark-color: #939CA9;
+    --font-dark-hover-color: white;
+}
+

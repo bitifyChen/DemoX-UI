@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DEMOX | 設定</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css"/>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+          rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="page/setting/css/select2theme.css"/>
+
+    <link rel="stylesheet" href="page/setting/css/dashboard.css"/>
+    <link rel="stylesheet" href="page/setting/css/dashboard-color.css"/>
+    <link rel="stylesheet" href="page/setting/css/dashboard-path.css"/>
+    <link rel="stylesheet" href="page/setting/demox_module/demox_module.css"/>
+
+   
+    <link rel="stylesheet" href="page/cropper/cropper.css">
+    <!-- {% block STYLEontent %}
+
+    {% endblock %} -->
+</head>
+<body class="gray">
+<div class="wrap">
+    <div class="sideBar">
+        <nav>
+            <button class="app-menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="logo" href="index.html">
+                <img src="page/setting/logo-w.svg" height="30" />
+            </a>
+            <a href="#" class="item" data-name="index">
+                <span>Demo X 控制台</span>
+            </a>
+            <a href="setting-curation-list.html" class="item" data-name="curation">
+                <i class="far fa-copy"></i>
+                <span>策展</span>
+            </a>
+            <a href="setting-idea-list.html" class="item" data-name="idea">
+                <i class="far fa-file"></i>
+                <span>作品</span>
+            </a>
+            <a href="setting-profile.html" class="item active" data-name="profile">
+                <i class="far fa-id-badge"></i>
+                <span>個人資料</span>
+            </a>
+            <button class="mode" id="btn-mode"></button>
+            <button class="back" id="btn-close-dashboard">
+                <i class="fas fa-arrow-left"></i>離開編輯模式
+            </button>
+        </nav>
+    </div>
+    <div class="main">
+        <div class="path">
+            <ul></ul>
+        </div>
+        <h2 class="title"></h2>
+        <div id="app" class="content-boxs">
+            <div class="content-box funcMenu">
+                <ul>
+                    <a href="?func=edit_profile">
+                        <li data-name="edit_profile">
+                            <i class="fas fa-edit fa-fw"></i>
+                            編輯個人資料
+                        </li>
+                    </a>
+                    <a href="?func=master_apply">
+                        <li data-name="master_apply">
+                            <i class="fas fa-award fa-fw"></i></i>
+                            成為策展人
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            <div class="content-box func-box box-9 " data-name="edit_profile">
+                <div class="form-group">
+                    <label for="username">姓名</label>
+                    <input type="text" id="username" v-model="profile.user">
+                </div>
+                <div class="form-group">
+                    <label for="school">學校/公司</label>
+                    <input type="text" id="school" v-model="profile.school">
+                </div>
+                <div class="form-group">
+                    <label for="department">系所/單位</label>
+                    <input type="text" id="department" v-model="profile.department">
+                </div>
+                <div class="btn-group">
+                    <button type="button" @click="sendData">送出</button>
+                </div>
+            </div>
+            <div class="content-box func-box box-9" data-name="master_apply">
+                <h5>請填寫以下資料，通過後將會以Email通知，即可申請策展。</h5>
+                <h5>申請狀態：[[profile.master_status_tw]]</h5>
+                <hr>
+                <form action="" class="form" id="master_apply">
+                    <div class="form-group">
+                        <label for="real_name">真實姓名</label>
+                        <input type="text" id="real_name" v-model="profile.real_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="school">學校/公司</label>
+                        <input type="text" id="school" v-model="profile.school">
+                    </div>
+                    <div class="form-group">
+                        <label for="department">系所/單位</label>
+                        <input type="text" id="department" v-model="profile.department">
+                    </div>
+                    <div class="form-group">
+                        <label for="master_url">學校個人主頁(資料確認用)</label>
+                        <input type="text" id="master_url" v-model="profile.master_url">
+                    </div>
+                    <div class="form-group">
+                        <label for="master_email">學校信箱</label>
+                        <input type="text" id="master_email" v-model="profile.master_email">
+                    </div>
+                    <div class="form-group">
+                        <label for="plan_to_curation_subject">預計策展主題</label>
+                        <input type="text" id="plan_to_curation_subject" v-model="profile.plan_to_curation_subject">
+                    </div>
+                    <hr>
+                    <p>
+                        注意!如您申請即表示您同意本站之隱私權規範與免責聲明，
+                        以外如建立之策展有違反本站之規定，我們有權利在尚未與您聯繫前先行將其隱藏或刪除。
+                    </p>
+                    <div class="btn-group">
+                        <template v-if="mode.isUpload">
+                            <button type="button">上傳中</button>
+                        </template>
+                        <template v-else>
+                            <template v-if="profile.master_status ==='apply'">
+                                <button type="button">[[profile.master_status_tw]]，如要修改資料請聯繫客服信箱</button>
+                            </template>
+                            <template v-else-if="profile.master_status ==='not_master'">
+                                <button type="button" class="master-btn" @click="sendMasterData">策展人申請</button>
+                            </template>
+                            <template v-else>
+                                <button type="button" class="master-btn" @click="sendMasterData">
+                                    目前狀態：[[profile.master_status_tw]]，如要更新資料請編輯後點選
+                                </button>
+                            </template>
+                        </template>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-animation"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js'></script>
+
+<script src="page/setting/js/dashboard.js"></script>
+<script src="page/setting/js/dashboard-color.js"></script>
+<script src="page/setting/js/dashboard-path.js"></script>
+<script src="page/web/url.js"></script>
+<script>
+    //  假資料
+    let data = {"user":"bitify","school":"","department":"","role_flag":"master","real_name":"","master_url":"","department ":"","master_email":"","master_status":"not_master","master_status_tw":"未申請/未通過","plan_to_curation_subject":"None"}
+   
+    let vm = new Vue({
+            delimiters: ['[[', ']]'],
+            el: "#app",
+            data: {
+                profile: data,
+                mode: {
+                    isUpload: false
+                }
+            },
+            created() {
+                this.getData()
+            },
+            methods: {
+                getData() {
+                    axios
+                        .get('#', {headers: {'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()}})
+                        .then((res) => {
+                            this.profile = res.data['profile']
+                        })
+                        .catch((err) => {
+                            console.log('err')
+                        })
+                },
+                sendData() {
+                    this.mode.isUpload = true
+                    axios
+                        .post('#', this.profile, {headers: {'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()}})
+                        .then((res) => {
+                            new Noty({type: 'success', text: '修改成功', timeout: 2000,}).show();
+                            this.mode.isUpload = false
+                        })
+                        .catch((err) => {
+                            this.mode.isUpload = false
+                            console.log('err')
+                        })
+                },
+                sendMasterData() {
+                    this.mode.isUpload = true
+                    let submitData = new FormData();
+                    submitData.append('real_name', this.profile.real_name);
+                    submitData.append('school', this.profile.school);
+                    submitData.append('department', this.profile.department);
+                    submitData.append('master_url', this.profile.master_url);
+                    submitData.append('master_email', this.profile.master_email);
+                    submitData.append('plan_to_curation_subject', this.profile.plan_to_curation_subject);
+                    axios
+                        .post('#', submitData, {
+                            headers: {'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()},
+                        })
+                        .then((res) => {
+                            new Noty({type: 'success', text: '修改成功', timeout: 2000,}).show();
+                            this.getData()
+                            this.mode.isUpload = false
+                        })
+                        .catch((err) => {
+                            console.log('err')
+                            this.mode.isUpload = false
+                        })
+                }
+            },
+        });
+</script>
+
+<script src="page/setting/js/dashboard-step.js"></script>
+<!-- {#----------Cropper----------#} -->
+<script src="page/cropper/cropper.js"></script>
+<script src="page/cropper/cropper_custom.js"></script>
+
+
+</body>
+</html>

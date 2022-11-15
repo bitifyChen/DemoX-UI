@@ -1,0 +1,119 @@
+#module_add {
+	background-color: var(--background-color);
+	padding: 10px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    .module_add_btn_list {
+        display: flex;
+        width: 100%;
+        .module_add_btn {
+            width: 50%;
+            background-color: #397197;
+            padding: 20px;
+            border: none;
+            border-radius: 10px;
+            color: whitesmoke;
+            margin: 10px;
+            cursor: pointer;
+            transition: 0.3s linear;
+            i {
+                display: block;
+                font-size: 2em;
+            }
+            .name {
+                font-weight: 700;
+            }
+            
+        }
+    }
+}
+
+.module_add_btn_google {
+	&:hover {
+		background-color: #4285F4;
+	}
+}
+.module_add_btn_youtube {
+	&:hover {
+		background-color: #FF0000;
+	}
+}
+.module_add_btn_pdf {
+	&:hover {
+		background-color: #a31f24;
+	}
+}
+.module_add_btn_git {
+	&:hover {
+		background-color: #dc4c32;
+	}
+}
+
+
+
+.module_box {
+	background-color: var(--background-color);
+	padding: 30px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	word-wrap: break-word;
+	.module_box_title{
+		margin-bottom: 20px;
+		display: inline-block;
+	}
+	.module_box_btn_list {
+		display: inline-block;
+		float: right;
+	}
+	iframe {
+		width: 100%;
+	}
+
+}
+
+.module_sort_box {
+	background-color: var(--background-color);
+	padding: 10px;
+	text-align: center;
+	margin-bottom: 5px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	h5 {
+		color: #397197;
+		font-weight: 900;
+	}
+}
+
+/*bootstrap modal*/
+.modal {
+	backdrop-filter: blur(6px);
+}
+
+.modal .modal-content {
+	background-color: var(--content-box-color);
+}
+
+.modal .modal-content h1, h2, h3, h4, h5, h6, label {
+	color: var(--font-dark-hover-color);
+}
+
+.modal .modal-content .modal-header, .modal .modal-content .modal-body, .modal .modal-content .modal-footer {
+	border: none
+}
+
+.modal .modal-content .modal-body input {
+	background-color: var(--background-color);
+	border: none;
+	padding: 0 10px;
+	letter-spacing: 1.5px;
+	color: var(--font-dark-hover-color);
+	font-weight: 900;
+	line-height: 30px;
+	width: 100%;
+}

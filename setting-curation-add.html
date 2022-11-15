@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEMOX | 設定</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" />
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="page/setting/css/select2theme.css" />
+
+    <link rel="stylesheet" href="page/setting/css/dashboard.css" />
+    <link rel="stylesheet" href="page/setting/css/dashboard-color.css" />
+    <link rel="stylesheet" href="page/setting/css/dashboard-path.css" />
+    <link rel="stylesheet" href="page/setting/demox_module/demox_module.css" />
+
+
+    <link rel="stylesheet" href="page/cropper/cropper.css">
+    <!-- {% block STYLEontent %}
+
+    {% endblock %} -->
+</head>
+
+<body class="gray">
+    <div class="wrap">
+        <div class="sideBar">
+            <nav>
+                <button class="app-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="logo" href="index.html">
+                    <img src="page/setting/logo-w.svg" height="30" />
+                </a>
+                <a href="#" class="item" data-name="index">
+                    <span>Demo X 控制台</span>
+                </a>
+                <a href="setting-curation-list.html" class="item active" data-name="curation">
+                    <i class="far fa-copy"></i>
+                    <span>策展</span>
+                </a>
+                <a href="setting-idea-list.html" class="item" data-name="idea">
+                    <i class="far fa-file"></i>
+                    <span>作品</span>
+                </a>
+                <a href="setting-profile.html" class="item" data-name="profile">
+                    <i class="far fa-id-badge"></i>
+                    <span>個人資料</span>
+                </a>
+                <button class="mode" id="btn-mode"></button>
+                <button class="back" id="btn-close-dashboard">
+                    <i class="fas fa-arrow-left"></i>離開編輯模式
+                </button>
+            </nav>
+        </div>
+        <div class="main">
+            <div class="path">
+                <ul></ul>
+            </div>
+            <h2 class="title"></h2>
+            <div class="modal fade" id="bannerModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                <h3 class="title">封面圖片 (請至少設定一張16:9的圖片)</h3>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="img-container">
+                                <img id="image" src="" class="img-fluid" alt="Picture" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                取消
+                            </button>
+                            <button type="button" id="btnCrop" class="btn btn-info">
+                                裁切
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+            <!--modal-->
+            <div class="content-boxs" id="app">
+                <div class="content-box funcMenu">
+                    <ul>
+                        <a href="setting-curation-list.html?func=list_curation">
+                            <li data-name="list_curation">
+                                <i class="far fa-file fa-fw"></i>
+                                策展列表
+                            </li>
+                        </a>
+                        <a href="setting-curation-add.html?func=add_curation">
+                            <li data-name="add_curation">
+                                <i class="fas fa-plus fa-fw"></i>
+                                新增策展
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="content-box stepMenu">
+                    <ul>
+                        <li data-step="1" class="active">
+                            <span>Step1</span>
+                            基本資料
+                        </li>
+
+                        <li data-step="2">
+                            <span>Step2</span>
+                            縮圖設定
+                        </li>
+
+                        <li data-step="3">
+                            <span>Step3</span>
+                            相關說明
+                        </li>
+
+                        <li data-step="4">
+                            <span>Step4</span>
+                            公開策展
+                        </li>
+
+                        <li data-step="5">
+                            <span>Step5</span>
+                            公開作品
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-box step-box box-9 show" data-step="1">
+                    <h3 class="title">基本資料</h3>
+                    <div class="form-group">
+                        <label for="curationName">策展名稱</label>
+                        <input type="text" id="curationName" v-model="curation.name" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label for="company">策展說明(限100字)</label>
+                        <input type="text" id="company" v-model="curation.description" required="required" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="unit">選擇分類(可複選、新增)</label>
+                        <select class="form-control js-example-tokenizer finish" multiple="multiple"
+                            id="Select"></select>
+                    </div>
+                    <div class="btn-group">
+                        <button class="prevBtn">上一步</button>
+                        <button class="nextBtn">下一步</button>
+                    </div>
+                </div>
+
+                <div class="content-box step-box box-9 " data-step="2">
+                    <div class="pic-group">
+                        <label>上傳封面圖片 (請至少設定一張16:9的圖片)</label>
+                        <div class="module_box module_box_banner" id="banner_1">
+                            <img src="" class="img-fluid" width="100%" alt="" />
+                        </div>
+                        <label for="bannerUpload" class="inputFile">
+                            <input type="file" name="image" id="bannerUpload" class="bannerUpload"
+                                required="required" />
+                        </label>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="prevBtn">上一步</button>
+                        <button class="nextBtn">下一步</button>
+                    </div>
+                </div>
+                <div class="content-box step-box box-9" data-step="3">
+                    <div id="module">
+                    </div>
+                    <div id="module_add">
+                        <div class="module_add_btn_box">
+                            <h3 class="title">新增組件</h3>
+                            <div class="module_add_btn_list">
+                                <button onclick="module_add('Introduction')" type="button"
+                                    class="module_add_btn module_add_btn_google col">
+                                    <i class="fas fa-pen-nib"></i>
+                                    <span class="name">文字區塊</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="prevBtn">上一步</button>
+                        <button class="nextBtn">下一步</button>
+                    </div>
+                </div>
+
+                <div class="content-box step-box box-9" data-step="4">
+                    <div class="form-group" id="publicInfoBox">
+                        <h4 class="title"></h4>
+                        <h5 class="sub-title"></h5>
+                    </div>
+                    <div class="switch-group">
+                        <div class="switch-info">
+                            <h5>公開於DEMO X</h5>
+                            <p>【公開】所有人都可以瀏覽您的策展。</p>
+                        </div>
+                        <div class="switch-btn">
+                            <input type="checkbox" id="public_mode_btn" data-toggle="toggle" data-on="公開" data-off="隱藏"
+                                data-onstyle="success" data-offstyle="secondary" data-width="100%">
+                        </div>
+                    </div>
+                    <div class="switch-group">
+                        <div class="switch-info">
+                            <h5>公開於策展成員</h5>
+                            <p>僅您、作品創作者可以瀏覽您的策展。</p>
+                        </div>
+                        <div class="switch-btn">
+                            <input type="checkbox" id="curation_mode_btn" data-toggle="toggle" data-on="開啟"
+                                data-off="關閉" data-onstyle="success" data-offstyle="secondary" data-width="100%">
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="prevBtn">上一步</button>
+                        <button class="nextBtn">下一步</button>
+                    </div>
+                </div>
+
+                <div class="content-box step-box box-9" data-step="5">
+                    <div class="switch-group">
+                        <div class="switch-info">
+                            <h5>預設作品狀態</h5>
+                            <p>【公開】當作品加入時，不須經過審核，即直接顯示您的策展中。</p>
+                        </div>
+                        <div class="switch-btn">
+                            <input type="checkbox" id="IinC_public_mode_btn" data-toggle="toggle" data-on="公開"
+                                data-off="隱藏" data-onstyle="success" data-offstyle="secondary" data-width="100%">
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="prevBtn">上一步</button>
+                        <button class="submitBtn" @click="submitCuration" :disabled=" isUpload ">送出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrap-animation"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js'></script>
+
+    <script src="page/setting/js/dashboard.js"></script>
+    <script src="page/setting/js/dashboard-color.js"></script>
+    <script src="page/setting/js/dashboard-path.js"></script>
+    <script src="page/web/url.js"></script>
+    <!-- {% block JScontent %} -->
+    <script>
+        const curationApiUrl = '{% url "curation:api" %}';
+        const categoryApiUrl = '{% url "idea:category_api" %}';
+        const curationBannerApiUrl = '{% url "curation:banner_api" %}';
+        const curationIntroductionApiUrl = '{% url "curation:introduction_api" %}';
+
+    </script>
+    {#----------ckeditor----------#}
+    <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
+    <script src="page/setting/curation/curation.js"></script>
+    <script src="page/setting/demox_module/curation_module.js"></script>
+    <script>
+        let vm = new Vue({
+            delimiters: ['[[', ']]'],
+            el: "#app",
+            data: {
+                curation: {
+                    name: '',
+                    description: '',
+                },
+                isUpload: false,
+            },
+            created() {
+                //select2
+                axios
+                    .get(categoryApiUrl, {
+                        headers: { 'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val() },
+                    })
+                    .then((res) => {
+                        $(".js-example-tokenizer").select2({
+                            tags: true,
+                            tokenSeparators: [',', ' '],
+                            data: res.data,
+                            placeholder: "請選擇",
+                        })
+                    })
+                    .catch((err) => {
+                        new Noty({ type: 'error', text: '獲取分類錯誤!', timeout: 2000, }).show();
+                    })
+            },
+            methods: {
+                submitCuration() {
+                    if (finishCheck() && !this.isUpload)
+                    {
+                        this.isUpload = true;
+                        axios
+                            .post(curationApiUrl, this.submitData, {
+                                headers: { 'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val() },
+                            })
+                            .then((res) => {
+                                new Noty({ type: 'success', text: '新增成功!', timeout: 2000, }).show();
+                            })
+                            .catch((err) => {
+                                this.isUpload = false;
+                                new Noty({ type: 'error', text: '錯誤!', timeout: 2000, }).show();
+                            })
+
+                    } else
+                    {
+                        this.isUpload = false;
+                        new Noty({ type: 'error', text: '部分資料未填寫完成。', timeout: 2000, }).show();
+                    }
+                },
+            },
+            computed: {
+                submitData() {
+                    let submitData = new FormData();
+                    submitData.append('name', this.curation.name);
+                    submitData.append('description', this.curation.description);
+                    submitData.append('categories', JSON.stringify(selectSubmit()));
+                    submitData.append('banners', JSON.stringify(bannerSubmit()));
+                    submitData.append('introductions', JSON.stringify(introductionSubmit()));
+                    submitData.append('public_mode', publicSubmit());
+                    submitData.append('default_idea_public', ideaPublicSubmit());
+                    return submitData
+                }
+            }
+        });
+    </script>
+    <script>
+
+        $('#public_mode_btn').change(function () {
+            let mode = $(this).prop('checked');
+            if (mode)
+            {
+                $('#curation_mode_btn').bootstrapToggle('on', true);
+            }
+            publicSubmit()
+        })
+
+        $('#curation_mode_btn').change(function () {
+            let mode = $(this).prop('checked');
+            if (!mode)
+            {
+                $('#public_mode_btn').bootstrapToggle('off', true);
+            }
+            publicSubmit()
+        })
+
+    </script>
+    <!-- {% endblock %} -->
+
+    <script src="page/setting/js/dashboard-step.js"></script>
+    <!-- {#----------Cropper----------#} -->
+    <script src="page/cropper/cropper.js"></script>
+    <script src="page/cropper/cropper_custom.js"></script>
+
+
+</body>
+
+</html>

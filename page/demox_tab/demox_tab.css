@@ -1,0 +1,114 @@
+.idea_tab .tabs {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+}
+
+.idea_tab .tabs > li {
+    transition-duration: 0.25s;
+    display: table-cell;
+    list-style: none;
+    text-align: center;
+    padding: 20px 20px 25px 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    color: #50555a;
+    font-weight: 900;
+}
+
+.idea_tab .tabs > li > i {
+    color: #50555a;
+}
+
+.idea_tab .tabs > li:before {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 120%;
+    top: 0;
+    left: 0;
+    background-color: rgba(57, 113, 151, 0.3);
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    transition-duration: 0.25s;
+    border-radius: 5px 5px 0 0;
+}
+
+.idea_tab .tabs > li:hover:before {
+    -webkit-transform: translateY(70%);
+    transform: translateY(70%);
+}
+
+.idea_tab .tabs > li.active {
+    color: #397197;
+    box-shadow: 3px 2px 3px #d0d3d9
+}
+
+.idea_tab .tabs > li.active:before {
+    transition-duration: 0.5s;
+    background-color: white;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.idea_tab .tab_content {
+    background-color: white;
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 3px 2px 3px #d0d3d9;
+}
+
+.idea_tab .tab_content > li {
+    width: 100%;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    list-style: none;
+}
+
+.idea_tab .tab_content > li > h1, h2, h3, h4, h5, p, span {
+    word-wrap: break-word;
+}
+
+.idea_tab .tabs > li.active > i.fa-youtube {
+    color: #FF0000;
+}
+
+.idea_tab .tabs > li.active > i.fa-youtube {
+    color: #FF0000;
+}
+
+.idea_tab .tabs > li.active > i.fa-google {
+    color: #4285F4;
+}
+
+.idea_tab .tabs > li.active > i.fa-github {
+    color: #dc4c32;
+}
+
+.idea_tab .tabs > li.active > i.fa-file-pdf {
+    color: #a31f24;
+}
+
+i.fa-youtube {
+    color: #FF0000;
+}
+
+i.fa-google {
+    color: #4285F4;
+}
+
+i.fa-github {
+    color: #dc4c32;
+}
+
+i.fa-file-pdf {
+    color: #a31f24;
+}

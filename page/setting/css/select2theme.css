@@ -1,0 +1,34 @@
+/*select2 Custom CSS*/
+.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+    background-color: var(--background-color);
+    border: none;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    background-color: var(--background-color);
+    border: none;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: var(--main-symmetry-color);;
+    border-radius: 99px;
+    border: none;
+    display: inline-block;
+    padding: 0px 5px;
+    color: #036;
+    font-weight: 900;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    border-right: none !important;
+    color: #036;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    background: none;
+    color: #036;
+}

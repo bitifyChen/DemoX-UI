@@ -1,0 +1,96 @@
+/*module組件按鈕相關*/
+.module_add_title, .module_box_title {
+    text-align: center;
+}
+
+.module_add_title h3.title, .module_box h3.title {
+    margin-top: 0px;
+}
+
+.module_add_btn_list {
+    background-color: rgb(233, 236, 243);
+    padding: 30px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.module_add_btn {
+    background-color: #397197;
+    padding: 20px;
+    border: none;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    color: whitesmoke;
+    min-width: 120px;
+    margin: 10px 20px 10px 20px;
+}
+
+.module_add_btn {
+    transition: 0.3s linear;
+}
+
+.module_add_btn_google:hover {
+    background-color: #4285F4;
+}
+
+.module_add_btn_youtube:hover {
+    background-color: #FF0000;
+}
+
+.module_add_btn_pdf:hover {
+    background-color: #a31f24;
+}
+
+.module_add_btn_git:hover {
+    background-color: #dc4c32;
+}
+
+.module_add_btn i {
+    display: block;
+    font-size: 2em;
+}
+
+.module_add_btn .name {
+    font-weight: 700;
+}
+
+.module_box_title {
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.module_box_btn_list {
+    display: inline-block;
+    float: right;
+}
+
+.module_box {
+    background-color: rgb(233, 236, 243);
+    padding: 30px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    word-wrap:break-word;
+}
+
+.module_box iframe {
+    width: 100%;
+}
+
+.module_sort_box{
+    background-color: rgb(233, 236, 243);
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.module_sort_box h5{
+    color: #397197;
+    font-weight: 900;
+}
