@@ -11,7 +11,7 @@
 /*Font Google -font-family: 'Noto Sans TC', sans-serif;*/
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;900&family=Roboto:wght@100;300;500;700;900&display=swap");
 body {
-  font-family: pingfangtc-regular,Microsoft JhengHei;
+  font-family: pingfangtc-regular, Microsoft JhengHei;
 }
 
 :root {
@@ -40,6 +40,25 @@ body {
   }
 }
 
+.btn-more{
+  box-shadow: rgba(0,0,0,0.1) 0px 0.75rem 2rem 0px;
+  background: rgba(255, 255, 255, 0.376);
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 900;
+  margin: auto;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all .3s linear;
+  &:hover {
+    color: white;
+    background-color: #f57481;
+  }
+}
+.btn-block{
+  display: flex;
+  align-items: center;
+}
 /*CKEditor*/
 .ckeditor {
   font-size: 1rem;
@@ -91,7 +110,7 @@ h2.title {
 
 .rainbow-text {
   .text {
-    background: linear-gradient(135deg,#6881E0,#C850C0,#FFCC70);
+    background: linear-gradient(135deg, #6881e0, #c850c0, #ffcc70);
     background-clip: text;
     -webkit-background-clip: text;
     position: relative;
@@ -325,7 +344,7 @@ main.index {
       }
     }
   }
-  .media-box{
+  .media-box {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
     background: rgba(255, 255, 255, 0.376);
   }
@@ -450,7 +469,6 @@ main.index {
         }
       }
     }
-
   }
 }
 
@@ -595,6 +613,58 @@ main.index {
   }
 }
 
+main.idea-list {
+  padding-top: 50px;
+  section{
+    padding: 50px 0px;
+  }
+  .rainbow-text.title {
+    line-height: 1.1;
+    font-weight: 900;
+    font-size: 30px;
+  }
+  .header-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .link {
+      font-weight: 900;
+      font-size: 30px;
+      letter-spacing: 0.2em;
+      padding-bottom: 0.3em;
+      position: relative;
+      color: white;
+      &::after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: white;
+        transition: all 0.3s linear;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  main.idea-list {
+   
+  }
+}
+
+@media screen and (min-width: 768px) {
+  main.idea-list {
+    padding-top: 100px;
+    .rainbow-text.title {
+      line-height: 1.1;
+      font-size: 40px;
+      font-weight: 900;
+    }
+  }
+}
+
 //Animation
 
 // main
@@ -650,9 +720,31 @@ main {
   }
 }
 
-// index - curation 動畫
+// index - list 動畫
 
 main.index {
+  //移除原先動畫
+  .media-boxes,
+  .media-box {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+  //添加重要動畫
+  .section-curation-list,
+  .section-idea-list {
+    //延遲
+    .rainbow-text.active {
+      .text ._t {
+        transition-delay: 1s;
+      }
+    }
+  }
+}
+
+// idea list - list 動畫
+main.idea-list {
   //移除原先動畫
   .media-boxes,
   .media-box {

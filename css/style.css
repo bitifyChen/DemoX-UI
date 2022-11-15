@@ -12,7 +12,7 @@
 /*Font Google -font-family: 'Noto Sans TC', sans-serif;*/
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;900&family=Roboto:wght@100;300;500;700;900&display=swap");
 body {
-  font-family: pingfangtc-regular,Microsoft JhengHei;
+  font-family: pingfangtc-regular, Microsoft JhengHei;
 }
 
 :root {
@@ -39,6 +39,34 @@ body {
 .btn-like.active, .btn-like:hover {
   color: white;
   background-color: #f57481;
+}
+
+.btn-more {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
+  background: rgba(255, 255, 255, 0.376);
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 900;
+  margin: auto;
+  border-radius: 99px;
+  cursor: pointer;
+  -webkit-transition: all .3s linear;
+  transition: all .3s linear;
+}
+
+.btn-more:hover {
+  color: white;
+  background-color: #f57481;
+}
+
+.btn-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 /*CKEditor*/
@@ -105,7 +133,7 @@ h2.title {
 }
 
 .rainbow-text .text {
-  background: linear-gradient(135deg, #6881E0, #C850C0, #FFCC70);
+  background: linear-gradient(135deg, #6881e0, #c850c0, #ffcc70);
   background-clip: text;
   -webkit-background-clip: text;
   position: relative;
@@ -658,6 +686,64 @@ main.index .section-school-list .school-list .swiper-wrapper {
   }
 }
 
+main.idea-list {
+  padding-top: 50px;
+}
+
+main.idea-list section {
+  padding: 50px 0px;
+}
+
+main.idea-list .rainbow-text.title {
+  line-height: 1.1;
+  font-weight: 900;
+  font-size: 30px;
+}
+
+main.idea-list .header-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+main.idea-list .header-block .link {
+  font-weight: 900;
+  font-size: 30px;
+  letter-spacing: 0.2em;
+  padding-bottom: 0.3em;
+  position: relative;
+  color: white;
+}
+
+main.idea-list .header-block .link::after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+@media screen and (min-width: 768px) {
+  main.idea-list {
+    padding-top: 100px;
+  }
+  main.idea-list .rainbow-text.title {
+    line-height: 1.1;
+    font-size: 40px;
+    font-weight: 900;
+  }
+}
+
 main.leave, main.in {
   position: relative;
   overflow: hidden;
@@ -721,6 +807,18 @@ main.index .media-box::after {
 
 main.index .section-curation-list .rainbow-text.active .text ._t,
 main.index .section-idea-list .rainbow-text.active .text ._t {
+  -webkit-transition-delay: 1s;
+          transition-delay: 1s;
+}
+
+main.idea-list .media-boxes::before, main.idea-list .media-boxes::after,
+main.idea-list .media-box::before,
+main.idea-list .media-box::after {
+  display: none;
+}
+
+main.idea-list .section-curation-list .rainbow-text.active .text ._t,
+main.idea-list .section-idea-list .rainbow-text.active .text ._t {
   -webkit-transition-delay: 1s;
           transition-delay: 1s;
 }
