@@ -66,6 +66,8 @@ function finishCheck() {
         e.classList.remove("alert");
         if (e.value !== "" && e.type === 'text') {
             checkPass += 1;
+        } else if (e.value != "" && e.tagName == "TEXTAREA") { 
+            checkPass += 1;
         } else if (e.type === 'file') {
             let banner = document.querySelector(".module_box_banner img").getAttribute('src');
             ;
@@ -77,7 +79,8 @@ function finishCheck() {
                 //Add This Step To unPass Array
                 unPassStep.push(e.closest(".step-box").dataset.step);
             }
-        } else {
+        }
+        else {
             //This Input Add Class .alert
             e.classList.add("alert");
             //Add This Step To unPass Array

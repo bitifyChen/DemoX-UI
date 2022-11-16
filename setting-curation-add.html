@@ -143,8 +143,8 @@
                         <input type="text" id="curationName" v-model="curation.name" required="required" />
                     </div>
                     <div class="form-group">
-                        <label for="company">策展說明(限100字)</label>
-                        <input type="text" id="company" v-model="curation.description" required="required" />
+                        <label for="curationDescription">策展說明(限100字)</label>
+                        <textarea id="curationDescription" v-model="curation.description" required="required" rows="8"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -270,7 +270,7 @@
         const curationIntroductionApiUrl = '{% url "curation:introduction_api" %}';
 
     </script>
-    {#----------ckeditor----------#}
+    <!-- {#----------ckeditor----------#} -->
     <script src="//cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
     <script src="page/setting/curation/curation.js"></script>
     <script src="page/setting/demox_module/curation_module.js"></script>

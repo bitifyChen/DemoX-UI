@@ -575,16 +575,14 @@ form.form {
     line-height: 30px;
     letter-spacing: 1.5px;
     cursor: pointer;
-    flex: 0 0 40%;
   }
-  input {
+  input,textarea {
     background-color: var(--background-color);
     border: none;
     padding: 0 10px;
     letter-spacing: 1.5px;
     color: var(--font-dark-hover-color);
     font-weight: 900;
-    flex: 1;
     line-height: 30px;
     &:focus {
       outline: none;
@@ -594,6 +592,9 @@ form.form {
       background-color: #f7858f;
       margin-bottom: 0;
     }
+  }
+  textarea{
+    height: auto;
   }
   &.input-button{
     flex-direction: row;
