@@ -139,6 +139,7 @@
                         <span class="likes"> [[ idea.like_users ]]</span>
                     </div>
                     <div class="box-func">
+                        <button class="btn-view btn-circle" @click="viewIdea"></button>
                         <button class="btn-edit btn-circle" @click="editIdea"></button>
                         <button class="btn-del btn-circle" @click="deleteIdea"></button>
                     </div>
@@ -157,6 +158,12 @@
                 },
                 editIdea() {
                     window.location.href = 'setting-idea-edit?func=edit_idea?id=' + this.idea.id
+                },
+                viewIdea(){
+                    window.open(
+                        'idea-detail.html',
+                        '_blank'
+                    );
                 },
                 deleteIdea() {
                     axios

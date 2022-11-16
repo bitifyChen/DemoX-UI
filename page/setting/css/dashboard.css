@@ -638,12 +638,12 @@ button.mode:hover:before {
 }
 
 .item-boxs .box .box-func .btn-circle.btn-view:before {
-  content: "\f06e";
-  background-color: #2ed573;
+  content: "\f002";
+  background-color: #4b528f;
 }
 
 .item-boxs .box .box-func .btn-circle.btn-view:hover:before {
-  background-color: #26a85c;
+  background-color: #3a3d58;
 }
 
 .item-boxs .box .box-func .btn-circle.btn-edit:before {

@@ -137,6 +137,7 @@
                         <span class="likes"> [[ curation.like_users ]]</span>
                     </div>
                     <div class="box-func">
+                        <button class="btn-view btn-circle" @click="viewCuration"></button>
                         <button class="btn-edit btn-circle" @click="editCuration"></button>
                         <button class="btn-del btn-circle" @click="deleteCuration"></button>
                     </div>
@@ -155,6 +156,12 @@
                 },
                 editCuration() {
                     window.location.href = '#' + this.curation.id
+                },
+                viewCuration(){
+                    window.open(
+                        'curation-detail.html',
+                        '_blank'
+                    );
                 },
                 deleteCuration() {
                     axios
