@@ -583,6 +583,57 @@ main.index {
     }
   }
 }
+main.curation-list {
+  padding-top: 50px;
+  section{
+    padding: 50px 0px;
+  }
+  .rainbow-text.title {
+    line-height: 1.1;
+    font-weight: 900;
+    font-size: 30px;
+  }
+  .header-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .link {
+      font-weight: 900;
+      font-size: 30px;
+      letter-spacing: 0.2em;
+      padding-bottom: 0.3em;
+      position: relative;
+      color: white;
+      &::after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: white;
+        transition: all 0.3s linear;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  main.curation-list {
+   
+  }
+}
+
+@media screen and (min-width: 768px) {
+  main.curation-list {
+    padding-top: 100px;
+    .rainbow-text.title {
+      line-height: 1.1;
+      font-size: 40px;
+      font-weight: 900;
+    }
+  }
+}
 
 //Idea
 @media screen and (min-width: 768px) {
@@ -754,8 +805,28 @@ main.idea-list {
     }
   }
   //添加重要動畫
-  .section-curation-list,
   .section-idea-list {
+    //延遲
+    .rainbow-text.active {
+      .text ._t {
+        transition-delay: 1s;
+      }
+    }
+  }
+}
+
+// curation list - list 動畫
+main.curation-list {
+  //移除原先動畫
+  .media-boxes,
+  .media-box {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+  //添加重要動畫
+  .section-curation-list{
     //延遲
     .rainbow-text.active {
       .text ._t {

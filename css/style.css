@@ -664,6 +664,64 @@ main.index .section-school-list .school-list .swiper-wrapper {
   }
 }
 
+main.curation-list {
+  padding-top: 50px;
+}
+
+main.curation-list section {
+  padding: 50px 0px;
+}
+
+main.curation-list .rainbow-text.title {
+  line-height: 1.1;
+  font-weight: 900;
+  font-size: 30px;
+}
+
+main.curation-list .header-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+main.curation-list .header-block .link {
+  font-weight: 900;
+  font-size: 30px;
+  letter-spacing: 0.2em;
+  padding-bottom: 0.3em;
+  position: relative;
+  color: white;
+}
+
+main.curation-list .header-block .link::after {
+  content: "";
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+
+@media screen and (min-width: 768px) {
+  main.curation-list {
+    padding-top: 100px;
+  }
+  main.curation-list .rainbow-text.title {
+    line-height: 1.1;
+    font-size: 40px;
+    font-weight: 900;
+  }
+}
+
 @media screen and (min-width: 768px) {
   main.idea .side-block {
     width: 180px;
@@ -817,8 +875,18 @@ main.idea-list .media-box::after {
   display: none;
 }
 
-main.idea-list .section-curation-list .rainbow-text.active .text ._t,
 main.idea-list .section-idea-list .rainbow-text.active .text ._t {
+  -webkit-transition-delay: 1s;
+          transition-delay: 1s;
+}
+
+main.curation-list .media-boxes::before, main.curation-list .media-boxes::after,
+main.curation-list .media-box::before,
+main.curation-list .media-box::after {
+  display: none;
+}
+
+main.curation-list .section-curation-list .rainbow-text.active .text ._t {
   -webkit-transition-delay: 1s;
           transition-delay: 1s;
 }
