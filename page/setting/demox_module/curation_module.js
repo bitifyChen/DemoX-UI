@@ -188,7 +188,7 @@ function module_delete(id, categories_id) {
             return e !== 59
         })
         //完成通知
-        new Noty({type: 'success', text: '刪除成功', timeout: 3000,}).show();
+        new Noty({type: 'success', text: '已移除，將於送出策展後生效。', timeout: 3000,}).show();
     }
 }
 

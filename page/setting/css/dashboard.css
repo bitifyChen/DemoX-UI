@@ -713,7 +713,7 @@ form.form h3.title:not(:first-child) {
   cursor: pointer;
 }
 
-.form-group input, .form-group textarea {
+.form-group input {
   background-color: var(--background-color);
   border: none;
   padding: 0 10px;
@@ -721,20 +721,30 @@ form.form h3.title:not(:first-child) {
   color: var(--font-dark-hover-color);
   font-weight: 900;
   line-height: 30px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
-.form-group input:focus, .form-group textarea:focus {
+.form-group input:focus {
   outline: none;
   border-bottom: 3px solid var(--main-symmetry-color);
 }
 
-.form-group input.alert, .form-group textarea.alert {
+.form-group input.alert {
   background-color: #f7858f;
   margin-bottom: 0;
 }
 
 .form-group textarea {
   height: auto;
+  background-color: var(--background-color);
+  border: none;
+  padding: 0 10px;
+  letter-spacing: 1.5px;
+  color: var(--font-dark-hover-color);
+  font-weight: 900;
+  line-height: 30px;
 }
 
 .form-group.input-button {

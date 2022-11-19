@@ -576,7 +576,7 @@ form.form {
     letter-spacing: 1.5px;
     cursor: pointer;
   }
-  input,textarea {
+  input {
     background-color: var(--background-color);
     border: none;
     padding: 0 10px;
@@ -584,6 +584,7 @@ form.form {
     color: var(--font-dark-hover-color);
     font-weight: 900;
     line-height: 30px;
+    flex: 1;
     &:focus {
       outline: none;
       border-bottom: 3px solid var(--main-symmetry-color);
@@ -595,6 +596,13 @@ form.form {
   }
   textarea{
     height: auto;
+    background-color: var(--background-color);
+    border: none;
+    padding: 0 10px;
+    letter-spacing: 1.5px;
+    color: var(--font-dark-hover-color);
+    font-weight: 900;
+    line-height: 30px;
   }
   &.input-button{
     flex-direction: row;

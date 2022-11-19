@@ -284,7 +284,7 @@ function module_edited(id) {
         }
         //如果網址錯誤
         else if (google_slide_url_to_embed(url) === false){
-            new Noty({type: 'error', text: '請確認連結是否有問題，可以閱覽Google Slide 嵌入說明。', timeout: 2000,}).show();
+            new Noty({type: 'error', text: '請確認連結是否有問題，請瀏覽本簡報Google Slide 嵌入說明。', timeout: 2000,}).show();
             return;
         }
     }
@@ -312,7 +312,7 @@ function module_delete(id) {
         //組件重新排序
         module_count(id);
         //完成通知
-        new Noty({type: 'success', text: '刪除成功', timeout: 3000,}).show();
+        new Noty({type: 'success', text: '已移除，將於送出作品後生效。', timeout: 3000,}).show();
     }
 }
 
