@@ -312,7 +312,30 @@ main {
     }
   }
 }
-
+//Pagination
+.pagination{
+  ul{
+    display: flex;
+    justify-content: center;
+    li{
+      font-weight: 900;
+      padding: 10px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .3s linear;
+      &.active,&:hover{
+        background-color: black;
+        color: white;
+      }
+    }
+    li+li{
+      margin-left: 5px;
+    }
+  }
+}
 //Index
 main.index {
   max-width: 100vw;
@@ -716,6 +739,164 @@ main.idea-list {
   }
 }
 
+//Search
+main.search {
+  padding-top: 50px;
+  section{
+    padding: 50px 0px;
+  }
+  .rainbow-text.title {
+    line-height: 1.1;
+    font-weight: 900;
+    font-size: 30px;
+  }
+  .header-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .link {
+      font-weight: 900;
+      font-size: 30px;
+      letter-spacing: 0.2em;
+      padding-bottom: 0.3em;
+      position: relative;
+      color: white;
+      &::after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: white;
+        transition: all 0.3s linear;
+      }
+    }
+  }
+  .search-block{
+    padding: 10px 0px;
+    /*li按鈕樣式*/
+    ul{
+      display: flex;
+      li{
+        font-size: 14px;
+        box-shadow: rgba(0,0,0,.1) 0px 0.75rem 2rem 0px;
+        background: rgba(255, 255, 255, 0.376);
+        padding: 5px 10px;
+        border-radius: 99px;
+        cursor: pointer;
+        transition: all .3s linear;
+        &.active,&:hover{
+          background-color: black;
+          color: white;
+        }
+      }
+      li+li{
+        margin-left: 5px;
+      }
+    }
+    /*標題樣式*/
+    .title{
+      font-weight: 900;
+    }
+    .search{
+      .search-bar{
+        display: flex;
+        font-weight: 900;
+        position: relative;
+        input{
+          flex: 1 1 auto;
+          font-size: 20px;
+          line-height: 24px;
+          border: none;
+          font-weight: 900;
+          box-shadow: rgba(0,0,0,.1) 0px 0.75rem 2rem 0px;
+          background: rgba(255, 255, 255, 0.376);
+          padding: 10px 120px 10px 20px;
+          border-radius: 99px;
+          outline: none;
+        }
+        button{
+          position: absolute;
+          right: 0px;
+          height: 100%;
+          line-height: 24px;
+          font-size: 20px;
+          letter-spacing: .2em;
+          width: 100px;
+          color: white;
+          background-color: #f57481;
+          border-radius: 99px;
+          cursor: pointer;
+        }
+      }
+    }
+    .filters{
+      .filter{
+        margin: 10px 0px;
+        display: flex;
+        align-items: center;
+      }
+    }
+    .order{
+      margin: 10px 0px;
+      display: flex;
+      align-items: center;
+     
+    }
+  }
+  .content{
+    border-top: 5px solid #000;
+  }
+  .search-with{
+    position: sticky;
+    top: 50px;
+    z-index: 5;
+    ul{
+      display: flex;
+      li{
+        background-color: black;
+        font-weight: 900;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        transition: all .3s linear;
+        &::after{
+          font-family: "Font Awesome 6 Free";
+          font-weight: 900;
+          content: "\f00d";
+          margin-left: 5px;
+        }
+      }
+      li:hover{
+        &::after{
+          color: #f57481;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  main.search {
+   
+  }
+}
+
+@media screen and (min-width: 768px) {
+  main.search {
+    padding-top: 100px;
+    .rainbow-text.title {
+      line-height: 1.1;
+      font-size: 40px;
+      font-weight: 900;
+    }
+    .search-with{
+      top: 35px;
+    }
+  }
+}
+
 //Animation
 
 // main
@@ -817,6 +998,27 @@ main.idea-list {
 
 // curation list - list 動畫
 main.curation-list {
+  //移除原先動畫
+  .media-boxes,
+  .media-box {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+  //添加重要動畫
+  .section-curation-list{
+    //延遲
+    .rainbow-text.active {
+      .text ._t {
+        transition-delay: 1s;
+      }
+    }
+  }
+}
+
+// curation list - list 動畫
+main.search {
   //移除原先動畫
   .media-boxes,
   .media-box {
