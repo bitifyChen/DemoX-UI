@@ -895,6 +895,8 @@ main.search .search-block ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 main.search .search-block ul li {
@@ -903,6 +905,8 @@ main.search .search-block ul li {
           box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
   background: rgba(255, 255, 255, 0.376);
   padding: 5px 10px;
+  margin-bottom: 5px;
+  margin-right: 5px;
   border-radius: 99px;
   cursor: pointer;
   -webkit-transition: all .3s linear;
@@ -912,10 +916,6 @@ main.search .search-block ul li {
 main.search .search-block ul li.active, main.search .search-block ul li:hover {
   background-color: black;
   color: white;
-}
-
-main.search .search-block ul li + li {
-  margin-left: 5px;
 }
 
 main.search .search-block .title {
@@ -970,6 +970,12 @@ main.search .search-block .filters .filter {
           align-items: center;
 }
 
+main.search .search-block .filters .filter .title {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+
 main.search .search-block .order {
   margin: 10px 0px;
   display: -webkit-box;
@@ -984,6 +990,12 @@ main.search .content {
   border-top: 5px solid #000;
 }
 
+main.search .content .no-result {
+  font-size: 30px;
+  font-weight: 900;
+  padding-top: 20px;
+}
+
 main.search .search-with {
   position: -webkit-sticky;
   position: sticky;
@@ -995,6 +1007,8 @@ main.search .search-with ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 main.search .search-with ul li {

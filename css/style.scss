@@ -778,11 +778,14 @@ main.search {
     /*li按鈕樣式*/
     ul{
       display: flex;
+      flex-wrap: wrap;
       li{
         font-size: 14px;
         box-shadow: rgba(0,0,0,.1) 0px 0.75rem 2rem 0px;
         background: rgba(255, 255, 255, 0.376);
         padding: 5px 10px;
+        margin-bottom: 5px;
+        margin-right: 5px;
         border-radius: 99px;
         cursor: pointer;
         transition: all .3s linear;
@@ -790,9 +793,6 @@ main.search {
           background-color: black;
           color: white;
         }
-      }
-      li+li{
-        margin-left: 5px;
       }
     }
     /*標題樣式*/
@@ -836,6 +836,9 @@ main.search {
         margin: 10px 0px;
         display: flex;
         align-items: center;
+        .title{
+          flex: 0 0 auto;
+        }
       }
     }
     .order{
@@ -847,6 +850,11 @@ main.search {
   }
   .content{
     border-top: 5px solid #000;
+    .no-result{
+      font-size: 30px;
+      font-weight: 900;
+      padding-top: 20px;
+    }
   }
   .search-with{
     position: sticky;
@@ -854,6 +862,7 @@ main.search {
     z-index: 5;
     ul{
       display: flex;
+      flex-wrap: wrap;
       li{
         background-color: black;
         font-weight: 900;

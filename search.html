@@ -97,7 +97,7 @@
         </div>
     </header>
     <canvas class="orb-canvas"></canvas>
-    <main class="search">
+    <main class="search" id="search">
         <!-- 我的策展 -->
         <section class="section-curation-list fade">
             <div class="container">
@@ -112,7 +112,7 @@
                     </p>
                     <div class="search">
                         <div class="search-bar">
-                            <input type="text">
+                            <input type="text" v-model.lazy="search.text">
                             <button>確認</button>
                         </div>
                     </div>
@@ -120,1017 +120,102 @@
                         <div class="filter">
                             <div class="title">類別：</div>
                             <ul>
-                                <li>全部</li>
-                                <li class="active">策展</li>
-                                <li>作品</li>
+                                <li @click="search.type = 'all'" :class="[ search.type == 'all' ? 'active' : ''  ]">全部
+                                </li>
+                                <li @click="search.type = 'curation'"
+                                    :class="[ search.type == 'curation' ? 'active' : ''  ]">策展</li>
+                                <li @click="search.type = 'idea' " :class="[ search.type == 'idea' ? 'active' : ''  ]">
+                                    作品</li>
                             </ul>
                         </div>
                         <div class="filter">
                             <div class="title">標籤：</div>
                             <ul>
-                                <li>sssss</li>
-                                <li>策展</li>
-                                <li>作品</li>
+                                <li v-for="tag in tags" :key="tag" @click="tagHandler(tag)"
+                                    :class="[ search.tags.includes(tag) ? 'active' : ''  ]" v-if="tagShowAll"> [[tag]]
+                                </li>
+                                <li v-for="(n,index) in 10" @click="tagHandler(tags[index])"
+                                    :class="[ search.tags.includes(tags[index]) ? 'active' : ''  ]" v-else> [[
+                                    tags[index] ]]
+                                </li>
+                                <li class="active" @click="tagShowAll = false" v-if="tagShowAll"><i
+                                        class="fa-solid fa-angle-up"></i>縮合</li>
+                                <li class="active" @click="tagShowAll = true" v-else><i
+                                        class="fa-solid fa-angle-down"></i>更多</li>
                             </ul>
                         </div>
                     </div>
                     <div class="order">
                         <div class="title">排序：</div>
                         <ul>
-                            <li class="active">建立日期</li>
-                            <li>喜愛次數</li>
-                            <li>瀏覽次數</li>
+                            <li @click="search.order = 'date'" :class="[ search.order == 'date' ? 'active' : ''  ]">建立日期
+                            </li>
+                            <li @click="search.order = 'like'" :class="[ search.order == 'like' ? 'active' : ''  ]">喜愛次數
+                            </li>
+                            <li @click="search.order = 'view'" :class="[ search.order == 'view' ? 'active' : ''  ]">瀏覽次數
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="content" data-aos="zoom-out-up" data-aos-delay="300" data-aos-duration="1000">
                     <div class="search-with">
                         <ul>
-                            <li>策展</li>
-                            <li>python</li>
+                            <li @click="tagRemove(tag)" v-for="tag in searchArr"> [[tag.name]] </li>
                         </ul>
                     </div>
-                    <div class="result">
+                    <div class="result" v-if="result.items">
                         <div class="media-boxes">
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
+                            <!--組件-->
+                            <a :href="item.url" onclick="return leaveMask(this);" v-for="item in result.items">
+                                <article class="media-box" :class="item.type">
+                                    <div class="media-image">
+                                        <img :src="item.banner" alt="">
+                                    </div>
+                                    <div class="media-info">
+                                        <div class="header">
+                                            <div class="badge"></div>
+                                            <ul class="popular icons">
+                                                <li class="likes"><span>[[ item.like ]]</span></li>
+                                                <li class="views"><span>[[ item.views ]]</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="title">
+                                            <p>[[ item.name ]]</p>
+                                        </div>
+                                        <ul class="footer icons">
+                                            <li v-for="(e, key) in item.include" :class="[ e ? 'active' : '', key ]">
+                                                <span v-if="item.type == 'curation'"> [[ e ]] </span>
+                                            </li>
                                         </ul>
                                     </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
+                                    <div class="media-footer">
+                                        <div class="date">
+                                            [[ item.date ]]
+                                        </div>
+                                        <span class="line"></span>
                                     </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
+                                    <div class="media-remark">
+                                        <p>[[ item.depiction ]]
+                                        </p>
                                     </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
-                        <a href="#">
-                            <article class="media-box curation">
-                                <div class="media-image">
-                                    <img src="https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp" alt="">
-                                </div>
-                                <div class="media-info">
-                                    <div class="header">
-                                        <div class="badge"></div>
-                                        <ul class="popular icons">
-                                            <li class="likes"><span>0</span></li>
-                                            <li class="views"><span>20</span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="title">
-                                        <p>Meta Z —— 國立政治大學數位內容學程第13屆畢業製作</p>
-                                    </div>
-                                    <ul class="footer icons">
-                                        <li class="idea active">
-                                            <span>10</span>
-                                        </li>
-                                        <li class="youtube active">
-
-                                        </li>
-                                        <li class="google active">
-
-                                        </li>
-                                        <li class="pdf ">
-
-                                        </li>
-                                        <li class="link active">
-
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="media-footer">
-                                    <div class="date">
-                                        <span class="y">22</span>
-                                        <span class="m">04</span>
-                                        <span class="d">04</span>
-                                    </div>
-                                    <span class="line"></span>
-                                </div>
-                                <div class="media-remark">
-                                    <p>「Meta」具有超越、之上、後設之意；「Z」可以放入人、科技、社會等概念，不設限於任何形式。身為Z世代的我們，從小和數位科技共處，我們一直努力跟上這個不斷超越現況的世界。現實生活中所見的一切已經不是全貌。透過數位科技,我們可以超越現在所處的世界，開創另一個現實。
-                                    </p>
-                                </div>
-                            </article>
-                        </a>
+                                </article>
+                            </a>
+                            <!--組件 End-->
                         </div>
                     </div>
-                    <div class="pagination">
+                    <div class="no-result" v-else>
+                        沒有相關搜尋結果。
+                    </div>
+
+                    <div class="pagination" v-if="result.pageNum >= 1">
                         <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li class="active">3</li>
-                            <li>4</li>
-                            <li>5</li>
-                            <li>6</li>
-                            <li>7</li>
-                            <li>8</li>
-                            <li>9</li>
-                            <li>10</li>
+                            <li v-for="page in pagination" :class="[ search.page == page ? 'active' : ''  ]"
+                                @click="search.page = page"> [[ page ]]</li>
                         </ul>
-                    </div>        
+                    </div>
                 </div>
             </div>
-        </section>   
+        </section>
     </main>
     <footer class="main-footer">
         <div class="container">
@@ -1177,9 +262,163 @@
         integrity="sha256-31FC/OT6XpfjAhj9FuXjw5/wPXXawCAjJQ29E23/XPk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"
         integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+    <!-- AXIOS JS -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js'
+        integrity='sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg=='
+        crossorigin='anonymous'></script>
     <script type="module" src="js/bgc.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    search: {
+                        text: '',
+                        type: 'all',
+                        tags: [],
+                        order: 'date',
+                        page: 1,
+                    },
+                    result: {
 
+                    },
+                    tags: [],
+                    tagShowAll: false,
+                }
+            },
+            compilerOptions: {
+                delimiters: ['[[', ']]']
+            },
+            created() {
+                this.tagGet()
+                this.itemGet()
+            },
+            methods: {
+                tagGet() {
+                    axios.get('json/tags.json')
+                        .then((response) => this.tags = response.data.tags)
+                        .catch((error) => { console.error(error) })
+                },
+                tagHandler(tag) {
+                    if (this.search.tags.includes(tag))
+                    {
+                        this.search.tags = this.search.tags.filter(e => e !== tag)
+                    } else
+                    {
+                        //如不再添加
+                        this.search.tags.push(tag)
+                    }
+                },
+                tagRemove(tag) {
+                    let name = tag.name
+                    let type = tag.type
+                    //如果是文字搜尋
+                    if (type == 'text')
+                    {
+                        this.search.text = ''
+                    }
+                    //如果是類別
+                    else if (type == 'type')
+                    {
+                        this.search.type = 'all'
+                    }
+                    //如果是tag
+                    else if (type == 'tag')
+                    {
+                        this.search.tags = this.search.tags.filter(e => e !== name)
+                    }
+                },
+                itemGet() {
+                    axios.get('json/search.json')
+                        .then((response) => {
+                            this.result = response.data
+                        })
+                        .catch((error) => { console.error(error) })
+                },
+                searchAPI(data) {
+                    //POST
+                    console.log(data)
+                }
+            },
+            computed: {
+                searchArr() {
+                    let data = []
+                    //先填入文字
+                    if (this.search.text)
+                    {
+                        data.push({ 'name': `"${this.search.text}"`, 'type': 'text' })
+                    }
+                    //填入類別
+                    if (this.search.type && this.search.type != 'all')
+                    {
+                        let text
+                        if (this.search.type == 'curation')
+                        {
+                            text = '僅搜尋策展'
+                        }
+                        else if (this.search.type == 'idea')
+                        {
+                            text = '僅搜尋作品'
+                        }
+                        data.push({ 'name': text, 'type': 'type' })
+                    }
+                    if (this.search.tags)
+                    {
+                        this.search.tags.forEach(tag => {
+                            data.push({ 'name': tag, 'type': 'tag' })
+                        });
+                    }
+                    return data
+                },
+                pagination() {
+                    let data = []
+                    let pageCurrent = this.search.page
+                    let pageNum = this.result.pageNum
+                    let pageStart = 0
+                    let pageEnd = 0
+                    //如果總數低於10頁
+                    if (pageNum <= 10)
+                    {
+                        pageStart = 1
+                        pageEnd = pageNum
+                    }
+                    //如果大於10頁
+                    else
+                    {
+                        //位於前五頁內
+                        if (pageCurrent <= 5)
+                        {
+                            pageStart = 1
+                            pageEnd = 10
+                        }
+                        //位於後五頁內
+                        else if (pageNum - pageCurrent < 5)
+                        {
+                            pageStart = pageNum - 9
+                            pageEnd = pageNum
+                        }
+                        else
+                        {
+                            pageStart = pageCurrent - 5
+                            pageEnd = pageCurrent + 4
+                        }
+
+                    }
+                    data = Array.from({ length: pageEnd - pageStart + 1 }, (_, i) => i + pageStart)
+                    return data
+                }
+            },
+            watch: {
+                search:{
+                    handler(newValue, oldValue) {
+                        this.searchAPI(newValue)
+                    },
+                    deep: true
+                }
+            }
+        }).mount('#search');
+    </script>
 
     <script>
         AOS.init();
@@ -1188,16 +427,16 @@
     <!-- ScrollMagic scene -->
     <script>
         let controller = new ScrollMagic.Controller();
-        const anim = TweenMax.fromTo(document.querySelector(".search-block"), 1, { opacity:1, scale: 1,paddingBottom:100 }, { opacity: .1,paddingBottom:0})
-        //Scenes0 - 背景越來越大
+        const anim = TweenMax.fromTo(document.querySelector(".search-block"), 1, { opacity: 1, scale: 1 }, { opacity: .1, paddingBottom: 0 })
         let scene0 = new ScrollMagic.Scene({
-            duration: document.querySelector('.search-block').offsetHeight,
-            triggerElement: document.querySelector('.search-block'),
-            triggerHook: 0.1,
+            duration: 100,
+            triggerElement: document.querySelector('.content'),
+            triggerHook: 0.2,
         })
             .setTween(anim)
             .addTo(controller);
     </script>
+
 </body>
 
 </html>
