@@ -97,33 +97,32 @@
   font-weight: 900;
 }
 
-
-
 /*bootstrap modal*/
 .modal {
-	backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
 }
 
 .modal .modal-content {
-	background-color: var(--content-box-color);
+  background-color: var(--content-box-color);
 }
 
 .modal .modal-content h1, h2, h3, h4, h5, h6, label {
-	color: var(--font-dark-hover-color);
+  color: var(--font-dark-hover-color);
 }
 
 .modal .modal-content .modal-header, .modal .modal-content .modal-body, .modal .modal-content .modal-footer {
-	border: none
+  border: none;
 }
 
 .modal .modal-content .modal-body input {
-	background-color: var(--background-color);
-	border: none;
-	padding: 0 10px;
-	letter-spacing: 1.5px;
-	color: var(--font-dark-hover-color);
-	font-weight: 900;
-	line-height: 30px;
-	width: 100%;
+  background-color: var(--background-color);
+  border: none;
+  padding: 0 10px;
+  letter-spacing: 1.5px;
+  color: var(--font-dark-hover-color);
+  font-weight: 900;
+  line-height: 30px;
+  width: 100%;
 }
 /*# sourceMappingURL=demox_module.css.map */

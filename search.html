@@ -152,7 +152,8 @@
                             </li>
                             <li @click="search.order = 'like'" :class="[ search.order == 'like' ? 'active' : ''  ]">喜愛次數
                             </li>
-                            <li @click="search.order = 'view'" :class="[ search.order == 'view' ? 'active' : ''  ]">瀏覽次數
+                            <li @click="search.order = 'views'" :class="[ search.order == 'views' ? 'active' : ''  ]">
+                                瀏覽次數
                             </li>
                         </ul>
                     </div>
@@ -163,56 +164,67 @@
                             <li @click="tagRemove(tag)" v-for="tag in searchArr"> [[tag.name]] </li>
                         </ul>
                     </div>
-                    <div class="result" v-if="result.items">
-                        <div class="media-boxes">
-                            <!--組件-->
-                            <a :href="item.url" onclick="return leaveMask(this);" v-for="item in result.items">
-                                <article class="media-box" :class="item.type">
-                                    <div class="media-image">
-                                        <img :src="item.banner" alt="">
-                                    </div>
-                                    <div class="media-info">
-                                        <div class="header">
-                                            <div class="badge"></div>
-                                            <ul class="popular icons">
-                                                <li class="likes"><span>[[ item.like ]]</span></li>
-                                                <li class="views"><span>[[ item.views ]]</span></li>
+                    <template v-if="updating">
+                        <div class="updating">
+                            <div class="logo">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="result" v-if="result.items.length > 0">
+                            <div class="media-boxes">
+                                <!--組件-->
+                                <a :href="item.url" onclick="return leaveMask(this);" v-for="item in result.items">
+                                    <article class="media-box" :class="item.type">
+                                        <div class="media-image">
+                                            <img :src="item.banner" alt="">
+                                        </div>
+                                        <div class="media-info">
+                                            <div class="header">
+                                                <div class="badge"></div>
+                                                <ul class="popular icons">
+                                                    <li class="likes"><span>[[ item.like ]]</span></li>
+                                                    <li class="views"><span>[[ item.views ]]</span></li>
+                                                </ul>
+                                            </div>
+                                            <div class="title">
+                                                <p>[[ item.name ]]</p>
+                                            </div>
+                                            <ul class="footer icons">
+                                                <li v-for="(e, key) in item.include"
+                                                    :class="[ e ? 'active' : '', key ]">
+                                                    <span v-if="item.type == 'curation'"> [[ e ]] </span>
+                                                </li>
                                             </ul>
                                         </div>
-                                        <div class="title">
-                                            <p>[[ item.name ]]</p>
+                                        <div class="media-footer">
+                                            <div class="date">
+                                                [[ item.date ]]
+                                            </div>
+                                            <span class="line"></span>
                                         </div>
-                                        <ul class="footer icons">
-                                            <li v-for="(e, key) in item.include" :class="[ e ? 'active' : '', key ]">
-                                                <span v-if="item.type == 'curation'"> [[ e ]] </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="media-footer">
-                                        <div class="date">
-                                            [[ item.date ]]
+                                        <div class="media-remark">
+                                            <p>[[ item.depiction ]]
+                                            </p>
                                         </div>
-                                        <span class="line"></span>
-                                    </div>
-                                    <div class="media-remark">
-                                        <p>[[ item.depiction ]]
-                                        </p>
-                                    </div>
-                                </article>
-                            </a>
-                            <!--組件 End-->
+                                    </article>
+                                </a>
+                                <!--組件 End-->
+                            </div>
                         </div>
-                    </div>
-                    <div class="no-result" v-else>
-                        沒有相關搜尋結果。
-                    </div>
-
-                    <div class="pagination" v-if="result.pageNum >= 1">
-                        <ul>
-                            <li v-for="page in pagination" :class="[ search.page == page ? 'active' : ''  ]"
-                                @click="search.page = page"> [[ page ]]</li>
-                        </ul>
-                    </div>
+                        <div class="no-result" v-else>
+                            沒有相關搜尋結果。
+                        </div>
+                        <div class="pagination" v-if="result.pageNum >= 1">
+                            <ul>
+                                <li v-for="page in pagination" :class="[ search.page == page ? 'active' : ''  ]"
+                                    @click="search.page = page , searchAPI('page')"> [[ page ]]</li>
+                            </ul>
+                        </div>
+                    </template>
                 </div>
             </div>
         </section>
@@ -278,13 +290,14 @@
                         type: 'all',
                         tags: [],
                         order: 'date',
-                        page: 1,
+                        page: 1
                     },
                     result: {
 
                     },
                     tags: [],
                     tagShowAll: false,
+                    updating: false,
                 }
             },
             compilerOptions: {
@@ -292,7 +305,7 @@
             },
             created() {
                 this.tagGet()
-                this.itemGet()
+                this.searchAPI('load')
             },
             methods: {
                 tagGet() {
@@ -329,17 +342,26 @@
                         this.search.tags = this.search.tags.filter(e => e !== name)
                     }
                 },
-                itemGet() {
+                searchAPI(mode) {
+                    //換頁
+                    if(mode == 'page'){
+                        
+                    }
+                    //一般，因此頁數歸零
+                    else{
+                        this.search.page = 1
+                    }
+                    //POST
                     axios.get('json/search.json')
                         .then((response) => {
                             this.result = response.data
+                            //延遲顯示
+                            setTimeout(() => {
+                                this.updating = false
+                            }, 2000);
                         })
                         .catch((error) => { console.error(error) })
                 },
-                searchAPI(data) {
-                    //POST
-                    console.log(data)
-                }
             },
             computed: {
                 searchArr() {
@@ -410,12 +432,23 @@
                 }
             },
             watch: {
-                search:{
+                //觀察資料，但不觀察search.page
+                'search.text'() {
+                    this.searchAPI()
+                },
+                'search.type'() {
+                    this.searchAPI()
+                },
+                'search.tags': {
                     handler(newValue, oldValue) {
-                        this.searchAPI(newValue)
+                        this.searchAPI()
                     },
                     deep: true
-                }
+                },
+                'search.order'() {
+                    this.searchAPI()
+                },
+
             }
         }).mount('#search');
     </script>
