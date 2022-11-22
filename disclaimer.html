@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo X</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <!-- Aos CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Bgc CSS -->
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(to right, #ffffff, #fadaf8);
+        }
+
+        body {
+            background: var(--bg-gradient);
+        }
+
+        .orb-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }   
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" id="menu-check">
+    <input type="checkbox" id="header-check" checked>
+    <input type="checkbox" id="user-check">
+    <header class="main-header">
+        <label class="menu-logo" for="header-check">
+            <img src="https://demox.tw/static/page/setting/logo-w.d6e001a47b68.svg" alt="">
+        </label>
+        <div class="wrap">
+            <label class="menu-header-close" for="header-check">
+                <span></span>
+            </label>
+            <div class="logo">
+                <a href="#">
+                    <h1 class="sr-only">Demo X</h1>
+                    <img src="https://demox.tw/static/page/setting/logo-w.d6e001a47b68.svg" alt="">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="link-list">
+                    <li class="link active">
+                        <a href="#">探索</a>
+                    </li>
+                    <li class="link">
+                        <a href="#">作品</a>
+                    </li>
+                    <li class="link">
+                        <a href="#">策展</a>
+                    </li>
+                    <li class="link">
+                        <a href="#">搜尋</a>
+                    </li>
+                    <label class="user" for="user-check">
+                        <span></span>
+                        <ul class="login">
+                            <li class="link">
+                                <a href="#">使用說明</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">建立作品</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">建立策展</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">個人資料</a>
+                            </li>
+                            <li class="link">
+                                <a href="#">登出</a>
+                            </li>
+                        </ul>
+                        <div class="user-info">
+                            <p class="user-name">嗨，陳品宏</p>
+                            <img class="user-pic" src="img/user.svg" alt="">
+                        </div>
+                    </label>
+                </ul>
+            </nav>
+            <label class="menu-hb" for="menu-check">
+                <span></span>
+            </label>
+        </div>
+    </header>
+    <canvas class="orb-canvas"></canvas>
+    <main class="rule">
+        <div class="container">
+            <div class="header-block" data-aos="zoom-out-right" data-aos-duration="500">
+                <p class="title rainbow-text fade">
+                    <span class="text">
+                        <span class="_t">免</span>
+                        <span class="_t">責</span>
+                        <span class="_t">聲</span>
+                        <span class="_t">明</span>
+                    </span>
+                </p>
+            </div>
+            <div class="content" data-aos="zoom-out-up" data-aos-delay="300" data-aos-duration="1000">
+                <div class="sub-title">
+                    DEMO X（以下簡稱本平台）歡迎您光臨本平台，任何瀏覽本平台的人士，須自行承擔一切風險，本平台不會負責任何因瀏覽或使用本網站而引致之損失。本平台不會作出任何默示的擔保。
+                </div>
+                <ul class="accordion">
+                    <li>
+                        <input type="checkbox">
+                        <i></i>
+                        <h3>內容之準確性及完整性</h3>
+                        <p>
+                            本平台承諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本平台不會承擔任何賠償責任，所有本平台內容，將會隨時更改，而不作另行通知。本平台可隨時停止或變更網頁資料及有關條款而毋須事前通知用戶。
+                        </p>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <i></i>
+                        <h3>版權與作品公開說明</h3>
+                        <p>
+                            本平台提供之作品與策展其著作財產權權歸屬於原作者，本平台不會將您的作品公開於其他平台或再製，如提交之作品，非原始創作、抄襲、仿冒、剽竊等侵害他人智慧財產權或其他權利之情事，原作者需負擔相關之法律責任。
+                        </p>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <i></i>
+                        <h3>連結本平台</h3>
+                        <p>
+                            本平台不會對使用或連結本平台而引致任何損害(包括但不限於電腦病毒、系統固障、資料損失)、誹謗、侵犯版權或知識產權所造成的損失，包括但不限於利潤、商譽、使用、資料損失或其他無形損失，本平台不承擔任何直接、間接、附帶、特別、衍生性或懲罰性賠償。
+                        </p>
+                    </li>
+                    <li>
+                        <input type="checkbox">
+                        <i></i>
+                        <h3>本平台提供之連結</h3>
+                        <p>
+                            本平台可能會連接至其他機構所提供的網頁，本平台不會對這些網頁內容作出任何保證或承擔任何責任。使用者如瀏覽這些網頁，將要自己承擔後果。是否使用本網站之服務下載或取得任何資料應由用戶自行考慮且自負風險，因前開任何資料之下載而導致用戶電腦系統之任何損壞或資料流失，本平台不承擔任何責任。
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <footer class="main-footer">
+        <div class="container">
+            <div class="main-block">
+                <span class="footer-bar"></span>
+                <ul class="footer-start sub-block">
+                    <p class="footer-subtitle">開始使用</p>
+                    <li><a href="#">DemoX Setting</a></li>
+                    <li><a href="#">建立作品</a></li>
+                    <li><a href="#">建立策展</a></li>
+                    <li><a href="#">成為策展人</a></li>
+                    <li><a href="#">使用說明</a></li>
+                </ul>
+                <ul class="footer-about sub-block">
+                    <p class="footer-subtitle">Demo X</p>
+                    <li><a href="#">OpenEdu</a></li>
+                    <li><a href="#">推動大學程式設計教學計畫</a></li>
+                </ul>
+                <ul class="footer-rule sub-block">
+                    <p class="footer-subtitle">網站規範</p>
+                    <li><a href="#">隱私權規範</a></li>
+                    <li><a href="#">免責聲明</a></li>
+                </ul>
+                <ul class="footer-contact sub-block">
+                    <p class="footer-subtitle">聯絡我們</p>
+                    <li>xxxxx@demox.tw</li>
+                </ul>
+            </div>
+            <div class="copyright">
+                DEMO X © 2022
+            </div>
+        </div>
+    </footer>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- ScrollMagic JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"
+        integrity="sha256-2p2tRZlPowp3P/04Pw2rqVCSbhyV/IB7ZEVUglrDS/c=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.js"
+        integrity="sha256-peenofh8a9TIqKdPKIeQE7mJvuwh+J0To7nslvpj1jI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.js"
+        integrity="sha256-31FC/OT6XpfjAhj9FuXjw5/wPXXawCAjJQ29E23/XPk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"
+        integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+    <script type="module" src="js/bgc.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper1 = new Swiper(".banners", {
+            grabCursor: true,
+            effect: "creative",
+            speed: 800,
+            autoplay: {
+                delay: 5000,
+            },
+            creativeEffect: {
+                prev: {
+                    shadow: true,
+                    translate: [0, 0, -400],
+                },
+                next: {
+                    translate: ["100%", 0, 0],
+                },
+            },
+        });
+
+        var swiper2 = new Swiper(".media-boxes", {
+            slidesPerView: 1,
+            centeredSlides: true,
+            speed: 6000,
+            autoplay: {
+                delay: 1,
+            },
+            loop: true,
+            allowTouchMove: true,
+            disableOnInteraction: true,
+            spaceBetween: 30,
+            breakpoints: {
+                768: {
+                    slidesPerView: 4,
+                }
+            }
+        });
+        swiper1.on('slideChange', function () {
+            bannerHide(this.activeIndex)
+        });
+
+        //隱藏背景
+        function bannerHide(no) {
+            document.querySelectorAll('.active-banner .banner-pic').forEach((banner, index) => {
+                if (no == index)
+                {
+                    banner.classList.add('active')
+                }
+                else
+                {
+                    banner.classList.remove('active')
+                }
+            })
+        }
+    </script>
+
+    <!-- ScrollMagic scene -->
+    <script>
+        let controller = new ScrollMagic.Controller();
+        const orbAnim = TweenMax.fromTo(document.querySelector(".orb-canvas"), 1, { opacity: .5, scale: 1 }, { opacity: 1, scale: 1.5, transformOrigin: "bottom right" })
+        //Scenes0 - 背景越來越大
+        let scene0 = new ScrollMagic.Scene({
+            duration: document.querySelector('body').offsetHeight,
+            triggerElement: document.querySelector('body'),
+            triggerHook: 0,
+        })
+            .setTween(orbAnim)
+            .addTo(controller);
+
+        //Scenes1 - 背景比物件晚移除
+        const sectionBanner = document.querySelector(".section-banner");
+        const itemAnim = TweenMax.fromTo(sectionBanner.querySelector(".active-banner"), 1, { opacity: 1, y: 0 }, { opacity: 0, scale: 1.5, filter: "blur(20px)" });
+        let scene = new ScrollMagic.Scene({
+            duration: 500,
+            triggerElement: sectionBanner,
+            triggerHook: 0
+        })
+            .setTween(itemAnim)
+            .addTo(controller);
+
+    </script>
+    <!-- <script>
+        const body = document.querySelector('body')
+        const rainbow = ['#e9e8e9', '#212933', '#192e47', '#153051']
+
+        /*取得總高*/
+        let bodyHight = body.offsetHeight
+        /*設定顏色*/
+        function scrollBgc() {
+            let scrollTop = window.scrollY; //滑動範圍
+            let docHeight = document.body.offsetHeight; //body高度
+            let winHeight = window.innerHeight; //頁面高度
+            let scrollPercent = scrollTop / (docHeight - winHeight);
+            let scrollPercentRounded = Math.round(scrollPercent * 100);
+            let nowBgc = Math.round(scrollPercentRounded / (100 / (rainbow.length - 1)));
+            body.style.setProperty('--bgc', rainbow[nowBgc]);
+        }
+    </script> -->
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

@@ -747,6 +747,10 @@ form.form h3.title:not(:first-child) {
   line-height: 30px;
 }
 
+.form-group textarea.alert {
+  background-color: #f7858f;
+}
+
 .form-group.input-button {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;

@@ -603,6 +603,9 @@ form.form {
     color: var(--font-dark-hover-color);
     font-weight: 900;
     line-height: 30px;
+    &.alert{
+      background-color: #f7858f;
+    }
   }
   &.input-button{
     flex-direction: row;
