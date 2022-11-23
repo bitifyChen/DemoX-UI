@@ -473,10 +473,11 @@ main .main-block {
   cursor: pointer;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
+  color: var(--main-base-color);
 }
 
 .pagination ul li.active, .pagination ul li:hover {
-  background-color: black;
+  background-color: var(--main-base-color);
   color: white;
 }
 
@@ -976,6 +977,7 @@ main.search .search-block ul {
 
 main.search .search-block ul li {
   font-size: 14px;
+  color: var(--main-base-color);
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
           box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
   background: rgba(255, 255, 255, 0.376);
@@ -989,12 +991,13 @@ main.search .search-block ul li {
 }
 
 main.search .search-block ul li.active, main.search .search-block ul li:hover {
-  background-color: black;
+  background-color: var(--main-base-color);
   color: white;
 }
 
 main.search .search-block .title {
   font-weight: 900;
+  color: var(--main-base-color);
 }
 
 main.search .search-block .search .search-bar {
@@ -1062,7 +1065,7 @@ main.search .search-block .order {
 }
 
 main.search .content {
-  border-top: 5px solid #000;
+  border-top: 5px solid var(--main-base-color);
 }
 
 main.search .content .no-result {
@@ -1087,7 +1090,7 @@ main.search .search-with ul {
 }
 
 main.search .search-with ul li {
-  background-color: black;
+  background-color: var(--main-base-color);
   font-weight: 900;
   color: white;
   padding: 10px;
@@ -1135,6 +1138,7 @@ main.rule .sub-title {
   font-size: 14px;
   font-weight: 900;
   margin-top: 10px;
+  color: var(--main-base-color);
 }
 
 main.rule .accordion {
@@ -1143,13 +1147,13 @@ main.rule .accordion {
           perspective: 900;
   padding-bottom: 50px;
   margin-top: 10px;
-  border-top: 5px solid #000;
+  border-top: 5px solid var(--main-base-color);
 }
 
 main.rule .accordion li {
   position: relative;
   padding: 20px 0px;
-  border-top: 1px solid black;
+  border-top: 1px solid var(--main-base-color);
   -webkit-animation: flipdown 0.5s ease both;
           animation: flipdown 0.5s ease both;
 }
@@ -1209,7 +1213,7 @@ main.rule .accordion li i {
 main.rule .accordion li i::before, main.rule .accordion li i::after {
   content: "";
   position: absolute;
-  background-color: black;
+  background-color: var(--main-base-color);
   width: 3px;
   height: 9px;
   -webkit-transition: all 0.25s ease-in-out;
@@ -1258,7 +1262,7 @@ main.rule .accordion h3 {
   line-height: 30px;
   font-weight: 900;
   letter-spacing: 0.2em;
-  background-color: black;
+  background-color: var(--main-base-color);
   color: white;
   display: inline-block;
   padding: 0px 10px;

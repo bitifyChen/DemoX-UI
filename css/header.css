@@ -207,7 +207,6 @@
     overflow: hidden;
     top: 25px;
     left: -100px;
-    border-radius: 99px;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;

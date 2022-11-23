@@ -370,9 +370,10 @@ main {
       justify-content: center;
       cursor: pointer;
       transition: all 0.3s linear;
+      color: var(--main-base-color);
       &.active,
       &:hover {
-        background-color: black;
+        background-color: var(--main-base-color);
         color: white;
       }
     }
@@ -824,6 +825,7 @@ main.search {
       flex-wrap: wrap;
       li {
         font-size: 14px;
+        color: var(--main-base-color);
         box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
         background: rgba(255, 255, 255, 0.376);
         padding: 5px 10px;
@@ -834,7 +836,7 @@ main.search {
         transition: all 0.3s linear;
         &.active,
         &:hover {
-          background-color: black;
+          background-color: var(--main-base-color);
           color: white;
         }
       }
@@ -842,6 +844,7 @@ main.search {
     /*標題樣式*/
     .title {
       font-weight: 900;
+      color: var(--main-base-color);
     }
     .search {
       .search-bar {
@@ -892,7 +895,7 @@ main.search {
     }
   }
   .content {
-    border-top: 5px solid #000;
+    border-top: 5px solid var(--main-base-color);
     .no-result {
       font-size: 30px;
       font-weight: 900;
@@ -907,7 +910,7 @@ main.search {
       display: flex;
       flex-wrap: wrap;
       li {
-        background-color: black;
+        background-color: var(--main-base-color);
         font-weight: 900;
         color: white;
         padding: 10px;
@@ -960,17 +963,18 @@ main.rule {
     font-size: 14px;
     font-weight: 900;
     margin-top: 10px;
+    color: var(--main-base-color);
   }
   .accordion {
     list-style: none;
     perspective: 900;
     padding-bottom: 50px;
     margin-top: 10px;
-    border-top: 5px solid #000;
+    border-top: 5px solid var(--main-base-color);
     li {
       position: relative;
       padding: 20px 0px;
-      border-top: 1px solid black;
+      border-top: 1px solid var(--main-base-color);
       animation: flipdown 0.5s ease both;
       &:nth-of-type(1) {
         animation-delay: 0.5s;
@@ -1009,7 +1013,7 @@ main.rule {
       &::after {
         content: "";
         position: absolute;
-        background-color: black;
+        background-color: var(--main-base-color);
         width: 3px;
         height: 9px;
         transition: all 0.25s ease-in-out;
@@ -1052,7 +1056,7 @@ main.rule {
       line-height: 30px;
       font-weight: 900;
       letter-spacing: 0.2em;
-      background-color: black;
+      background-color: var(--main-base-color);
       color: white;
       display: inline-block;
       padding: 0px 10px;

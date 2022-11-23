@@ -22,7 +22,7 @@
                 <span></span>
             </label>
             <div class="logo">
-                <a href="#">
+                <a href="index.html">
                     <h1 class="sr-only">Demo X</h1>
                     <img src="https://demox.tw/static/page/setting/logo-w.d6e001a47b68.svg" alt="">
                 </a>
@@ -30,31 +30,28 @@
             <nav class="main-nav">
                 <ul class="link-list">
                     <li class="link active">
-                        <a href="#">探索</a>
+                        <a href="search.html">探索</a>
                     </li>
                     <li class="link">
-                        <a href="#">作品</a>
+                        <a href="idea-list.html">作品</a>
                     </li>
                     <li class="link">
-                        <a href="#">策展</a>
-                    </li>
-                    <li class="link">
-                        <a href="#">搜尋</a>
+                        <a href="curation-list.html">策展</a>
                     </li>
                     <label class="user" for="user-check">
                         <span></span>
                         <ul class="login">
                             <li class="link">
-                                <a href="#">使用說明</a>
+                                <a href="https://hackmd.io/@bitify/demox">使用說明</a>
                             </li>
                             <li class="link">
-                                <a href="#">建立作品</a>
+                                <a href="setting-idea-add.html">建立作品</a>
                             </li>
                             <li class="link">
-                                <a href="#">建立策展</a>
+                                <a href="setting-curation-add.html">建立策展</a>
                             </li>
                             <li class="link">
-                                <a href="#">個人資料</a>
+                                <a href="setting-profile.html">個人資料</a>
                             </li>
                             <li class="link">
                                 <a href="#">登出</a>
@@ -119,7 +116,48 @@
                         </div>
                         <div class="media-boxes">
                             <!--組件-->
-                            <a :href="item.url" onclick="return leaveMask(this);" v-for="item in items">
+                            <a :href="item.url" onclick="return leaveMask(this);" v-for="item in itemsPublic">
+                                <article class="media-box" :class="item.type">
+                                    <div class="media-image">
+                                        <img :src="item.banner" alt="">
+                                    </div>
+                                    <div class="media-info">
+                                        <div class="header">
+                                            <div class="badge"></div>
+                                            <ul class="popular icons">
+                                                <li class="likes"><span>[[ item.like ]]</span></li>
+                                                <li class="views"><span>[[ item.views ]]</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="title">
+                                            <p>[[ item.name ]]</p>
+                                        </div>
+                                        <ul class="footer icons">
+                                            <li v-for="(e, key) in item.include" :class="[ e ? 'active' : '', key ]">
+                                                <span v-if="item.type == 'curation'"> [[ e ]] </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="media-footer">
+                                        <div class="date">
+                                            [[ item.date ]]
+                                        </div>
+                                        <span class="line"></span>
+                                    </div>
+                                    <div class="media-remark">
+                                        <p>[[ item.depiction ]]
+                                        </p>
+                                    </div>
+                                </article>
+                            </a>
+                            <!--組件 End-->
+                        </div>
+                        <div class="media-boxes hidden" v-show="itemsPrivate.length > 0">
+                            <div class="title-block">
+                                <h3>隱藏的作品</h3>
+                            </div>
+                            <!--組件-->
+                            <a :href="item.url" onclick="return leaveMask(this);" v-for="item in itemsPrivate">
                                 <article class="media-box" :class="item.type">
                                     <div class="media-image">
                                         <img :src="item.banner" alt="">
@@ -208,8 +246,8 @@
                             </div>`
 
             }],
-            items: [
-                {
+            itemsPublic:[
+            {
                     name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
                     depiction: '這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。',
                     banner: 'https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp',
@@ -243,40 +281,8 @@
                     },
                     date: '2022-04-20',
                 },
-                {
-                    name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
-                    depiction: '這門課是程式設計的初階課程，學生在學習 Python 和 Pandas 後，可組隊發想、設計一個小專題。專題的內容包含解決生活問題的小工具、遊戲或是一些資料分析的成果。',
-                    banner: 'https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp',
-                    type: 'curation',
-                    url: 'idea-detail.html',
-                    like: 10,
-                    views: 20,
-                    include: {
-                        idea: 3,
-                        youtube: 1,
-                        google: 2,
-                        pdf: 2,
-                        link: 0,
-                    },
-                    date: '2022-04-20',
-                },
-                {
-                    name: '有色眼鏡',
-                    depiction: '<有色眼鏡>為第一人稱視角的虛擬實境遊戲。遊戲中，玩家必須透過更換、尋找不同顏色的眼鏡解謎。遊戲性的方式，讓玩家體驗主角從幼年、壯年、老年的人生經歷，並從遊玩的過程中，體會主角一路走來慢慢放下偏見的成長歷程。',
-                    banner: 'https://demox.tw/media/img/idea/cover_image/blob_2fdopdl.webp',
-                    type: 'idea',
-                    url: 'idea-detail.html',
-                    like: 10,
-                    views: 20,
-                    include: {
-                        idea: 3,
-                        youtube: 1,
-                        google: 2,
-                        pdf: 0,
-                        link: 3,
-                    },
-                    date: '2022-04-20',
-                },
+            ],
+            itemsPrivate: [
 
             ]
         }

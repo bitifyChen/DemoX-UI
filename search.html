@@ -46,7 +46,7 @@
                 <span></span>
             </label>
             <div class="logo">
-                <a href="#">
+                <a href="index.html">
                     <h1 class="sr-only">Demo X</h1>
                     <img src="https://demox.tw/static/page/setting/logo-w.d6e001a47b68.svg" alt="">
                 </a>
@@ -54,31 +54,28 @@
             <nav class="main-nav">
                 <ul class="link-list">
                     <li class="link active">
-                        <a href="#">探索</a>
+                        <a href="search.html">探索</a>
                     </li>
                     <li class="link">
-                        <a href="#">作品</a>
+                        <a href="idea-list.html">作品</a>
                     </li>
                     <li class="link">
-                        <a href="#">策展</a>
-                    </li>
-                    <li class="link">
-                        <a href="#">搜尋</a>
+                        <a href="curation-list.html">策展</a>
                     </li>
                     <label class="user" for="user-check">
                         <span></span>
                         <ul class="login">
                             <li class="link">
-                                <a href="#">使用說明</a>
+                                <a href="https://hackmd.io/@bitify/demox">使用說明</a>
                             </li>
                             <li class="link">
-                                <a href="#">建立作品</a>
+                                <a href="setting-idea-add.html">建立作品</a>
                             </li>
                             <li class="link">
-                                <a href="#">建立策展</a>
+                                <a href="setting-curation-add.html">建立策展</a>
                             </li>
                             <li class="link">
-                                <a href="#">個人資料</a>
+                                <a href="setting-profile.html">個人資料</a>
                             </li>
                             <li class="link">
                                 <a href="#">登出</a>
@@ -174,7 +171,7 @@
                         </div>
                     </template>
                     <template v-else>
-                        <div class="result" v-if="result.items.length > 0">
+                        <div class="result">
                             <div class="media-boxes">
                                 <!--組件-->
                                 <a :href="item.url" onclick="return leaveMask(this);" v-for="item in result.items">
@@ -215,9 +212,9 @@
                                 <!--組件 End-->
                             </div>
                         </div>
-                        <div class="no-result" v-else>
+                        <!-- <div class="no-result">
                             沒有相關搜尋結果。
-                        </div>
+                        </div> -->
                         <div class="pagination" v-if="result.pageNum >= 1">
                             <ul>
                                 <li v-for="page in pagination" :class="[ search.page == page ? 'active' : ''  ]"
@@ -235,11 +232,11 @@
                 <span class="footer-bar"></span>
                 <ul class="footer-start sub-block">
                     <p class="footer-subtitle">開始使用</p>
-                    <li><a href="#">DemoX Setting</a></li>
-                    <li><a href="#">建立作品</a></li>
-                    <li><a href="#">建立策展</a></li>
-                    <li><a href="#">成為策展人</a></li>
-                    <li><a href="#">使用說明</a></li>
+                    <li><a href="setting-idea-list.html">DemoX Setting</a></li>
+                    <li><a href="setting-idea-add.html">建立作品</a></li>
+                    <li><a href="setting-curation-add.html">建立策展</a></li>
+                    <li><a href="setting-profile.html?func=master_apply">成為策展人</a></li>
+                    <li><a href="https://hackmd.io/@bitify/demox">使用說明</a></li>
                 </ul>
                 <ul class="footer-about sub-block">
                     <p class="footer-subtitle">Demo X</p>
@@ -248,8 +245,8 @@
                 </ul>
                 <ul class="footer-rule sub-block">
                     <p class="footer-subtitle">網站規範</p>
-                    <li><a href="#">隱私權規範</a></li>
-                    <li><a href="#">免責聲明</a></li>
+                    <li><a href="privacy-policy.html">隱私權規範</a></li>
+                    <li><a href="disclaimer.html">免責聲明</a></li>
                 </ul>
                 <ul class="footer-contact sub-block">
                     <p class="footer-subtitle">聯絡我們</p>

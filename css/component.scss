@@ -225,6 +225,18 @@
   > a {
     padding: 20px;
   }
+  .title-block{
+    width: 100%;
+    text-align: center;
+    h3{
+      font-weight: 900;
+      font-size: 24px;
+      color: white;
+    }
+  }
+  &.hidden{
+    background-color: var(--main-base-light-color);
+  }
 }
 @media screen and (min-width: 900px) {
   .media-boxes {
