@@ -25,24 +25,37 @@ function scrollFunction() {
   }
 }
 
+//返回按鈕如果有才顯示
+const navBtn = document.querySelector("button.navBtn");
+if (navBtn) {
+  //如果返回為空
+  if (document.referrer == "") {
+    navBtn.style.display = "none";
+  }
+}
+
 // Footer
 //Footer 進場動畫
 //-Footer 下方區塊漸進
-let footerController = new ScrollMagic.Controller();
-new ScrollMagic.Scene({
-  triggerElement: document.querySelector(".main-footer"),
-  triggerHook: 0.8,
-})
-  .setTween(TweenMax.fromTo(document.querySelector(".main-footer .main-block"), 1, { scale: 0.8 }, { scale: 1 }))
-  .addTo(footerController);
-//-Footer 上方Bar動畫
-new ScrollMagic.Scene({
-  triggerElement: document.querySelector(".main-footer"),
-  triggerHook: 1,
-  duration: document.querySelector(".main-footer").offsetHeight,
-})
-  .setTween(TweenMax.fromTo(document.querySelector(".main-footer .footer-bar"), 1, { width: "0%" }, { width: "100%" }))
-  .addTo(footerController);
+if (document.querySelector("footer.main-footer")) {
+  let footerController = new ScrollMagic.Controller();
+  new ScrollMagic.Scene({
+    triggerElement: document.querySelector(".main-footer"),
+    triggerHook: 0.8,
+  })
+    .setTween(TweenMax.fromTo(document.querySelector(".main-footer .main-block"), 1, { scale: 0.8 }, { scale: 1 }))
+    .addTo(footerController);
+  //-Footer 上方Bar動畫
+  new ScrollMagic.Scene({
+    triggerElement: document.querySelector(".main-footer"),
+    triggerHook: 1,
+    duration: document.querySelector(".main-footer").offsetHeight,
+  })
+    .setTween(
+      TweenMax.fromTo(document.querySelector(".main-footer .footer-bar"), 1, { width: "0%" }, { width: "100%" }),
+    )
+    .addTo(footerController);
+}
 
 // Item active
 const onceItems = document.querySelectorAll(".fadeOnce");
@@ -50,33 +63,37 @@ const items = document.querySelectorAll(".fade");
 
 function enterCheck() {
   const windowHigh = window.innerHeight;
-  onceItems.forEach((item) => {
-    const toTopHight = item.getBoundingClientRect().y;
-    let fadeDelay = 0;
-    if (toTopHight < windowHigh / 1.25) {
-      if (item.getAttribute("data-fade-delay")) {
-        fadeDelay = item.getAttribute("data-fade-delay");
+  if (onceItems) {
+    onceItems.forEach((item) => {
+      const toTopHight = item.getBoundingClientRect().y;
+      let fadeDelay = 0;
+      if (toTopHight < windowHigh / 1.25) {
+        if (item.getAttribute("data-fade-delay")) {
+          fadeDelay = item.getAttribute("data-fade-delay");
+        }
+        setTimeout(function () {
+          item.classList.add("active");
+        }, fadeDelay);
       }
-      setTimeout(function () {
-        item.classList.add("active");
-      }, fadeDelay);
-    }
-  });
+    });
+  }
 
-  items.forEach((item) => {
-    const toTopHight = item.getBoundingClientRect().y;
-    let fadeDelay = 0;
-    if (toTopHight < windowHigh / 1.25) {
-      if (item.getAttribute("data-fade-delay")) {
-        fadeDelay = item.getAttribute("data-fade-delay");
+  if (items) {
+    items.forEach((item) => {
+      const toTopHight = item.getBoundingClientRect().y;
+      let fadeDelay = 0;
+      if (toTopHight < windowHigh / 1.25) {
+        if (item.getAttribute("data-fade-delay")) {
+          fadeDelay = item.getAttribute("data-fade-delay");
+        }
+        setTimeout(function () {
+          item.classList.add("active");
+        }, fadeDelay);
+      } else {
+        item.classList.remove("active");
       }
-      setTimeout(function () {
-        item.classList.add("active");
-      }, fadeDelay);
-    } else {
-      item.classList.remove("active");
-    }
-  });
+    });
+  }
 }
 enterCheck();
 

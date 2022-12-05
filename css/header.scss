@@ -10,7 +10,6 @@
     align-items: center;
     padding: 5px 10px;
     background-color: var(--main-base-color);
-    box-shadow: 0 0 5px var(--main-base-color);
   }
 
   .logo {
@@ -33,6 +32,9 @@
 /*手機*/
 @media screen and (max-width: 767px) {
   .main-header {
+    .wrap{
+      box-shadow: 0 0 5px var(--main-base-color);
+    }
     .main-nav {
       display: none;
       position: absolute;
@@ -192,8 +194,6 @@
       left: -100px;
       justify-content: space-between;
       align-items: center;
-      background-color: transparent;
-      box-shadow: 0 0 5px transparent;
       display: flex;
       transition: background-color 2s 0.5s linear, left 0.5s 0s linear, width 0.5s 0s linear;
     }
@@ -262,9 +262,7 @@
     width: 90%;
     left: 5%;
     background-color: var(--main-base-color);
-    box-shadow: 0 0 5px var(--main-base-color);
-    background-color: #153051e0;
-    backdrop-filter: blur(4px);
+    box-shadow: rgba(0,0,0,0.1) 0px 0.75rem 2rem 0px;
     transition: 0.3s 0.3s linear;
   }
   #header-check:checked ~ .main-header .main-nav {

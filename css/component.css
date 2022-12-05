@@ -444,13 +444,15 @@
   color: var(--main-base-color);
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
-  border-radius: 999px;
+  border-radius: 5px;
   cursor: pointer;
+  -webkit-filter: grayscale(80%);
+          filter: grayscale(80%);
 }
 
 .module-btns .btn:hover, .module-btns .btn.active {
-  background-color: var(--main-base-color);
-  color: var(--main-symmetry-color);
+  -webkit-filter: grayscale(0%);
+          filter: grayscale(0%);
 }
 
 .module-btns .btn + .btn {
@@ -481,6 +483,8 @@
 
 .module-show {
   max-width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .module-show iframe {

@@ -371,12 +371,12 @@
     background-color: var(--main-symmetry-color);
     color: var(--main-base-color);
     transition: all 0.3s linear;
-    border-radius: 999px;
+    border-radius: 5px;
     cursor: pointer;
+    filter: grayscale(80%);
     &:hover,
     &.active {
-      background-color: var(--main-base-color);
-      color: var(--main-symmetry-color);
+      filter: grayscale(0%);
     }
     & + .btn {
       margin-left: 5px;
@@ -407,6 +407,8 @@
 }
 .module-show {
   max-width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
   iframe{
     width: 100%;
     height: auto !important;

@@ -19,8 +19,6 @@
           align-items: center;
   padding: 5px 10px;
   background-color: var(--main-base-color);
-  -webkit-box-shadow: 0 0 5px var(--main-base-color);
-          box-shadow: 0 0 5px var(--main-base-color);
 }
 
 .main-header .logo {
@@ -46,6 +44,10 @@
 
 /*手機*/
 @media screen and (max-width: 767px) {
+  .main-header .wrap {
+    -webkit-box-shadow: 0 0 5px var(--main-base-color);
+            box-shadow: 0 0 5px var(--main-base-color);
+  }
   .main-header .main-nav {
     display: none;
     position: absolute;
@@ -213,9 +215,6 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    background-color: transparent;
-    -webkit-box-shadow: 0 0 5px transparent;
-            box-shadow: 0 0 5px transparent;
     display: flex;
     -webkit-transition: background-color 2s 0.5s linear, left 0.5s 0s linear, width 0.5s 0s linear;
     transition: background-color 2s 0.5s linear, left 0.5s 0s linear, width 0.5s 0s linear;
@@ -289,11 +288,8 @@
     width: 90%;
     left: 5%;
     background-color: var(--main-base-color);
-    -webkit-box-shadow: 0 0 5px var(--main-base-color);
-            box-shadow: 0 0 5px var(--main-base-color);
-    background-color: #153051e0;
-    -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0.75rem 2rem 0px;
     -webkit-transition: 0.3s 0.3s linear;
     transition: 0.3s 0.3s linear;
   }
