@@ -407,14 +407,14 @@
   padding: 10px 20px;
 }
 
-.media-main .media-footer {
+.media-main > .media-footer {
   -webkit-box-shadow: 0 0 5px var(--main-base-color);
           box-shadow: 0 0 5px var(--main-base-color);
   background-color: var(--main-base-color);
   margin: 0px -20px;
 }
 
-.media-main .media-footer .other-ideas {
+.media-main > .media-footer .other-ideas {
   width: 100%;
   padding: 10px 20px;
   display: -webkit-box;
@@ -422,18 +422,18 @@
   display: flex;
 }
 
-.media-main .media-footer .other-ideas .prev {
+.media-main > .media-footer .other-ideas .prev {
   border-right: 1px solid white;
   margin-right: auto;
 }
 
-.media-main .media-footer .other-ideas .next {
+.media-main > .media-footer .other-ideas .next {
   border-left: 1px solid white;
   margin-left: auto;
 }
 
-.media-main .media-footer .other-ideas .prev,
-.media-main .media-footer .other-ideas .next {
+.media-main > .media-footer .other-ideas .prev,
+.media-main > .media-footer .other-ideas .next {
   width: 50%;
   padding: 5px;
   display: -webkit-box;
@@ -447,8 +447,8 @@
           align-items: center;
 }
 
-.media-main .media-footer .other-ideas .prev .arrow,
-.media-main .media-footer .other-ideas .next .arrow {
+.media-main > .media-footer .other-ideas .prev .arrow,
+.media-main > .media-footer .other-ideas .next .arrow {
   color: #ffffff;
   font-size: 20px;
   width: 30px;
@@ -456,7 +456,7 @@
   line-height: 30px;
 }
 
-.media-main .media-footer .other-ideas .idea-info .title {
+.media-main > .media-footer .other-ideas .idea-info .title {
   height: 1em;
   color: #ffffff;
   overflow: hidden;
@@ -472,34 +472,34 @@
 }
 
 @media screen and (min-width: 768px) {
-  .media-main .media-footer {
+  .media-main > .media-footer {
     -webkit-box-shadow: none;
             box-shadow: none;
     background-color: transparent;
   }
-  .media-main .media-footer .other-ideas .prev .arrow,
-  .media-main .media-footer .other-ideas .next .arrow {
+  .media-main > .media-footer .other-ideas .prev .arrow,
+  .media-main > .media-footer .other-ideas .next .arrow {
     color: var(--main-base-color);
   }
-  .media-main .media-footer .other-ideas .idea-info {
+  .media-main > .media-footer .other-ideas .idea-info {
     -webkit-box-flex: 1;
         -ms-flex: 1 1  auto;
             flex: 1 1  auto;
     text-align: center;
   }
-  .media-main .media-footer .other-ideas .idea-info .title {
+  .media-main > .media-footer .other-ideas .idea-info .title {
     color: var(--main-base-color);
     font-weight: 900;
   }
-  .media-main .media-footer .other-ideas .prev, .media-main .media-footer .other-ideas .next {
+  .media-main > .media-footer .other-ideas .prev, .media-main > .media-footer .other-ideas .next {
     border-color: var(--main-base-color);
     -webkit-transition: all .3s linear;
     transition: all .3s linear;
   }
-  .media-main .media-footer .other-ideas .prev:hover, .media-main .media-footer .other-ideas .next:hover {
+  .media-main > .media-footer .other-ideas .prev:hover, .media-main > .media-footer .other-ideas .next:hover {
     background-color: var(--main-base-color);
   }
-  .media-main .media-footer .other-ideas .prev:hover .arrow, .media-main .media-footer .other-ideas .prev:hover .idea-info .title, .media-main .media-footer .other-ideas .next:hover .arrow, .media-main .media-footer .other-ideas .next:hover .idea-info .title {
+  .media-main > .media-footer .other-ideas .prev:hover .arrow, .media-main > .media-footer .other-ideas .prev:hover .idea-info .title, .media-main > .media-footer .other-ideas .next:hover .arrow, .media-main > .media-footer .other-ideas .next:hover .idea-info .title {
     color: white;
   }
 }

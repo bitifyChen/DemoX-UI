@@ -336,7 +336,7 @@
 }
 
 .media-main {
-  .media-footer {
+  >.media-footer {
     box-shadow: 0 0 5px var(--main-base-color);
     background-color: var(--main-base-color);
     margin: 0px -20px;
@@ -389,7 +389,7 @@
 }
 @media screen and (min-width: 768px) {
   .media-main {
-    .media-footer {
+    >.media-footer {
       box-shadow: none;
       background-color: transparent;
       .other-ideas {
