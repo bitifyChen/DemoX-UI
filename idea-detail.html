@@ -98,12 +98,11 @@
                             </div>
                             <div class="media-buttons">
                                 <button type="button" class="btn-like" :class=" like.liked ? 'active' : ''"
-                                @click="likeHandler"><i class="far fa-heart"></i><span>[[like.num]]</span>人</button>
+                                    @click="likeHandler"><i class="far fa-heart"></i><span>[[like.num]]</span>人</button>
                             </div>
                         </div>
                     </div>
                     <div class="media-body">
-
                         <div class="media-modules">
                             <div class="module-btns drag-scroll">
                                 <button class="btn" :class=" [ module.type , key==showingModule.order?'active':''] "
@@ -121,6 +120,26 @@
                                     frameborder="0" width="100%" height="569" allowfullscreen="true"
                                     mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                             </div>
+                        </div>
+                    </div>
+                    <div class="media-footer">
+                        <div class="other-ideas">
+                            <a :href="suggests.prev.url" class="prev" v-if="suggests.prev">
+                                <span class="arrow"><i class="fa-solid fa-arrow-left"></i></span>
+                                <div class="idea-info">
+                                    <p class="title">
+                                        [[suggests.prev.name]]
+                                    </p>
+                                </div>
+                            </a>
+                            <a :href="suggests.next.url" class="next" v-if="suggests.next">
+                                <div class="idea-info">
+                                    <p class="title">
+                                        [[suggests.next.name]]
+                                    </p>
+                                </div>
+                                <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -185,6 +204,17 @@
                     url: 'https://tw.yahoo.com/',
                 },
             ],
+            suggests: {
+                prev: {
+                    name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
+                    url: '/idea-detail.html'
+                },
+                next: {
+                    name: '2023Coding101',
+                    url: '/idea-detail.html'
+                }
+            }
+
         }
         Vue.createApp({
             data() { return dataOrg },
@@ -201,12 +231,12 @@
                     {
                         if (this.like.liked)
                         {
-                            new Noty({type: 'success',layout: 'topCenter',text: '已收回讚',timeout: 2000,}).show();
+                            new Noty({ type: 'success', layout: 'topCenter', text: '已收回讚', timeout: 2000, }).show();
                             this.like.num -= 1
                             this.like.liked = false
                         } else
                         {
-                            new Noty({type: 'success',layout: 'topCenter',text: '已按讚',timeout: 2000,}).show();
+                            new Noty({ type: 'success', layout: 'topCenter', text: '已按讚', timeout: 2000, }).show();
                             this.like.num += 1
                             this.like.liked = true
                         }

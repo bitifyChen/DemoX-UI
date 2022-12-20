@@ -334,6 +334,49 @@
     }
   }
 }
+
+.media-main {
+  .media-footer {
+    box-shadow: 0 0 5px var(--main-base-color);
+    background-color: var(--main-base-color);
+    margin: 0px -20px;
+    .other-ideas {
+      width: 100%;
+      padding: 10px 20px;
+      display: flex;
+      .prev {
+        border-right: 1px solid white;
+        margin-right: auto;
+      }
+      .next{
+        border-left: 1px solid white;
+        margin-left: auto;
+      }
+      .prev,
+      .next {
+        width: 50%;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .prev .arrow,
+      .next .arrow {
+        color: #ffffff;
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+      }
+      .idea-info .title {
+        height: 1em;
+        color: #ffffff;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 900px) {
   .media-main {
     .media-title {
@@ -341,6 +384,38 @@
     }
     .media-depiction {
       margin: 10px 0px;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .media-main {
+    .media-footer {
+      box-shadow: none;
+      background-color: transparent;
+      .other-ideas {
+        .prev .arrow,
+        .next .arrow {
+          color: var(--main-base-color);
+        }
+        .idea-info {
+          flex: 1 1  auto;
+          text-align: center;
+        }
+        .idea-info .title {
+          color: var(--main-base-color);
+          font-weight: 900;
+        }
+        .prev,.next{
+          border-color:var(--main-base-color);
+          transition: all .3s linear;
+          &:hover{
+             background-color:var(--main-base-color);
+             .arrow,.idea-info .title {
+              color:white
+             }
+          }
+        }
+      }
     }
   }
 }
@@ -386,7 +461,7 @@
         font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
         font-weight: 900;
         margin-right: 4px;
-      }   
+      }
     }
     &.google::before{
       content: "\f1a0";
