@@ -59,6 +59,38 @@ body {
   display: flex;
   align-items: center;
 }
+.btn-theater {
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: 400;
+  color: #780caa;
+  border: 1px solid#780caa;
+  background-color: transparent;
+  cursor: pointer;
+  &.active,
+  &:hover {
+    color: white;
+    background-color: #780caa;
+  }
+}
+.btn-edit{
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  display: inline-block;
+  font-weight: 400;
+  color: #3d3d3d;
+  border: 1px solid#3d3d3d;
+  background-color: transparent;
+  cursor: pointer;
+  &.active,
+  &:hover {
+    color: white;
+    background-color: #3d3d3d;
+  }
+}
 /*CKEditor*/
 .ckeditor {
   font-size: 1rem;

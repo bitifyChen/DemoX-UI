@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo X</title>
+     <!-- Swiper CSS -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -99,6 +101,10 @@
                             <div class="media-buttons">
                                 <button type="button" class="btn-like" :class=" like.liked ? 'active' : ''"
                                     @click="likeHandler"><i class="far fa-heart"></i><span>[[like.num]]</span>人</button>
+                            </div>
+                            <div class="other-buttons">
+                                <button type="button" class="btn-theater" @click="theaterHandler"><i class="fa-solid fa-video"></i><span>劇院模式</span></button>
+                                <button type="button" class="btn-edit"  @click="editHandler" v-if="this.author"><i class="fa-solid fa-pen"></i><span>前往編輯</span></button>
                             </div>
                         </div>
                     </div>
@@ -197,7 +203,28 @@
                 </div>
             </div>
         </div>
+        <div class="theater " :class="{active : this.theaterMode}">
+            <div class="active-banner">
+                <div class="mask"></div>
+                <img class="banner-pic" :class="{ 'active': index === 0 }" :src="item.banner" alt="" v-for="(item,index) in itemsPublic">
+            </div>
+            <div class="banners">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="(item,index) in itemsPublic">
+                        <img :src="item.banner" alt="">
+                        <div class="info">
+                            <h3 class="title">[[ item.name ]]</h3>
+                            <p class="depiction">[[ item.depiction ]]</p>
+                            <a :href="item.url" class="link" target="_blank">瀏覽更多</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-leave" @click="this.theaterMode = false">離開劇院模式</button>
+        </div>
     </main>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"></script>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="js/main.js"></script>
@@ -205,6 +232,8 @@
         let dataOrg = {
             id: 20,
             userId: 22,
+            theaterMode:false,
+            author:true,
             type: 'curation',
             name: '推動大學程式設計教學 學校虛實整合成果展-慈濟大學',
             banner: 'https://demox.tw/media/img/curation/image/blob_UaXqwgN.webp',
@@ -314,6 +343,14 @@
                         new Noty({ type: 'error', layout: 'topCenter', text: '此操作需要登入', timeout: 2000, }).show();
                     }
                 },
+                theaterHandler(){
+                    //開啟背景
+                    this.theaterMode = true
+                },
+                editHandler(){
+                    //網址須改為正式站
+                    window.open("/setting-curation-add.html", "Window", "popup");
+                },
             },
         }).mount('#app');
 
@@ -337,6 +374,44 @@
             return false
         }
     </script>
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper1 = new Swiper(".banners", {
+                grabCursor: true,
+                effect: "creative",
+                speed: 800,
+                autoplay: {
+                    delay: 8000,
+                },
+                creativeEffect: {
+                    prev: {
+                        shadow: true,
+                        translate: [0, 0, -400],
+                    },
+                    next: {
+                        translate: ["100%", 0, 0],
+                    },
+                },
+            });
+    
+            swiper1.on('slideChange', function () {
+                bannerHide(this.activeIndex)
+            });
+    
+            //隱藏背景
+            function bannerHide(no) {
+                document.querySelectorAll('.active-banner .banner-pic').forEach((banner, index) => {
+                    if (no == index)
+                    {
+                        banner.classList.add('active')
+                    }
+                    else
+                    {
+                        banner.classList.remove('active')
+                    }
+                })
+            }
+        </script>
 </body>
 
 </html>
