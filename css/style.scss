@@ -1153,7 +1153,6 @@ main {
   &.leave,
   &.in {
     position: relative;
-    overflow: hidden;
     &::before {
       content: "";
       top: 0;
@@ -1172,8 +1171,8 @@ main {
     }
   }
   &.in {
-    max-height: 100vh;
-    height: 100vh;
+   top: 0;
+   bottom: 0;
     &::before {
       animation: mainIn 1.5s 0s forwards;
       transform-origin: 0% 0; //從左側展開
