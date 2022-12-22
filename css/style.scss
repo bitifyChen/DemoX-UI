@@ -624,6 +624,12 @@ main.index {
             line-height: 1.2em;
             letter-spacing: 0.2em;
             margin: 10px 0px;
+            height: 3.6em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
           }
           .link {
             display: inline-block;

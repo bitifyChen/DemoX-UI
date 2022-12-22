@@ -765,6 +765,12 @@ main.index .section-school-list .school-list .swiper-wrapper {
     line-height: 1.2em;
     letter-spacing: 0.2em;
     margin: 10px 0px;
+    height: 3.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
   main.index .section-banner .swiper-slide .info .link {
     display: inline-block;
